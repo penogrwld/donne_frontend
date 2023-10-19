@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react'
 
-export default function choicesScreen() {
+export default function choicesScreen({navigation}) {
   return (
     <View style={styles.container}>
     <LinearGradient
