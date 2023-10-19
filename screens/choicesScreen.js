@@ -16,6 +16,7 @@ export default function choicesScreen() {
       <TouchableOpacity style={styles.buttons}>
       <Text style={styles.text}>JE TROUVE</Text>
       </TouchableOpacity>
+      
       </View>
     </View>
   )
