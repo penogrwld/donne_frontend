@@ -33,8 +33,6 @@ const store = configureStore({
 
 
 
-<<<<<<< HEAD
-=======
 const TabNavigator = () => {
   return (
     <Tab.Navigator screenOptions={({ route }) => ({
@@ -68,7 +66,6 @@ const TabNavigator = () => {
   );
  }
 
->>>>>>> dd387ba9f830da8ee5f17eb7767a6f53be23ce37
 
 export default function App() {
   return (
