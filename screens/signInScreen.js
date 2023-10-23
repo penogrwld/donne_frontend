@@ -8,19 +8,49 @@ import {
 } from "react-native";
 import { SocialIcon } from "react-native-elements";
 import { LinearGradient } from "expo-linear-gradient";
-
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { signIn } from "../reducers/user";
 import React from "react";
 
-export default function SignInScreen({ navigation }) {
+
+export default function signInScreen({ navigation }) {
+
+  const dispatch = useDispatch()
+  const [signInUsername, setSignInUsername] = useState('')
+  const [signInPassword, setSignInPassword] = useState('')
+  const [errorField, setErrorField] = useState(false)
+
+
+  const handleConnexion = () => {
+		fetch('http://10.3.0.21:3000/users/signin', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ username: signInUsername, password: signInPassword }),
+		}).then(response => response.json())
+			.then(data => {
+				if (data.result) {
+					dispatch(signIn({ username: signInUsername, token: data.token }));
+          navigation.navigate("Choices")
+					setSignInUsername('');
+					setSignInPassword('');
+          setErrorField(false)
+				} else {
+          setErrorField(true)
+        }
+			});
+	};
+
   return (
     <View style={styles.container}>
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
       <View style={styles.containerInput}>
-        <TextInput style={styles.input} placeholder="UserName"></TextInput>
-        <TextInput style={styles.input} placeholder="Password"></TextInput>
+        { errorField && <Text style={styles.errorMsg}>Le nom d'utilisateur ou le mot de passe est invalide</Text>}
+        <TextInput style={styles.input} placeholder="UserName" onChangeText={(value) => setSignInUsername(value)} value={signInUsername}></TextInput>
+        <TextInput style={styles.input} placeholder="Password" secureTextEntry={true} onChangeText={(value) => setSignInPassword(value)} value={signInPassword}></TextInput>
         <TouchableOpacity
           style={styles.buttons}
-          onPress={() => navigation.navigate("Choices")}
+          onPress={() => handleConnexion()}
         >
           {/* // Ramène sur la page Choices */}
           <Text style={styles.text}>CONNEXION</Text>
@@ -76,6 +106,12 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderRadius: 10,
     padding: 10,
+  },
+  errorMsg: {
+    backgroundColor: 'red',
+    color: 'white',
+    padding: 10,
+    marginBottom: 10
   },
   buttons: {
     backgroundColor: "#74D48F",
