@@ -14,6 +14,7 @@ import DonationScreen from "./screens/DonationScreen";
 import UserScreen from "./screens/UserScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import ThanksScreen from "./screens/ThanksScreen";
+import TutoScreen from "./screens/TutoScreen";
 
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -41,12 +42,14 @@ const TabNavigator = () => {
         if (route.name === 'Home') {
           iconName = 'home';
         } else if (route.name === 'User') {
-          iconName = 'user';
+          iconName = 'user-o';
         } else if (route.name === 'Liked') {
-          iconName = 'comment';
+          iconName = 'heart-o';
         } else if (route.name === 'Donation') {
           iconName = 'plus-circle';
-        }
+        } else if (route.name === 'Tuto') {
+          iconName = 'hand-peace-o';
+        } 
 
         return <FontAwesome name={iconName} size={size} color={color} />;
       },
@@ -56,8 +59,9 @@ const TabNavigator = () => {
     })}>
       <Tab.Screen name="User" component={UserScreen} />
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Liked" component={LikedScreen} />
       <Tab.Screen name="Donation" component={DonationScreen} />
+      <Tab.Screen name="Liked" component={LikedScreen} />
+      <Tab.Screen name="Tuto" component={TutoScreen} />
     </Tab.Navigator>
   );
  }
