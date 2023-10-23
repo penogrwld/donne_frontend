@@ -20,6 +20,7 @@ export default function ChoicesScreen({ navigation }) {
   );
 }
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -6,12 +6,15 @@ export default function CguScreen({navigation}) {
   return (
     <View style={styles.container}>
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
-      <Text>CGU lorem ipsum</Text>
-         <View style={styles.containerButton}>
+            <TouchableOpacity style={styles.itemBack}>
+               <Text>icon={faArrowLeft}</Text>
+            </TouchableOpacity>
+            <Text>CGU lorem ipsum</Text>
+      <View style={styles.containerButton}>
             <TouchableOpacity style={styles.buttons}>
                <Text style={styles.text}>ACCEPTER</Text>
             </TouchableOpacity>
-         </View>
+      </View>
     </View>
   );
 }
@@ -45,4 +48,8 @@ const styles = StyleSheet.create({
   text: {
     color: "white",
   },
+  itemBack: {
+    color: "black",
+
+  }
 });
