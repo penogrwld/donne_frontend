@@ -7,21 +7,49 @@ import {
 } from "react-native";
 import { CheckBox } from "react-native-elements";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { signUp } from "../reducers/user";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 
 export default function SignUpScreen({ navigation }) {
+
+  const dispatch = useDispatch()
   const [isSelected, setSelection] = useState(false);
+  const [signUpFirstName, setSignUpFirstname] = useState('');
+  const [signUpLastName, setSignUpLastname] = useState('');
+  const [signUpUsername, setSignUpUsername] = useState('');
+  const [signUpEmail, setSignUpEmail] = useState('');
+	const [signUpPassword, setSignUpPassword] = useState('');
+
+  const handleRegister = () => {
+		fetch('http://10.3.0.21:3000/users/signup', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({firstname: signUpFirstName, lastname: signUpLastName, username: signUpUsername, email: signUpEmail, password: signUpPassword }),
+		}).then(response => response.json())
+			.then(data => {
+				if (data.result) {
+					dispatch(signUp({firstname: signUpFirstName, lastname: signUpLastName, username: signUpUsername, email: signUpEmail, token: data.token }));
+					setSignUpLastname('');
+					setSignUpFirstname('');
+					setSignUpUsername('');
+					setSignUpEmail('');
+					setSignUpPassword('');
+          navigation.navigate("Choices")
+				}
+			});
+	};
 
   return (
     <View style={styles.container}>
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
       <View style={styles.containerInput}>
-        <TextInput style={styles.input} placeholder="Nom"></TextInput>
-        <TextInput style={styles.input} placeholder="Prénom"></TextInput>
-        <TextInput style={styles.input} placeholder="Pseudo"></TextInput>
-        <TextInput style={styles.input} placeholder="Email"></TextInput>
-        <TextInput style={styles.input} placeholder="Mot de passe"></TextInput>
+        <TextInput style={styles.input} placeholder="Nom" onChangeText={(value) => setSignUpLastname(value)} value={signUpLastName}></TextInput>
+        <TextInput style={styles.input} placeholder="Prénom" onChangeText={(value) => setSignUpFirstname(value)} value={signUpFirstName}></TextInput>
+        <TextInput style={styles.input} placeholder="Pseudo" onChangeText={(value) => setSignUpUsername(value)} value={signUpUsername}></TextInput>
+        <TextInput style={styles.input} placeholder="Email" onChangeText={(value) => setSignUpEmail(value)} value={signUpEmail}></TextInput>
+        <TextInput style={styles.input} secureTextEntry={true} placeholder="Mot de passe" onChangeText={(value) => setSignUpPassword(value)} value={signUpPassword}></TextInput>
         <View style={styles.check}>
           <CheckBox
             style={styles.checkbox}
@@ -34,7 +62,7 @@ export default function SignUpScreen({ navigation }) {
         </View>
         <TouchableOpacity
           style={styles.buttons}
-          onPress={() => navigation.navigate("Choices")}
+          onPress={() => handleRegister()}
         >
           {/* // Au clique ramène sur la page Choices */}
           <Text style={styles.text}>INSCRIPTION</Text>
