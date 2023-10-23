@@ -6,14 +6,14 @@ export default function ChoicesScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
-      <View style={styles.containerButtons}>
-        <TouchableOpacity style={styles.buttons}>
-          <Text style={styles.text}>JE DONNE</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.buttons}>
-          <Text style={styles.text}>JE TROUVE</Text>
-        </TouchableOpacity>
-      </View>
+        <View style={styles.containerButtons}>
+          <TouchableOpacity style={styles.buttons}>
+              <Text style={styles.text}>JE DONNE</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.buttons}>
+             <Text style={styles.text}>JE TROUVE</Text>
+          </TouchableOpacity>
+        </View>
     </View>
   );
 }
