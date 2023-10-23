@@ -70,12 +70,12 @@ export default function DonationScreen() {
         <Text style={styles.titleState}>ETAT :</Text>
         <View style={styles.check}>
         {isSelectedOne ? ( 
-            <FontAwesome name='check-square' size={20} color={'green'} onPress={()=> handleSelectOne()}/> 
+            <FontAwesome name='check-square' size={20} color={'#74D48F'} onPress={()=> handleSelectOne()}/> 
           ) : (
             <FontAwesome name='square-o' size={20} color={'black'} onPress={()=> handleSelectOne()} />
             )}
             {isSelectedTwo ? ( 
-            <FontAwesome name='check-square' size={20} color={'green'} onPress={()=> handleSelectTwo()}/> 
+            <FontAwesome name='check-square' size={20} color={'#74D48F'} onPress={()=> handleSelectTwo()}/> 
           ) : (
             <FontAwesome name='square-o' size={20} color={'black'} onPress={()=> handleSelectTwo()} />
             )}
