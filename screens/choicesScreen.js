@@ -1,51 +1,48 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import { LinearGradient } from 'expo-linear-gradient';
-import React from 'react'
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import React from "react";
 
-export default function choicesScreen({navigation}) {
+export default function ChoicesScreen({ navigation }) {
   return (
     <View style={styles.container}>
-    <LinearGradient
-        colors={['#D7C4AB', 'white']}
-        style={styles.background}
-      />
+      <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
       <View style={styles.containerButtons}>
-      <TouchableOpacity style={styles.buttons}>
-      <Text style={styles.text}>JE DONNE</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.buttons}>
-      <Text style={styles.text}>JE TROUVE</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.buttons}>
+          <Text style={styles.text}>JE DONNE</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.buttons}>
+          <Text style={styles.text}>JE TROUVE</Text>
+        </TouchableOpacity>
       </View>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   background: {
-    height: '100%',
-    width: '100%',
-    position: 'absolute'
+    height: "100%",
+    width: "100%",
+    position: "absolute",
   },
   containerButtons: {
-    width: '80%',
+    width: "80%",
   },
   buttons: {
-    backgroundColor: '#74D48F',
+    backgroundColor: "#74D48F",
     padding: 20,
     margin: 10,
-    alignItems: 'center',
+    alignItems: "center",
     borderRadius: 10,
-    shadowOffset:{ width: 5,  height: 5, },
-    shadowColor: 'grey',
+    shadowOffset: { width: 5, height: 5 },
+    shadowColor: "grey",
     shadowOpacity: 1.0,
-  }, 
-  text:{
-    color: 'white',
+  },
+  text: {
+    color: "white",
   },
 });

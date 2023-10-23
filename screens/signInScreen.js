@@ -11,7 +11,7 @@ import { LinearGradient } from "expo-linear-gradient";
 
 import React from "react";
 
-export default function signInScreen({ navigation }) {
+export default function SignInScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
@@ -22,13 +22,12 @@ export default function signInScreen({ navigation }) {
           style={styles.buttons}
           onPress={() => navigation.navigate("Choices")}
         >
-        // Ramène sur la page Choices
+          // Ramène sur la page Choices
           <Text style={styles.text}>CONNEXION</Text>
         </TouchableOpacity>
         <View style={styles.question}>
           <Text>
-            Pas encore inscrit ?{" "}
-        // Au clique ramène vers la page SignUp
+            Pas encore inscrit ? // Au clique ramène vers la page SignUp
             <Text
               onPress={() => navigation.navigate("signUp")}
               style={styles.link}
@@ -38,8 +37,18 @@ export default function signInScreen({ navigation }) {
           </Text>
           <Text style={styles.connectWith}>Se connecter avec: </Text>
           // Permet de s'incrire ou se connecter avec un réseau social
-          <SocialIcon style={styles.social} title="Sign In With Facebook" button type="facebook" />
-          <SocialIcon style={styles.social} title="Sign In With Google" button type="google" />
+          <SocialIcon
+            style={styles.social}
+            title="Sign In With Facebook"
+            button
+            type="facebook"
+          />
+          <SocialIcon
+            style={styles.social}
+            title="Sign In With Google"
+            button
+            type="google"
+          />
         </View>
       </View>
     </View>
@@ -82,8 +91,8 @@ const styles = StyleSheet.create({
     color: "white",
     fontFamily: "Montserrat",
   },
-  connectWith:{
-    margin: 15
+  connectWith: {
+    margin: 15,
   },
   question: {
     alignItems: "center",
@@ -93,6 +102,6 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
   },
   social: {
-    padding: 30
-  }
+    padding: 30,
+  },
 });
