@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SignInScreen from "./screens/SignInScreen";
 import SignUpScreen from "./screens/SignUpScreen";
-import ChoicesScreen from "./screens/ChicesScreen";
+import ChoicesScreen from "./screens/ChoicesScreen";
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 

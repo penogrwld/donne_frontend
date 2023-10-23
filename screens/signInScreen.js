@@ -11,8 +11,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { signIn } from "../reducers/user";
-
 import React from "react";
+
 
 export default function signInScreen({ navigation }) {
 
