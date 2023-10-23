@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SignInScreen from "./screens/SignInScreen";
 import SignUpScreen from "./screens/SignUpScreen";
-import ChoicesScreen from "./screens/ChicesScreen";
+import ChoicesScreen from "./screens/ChoicesScreen";
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
@@ -71,10 +71,13 @@ export default function App() {
     </View> */}
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-          {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
-          <Stack.Screen name="signIn" component={SignInScreen} />
-          <Stack.Screen name="signUp" component={SignUpScreen} />
-          <Stack.Screen name="Choices" component={choicesScreen} />
+
+          <Stack.Screen name="SignIn" component={SignInScreen} />
+          <Stack.Screen name="SignUp" component={SignUpScreen} />
+          <Stack.Screen name="Choices" component={ChoicesScreen} />
+
+          <Stack.Screen name="TabNavigator" component={TabNavigator} />
+
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

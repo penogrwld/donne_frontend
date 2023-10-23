@@ -4,6 +4,7 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  SafeAreaView
 } from "react-native";
 import { CheckBox } from "react-native-elements";
 import { useState } from "react";
