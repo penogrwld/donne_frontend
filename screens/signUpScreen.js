@@ -29,14 +29,14 @@ export default function SignUpScreen({ navigation }) {
             onValueChange={setSelection}
           />
           <Text>J'accepte les </Text>
-          // Redirige vers la page CGU
+          {/* // Redirige vers la page CGU */}
           <Text style={styles.link}>conditions générales d'utilisations</Text>
         </View>
         <TouchableOpacity
           style={styles.buttons}
           onPress={() => navigation.navigate("Choices")}
         >
-          // Au clique ramène sur la page Choices
+          {/* // Au clique ramène sur la page Choices */}
           <Text style={styles.text}>INSCRIPTION</Text>
         </TouchableOpacity>
       </View>

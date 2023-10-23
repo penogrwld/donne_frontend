@@ -22,12 +22,13 @@ export default function SignInScreen({ navigation }) {
           style={styles.buttons}
           onPress={() => navigation.navigate("Choices")}
         >
-          // Ramène sur la page Choices
+          {/* // Ramène sur la page Choices */}
           <Text style={styles.text}>CONNEXION</Text>
         </TouchableOpacity>
         <View style={styles.question}>
           <Text>
-            Pas encore inscrit ? // Au clique ramène vers la page SignUp
+            {/* // Au clique ramène vers la page SignUp */}
+            Pas encore inscrit ? 
             <Text
               onPress={() => navigation.navigate("signUp")}
               style={styles.link}
@@ -36,7 +37,7 @@ export default function SignInScreen({ navigation }) {
             </Text>
           </Text>
           <Text style={styles.connectWith}>Se connecter avec: </Text>
-          // Permet de s'incrire ou se connecter avec un réseau social
+          {/* // Permet de s'incrire ou se connecter avec un réseau social */}
           <SocialIcon
             style={styles.social}
             title="Sign In With Facebook"
