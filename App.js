@@ -1,10 +1,20 @@
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SignInScreen from "./screens/SignInScreen";
 import SignUpScreen from "./screens/SignUpScreen";
-import choicesScreen from "./screens/ChoicesScreen";
+import ChoicesScreen from "./screens/ChoicesScreen";
+
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
+import HomeScreen from "./screens/HomeScreen";
+import LikedScreen from "./screens/LikedScreen";
+import DonationScreen from "./screens/DonationScreen";
+import UserScreen from "./screens/UserScreen";
+import ProfileScreen from "./screens/ProfileScreen";
+import ThanksScreen from "./screens/ThanksScreen";
+
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -13,11 +23,45 @@ import { configureStore } from "@reduxjs/toolkit";
 import user from "./reducers/user";
 
 const Stack = createNativeStackNavigator();
-// const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
+
 
 const store = configureStore({
   reducer: { user },
 });
+
+
+
+const TabNavigator = () => {
+  return (
+    <Tab.Navigator screenOptions={({ route }) => ({
+      tabBarIcon: ({ color, size }) => {
+        let iconName = '';
+ 
+        if (route.name === 'Home') {
+          iconName = 'home';
+        } else if (route.name === 'User') {
+          iconName = 'user';
+        } else if (route.name === 'Liked') {
+          iconName = 'comment';
+        } else if (route.name === 'Donation') {
+          iconName = 'plus-circle';
+        }
+
+        return <FontAwesome name={iconName} size={size} color={color} />;
+      },
+      tabBarActiveTintColor: '#A896CF',
+      tabBarInactiveTintColor: 'black',
+      headerShown: false,
+    })}>
+      <Tab.Screen name="User" component={UserScreen} />
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Liked" component={LikedScreen} />
+      <Tab.Screen name="Donation" component={DonationScreen} />
+    </Tab.Navigator>
+  );
+ }
+
 
 export default function App() {
   return (
@@ -27,10 +71,13 @@ export default function App() {
     </View> */}
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-          {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
-          <Stack.Screen name="signIn" component={SignInScreen} />
-          <Stack.Screen name="signUp" component={SignUpScreen} />
-          <Stack.Screen name="Choices" component={choicesScreen} />
+
+          <Stack.Screen name="SignIn" component={SignInScreen} />
+          <Stack.Screen name="SignUp" component={SignUpScreen} />
+          <Stack.Screen name="Choices" component={ChoicesScreen} />
+
+          <Stack.Screen name="TabNavigator" component={TabNavigator} />
+
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

@@ -30,7 +30,7 @@ export default function SignInScreen({ navigation }) {
             {/* // Au clique ramène vers la page SignUp */}
             Pas encore inscrit ? 
             <Text
-              onPress={() => navigation.navigate("signUp")}
+              onPress={() => navigation.navigate("SignUp")}
               style={styles.link}
             >
               Inscription
