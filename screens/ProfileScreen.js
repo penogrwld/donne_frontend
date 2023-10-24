@@ -1,8 +1,12 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOppacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useSelector } from 'react-redux';
 import React from "react";
 
 export default function ProfileScreen() {
+
+  const user = useSelector((state) => state.user.value);
+
     return (
       <View style={styles.container}>
         <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
@@ -12,10 +16,11 @@ export default function ProfileScreen() {
         </View>
 
          <View style={styles.user}>
+          
            <View style={styles.image}>
            <Text>+</Text>
            </View>
-  
+           
            <View style={styles.infos}>
            <Text>{user.firstname} {user.lastname}</Text>
            <Text>{user.email}</Text>
@@ -41,8 +46,7 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   text: {
-    margin: 30,
-    marginBottom: 50,
+    marginBottom: 150,
     marginTop: 80,
     borderWidth: 1,
     borderColor: 'grey',
@@ -57,8 +61,9 @@ const styles = StyleSheet.create({
   image: {
     borderWidth: 1,
     backgroundColor: 'white',
-    borderRadius: '100%',
+    borderRadius: 100,
     padding: 50,
+    marginTop: 50,
   },
   header: {
     borderBottomWidth: 1,

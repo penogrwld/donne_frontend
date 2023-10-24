@@ -28,6 +28,9 @@ export const userSlice = createSlice({
       signIn: (state, action) => {
         state.value.token = action.payload.token;
         state.value.username = action.payload.username;
+        state.value.firstname = action.payload.firstname;
+        state.value.lastname = action.payload.lastname;
+        state.value.email = action.payload.email;
         state.value.password = action.payload.password;
         state.value.isConnected = true
       },

@@ -30,7 +30,12 @@ import {
           }).then(response => response.json())
               .then(data => {
                   if (data.result) {
-                      dispatch(signIn({ username: signInUsername, token: data.token }));
+                      dispatch(signIn(
+                        { username: signInUsername, 
+                          token: data.token, 
+                          lastname: data.lastname, 
+                          firstname: data.firstname,
+                          email: data.email  }));
             navigation.navigate("Choices")
                       setSignInUsername('');
                       setSignInPassword('');

@@ -8,6 +8,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 export default function UserScreen() {
 
   const user = useSelector((state) => state.user.value);
+  console.log(user)
 
   return (
     <View style={styles.container}>
@@ -20,6 +21,7 @@ export default function UserScreen() {
 
 
        <View style={styles.user}>
+         
          <View style={styles.image}>
          <Text>+</Text>
          </View>
@@ -30,10 +32,22 @@ export default function UserScreen() {
          </View>
        </View>
 
-        <View style={styles.title}>
-         <Text style={styles.text1}>MES DONS</Text>
-         <Text style={styles.text2}>MES CATCHS</Text>
-        </View>
+       <View style={styles.text1}>
+       <Text>MES DONS</Text>
+       </View>
+
+         <View style={styles.dons}>
+          <Text>+</Text>
+         </View>
+
+       <View style={styles.text2}>
+       <Text>MES CATCHS</Text>
+       </View>
+
+         <View style={styles.catchs}>
+          <Text>+</Text>
+         </View>
+
 
      </View>
   );
@@ -52,16 +66,16 @@ const styles = StyleSheet.create({
   text1: {
     marginBottom: 150,
     marginTop: 80,
-    borderWidth: 1,
-    borderColor: 'grey',
+    borderTopWidth: 1,
+    borderColor: 'black',
     padding: 10,
   },
 
   text2: {
     marginBottom: 125,
     marginTop: 5,
-    borderWidth: 1,
-    borderColor: 'grey',
+    borderTopWidth: 1,
+    borderColor: 'black',
     padding: 10,
   },
 
@@ -86,6 +100,23 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 20,
     fontWeight: '800'
+  },
+  dons: {
+    borderWidth: 1,
+    backgroundColor: 'white',
+    borderRadius: 100,
+    padding: 10,
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    
+  },
+  catchs: {
+    borderWidth: 1,
+    backgroundColor: 'white',
+    borderRadius: 100,
+    padding: 10,
+    flexDirection: "row",
+    justifyContent: "center",
   },
 
 });
