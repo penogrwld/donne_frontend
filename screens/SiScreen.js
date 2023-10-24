@@ -60,7 +60,7 @@ import {
               {/* // Au clique ramène vers la page SignUp */}
               Pas encore inscrit ? 
               <Text
-                onPress={() => navigation.navigate("SignUp")}
+                onPress={() => navigation.navigate("Su")}
                 style={styles.link}
               >
                 Inscription
