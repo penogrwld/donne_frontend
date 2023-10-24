@@ -16,6 +16,11 @@ import ProfileScreen from "./screens/ProfileScreen";
 import ThanksScreen from "./screens/ThanksScreen";
 import TutoScreen from "./screens/TutoScreen";
 
+
+// A SUPPRIMER
+import CguScreen from './screens/CguScreen';
+
+
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -79,6 +84,11 @@ export default function App() {
           <Stack.Screen name="SignIn" component={SignInScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
           <Stack.Screen name="Choices" component={ChoicesScreen} />
+
+          {/* A SUPPRIMER */}
+          <Stack.Screen name="Cgu" component={CguScreen} />
+          {/* <Stack.Screen name="Liked" component={LikedScreen} /> */}
+          
 
           <Stack.Screen name="TabNavigator" component={TabNavigator} />
 

@@ -14,7 +14,7 @@ import { signIn } from "../reducers/user";
 import React from "react";
 
 
-export default function signInScreen({ navigation }) {
+export default function SignInScreen({ navigation }) {
 
   const dispatch = useDispatch()
   const [signInUsername, setSignInUsername] = useState('')

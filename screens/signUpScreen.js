@@ -19,7 +19,10 @@ const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"
 export default function SignUpScreen({ navigation }) {
 
   const dispatch = useDispatch()
+  // case cocher (pas cocher = false / cocher = true)
   const [isSelected, setSelection] = useState(false);
+
+
   const [signUpFirstName, setSignUpFirstname] = useState('');
   const [signUpLastName, setSignUpLastname] = useState('');
   const [signUpUsername, setSignUpUsername] = useState('');
@@ -39,6 +42,7 @@ export default function SignUpScreen({ navigation }) {
 			.then(data => {
 				if (data.result && EMAIL_REGEX.test(signUpEmail)) {
 					dispatch(signUp({firstname: signUpFirstName, lastname: signUpLastName, username: signUpUsername, email: signUpEmail, token: data.token }));
+          // vide les champs après inscription
 					setSignUpLastname('');
 					setSignUpFirstname('');
 					setSignUpUsername('');
@@ -76,7 +80,7 @@ export default function SignUpScreen({ navigation }) {
           />) } 
           <Text style={styles.textValid}>  J'accepte les </Text>
           {/* // Redirige vers la page CGU */}
-          <Text style={styles.link}>conditions générales d'utilisations</Text>
+          <Text style={styles.link} onPress={()=> navigation.navigate('Cgu')}>conditions générales d'utilisations</Text>
         </View>
         <TouchableOpacity
           style={styles.buttons}
