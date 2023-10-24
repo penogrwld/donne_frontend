@@ -2,8 +2,8 @@ import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import SignInScreen from "./screens/SignInScreen";
-import SignUpScreen from "./screens/SignUpScreen";
+import SiScreen from "./screens/SiScreen";
+import SuScreen from "./screens/SuScreen";
 import ChoicesScreen from "./screens/ChoicesScreen";
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -81,8 +81,8 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
 
-          <Stack.Screen name="SignIn" component={SignInScreen} />
-          <Stack.Screen name="SignUp" component={SignUpScreen} />
+          <Stack.Screen name="SignIn" component={SiScreen} />
+          <Stack.Screen name="Su" component={SuScreen} />
           <Stack.Screen name="Choices" component={ChoicesScreen} />
 
           {/* A SUPPRIMER */}

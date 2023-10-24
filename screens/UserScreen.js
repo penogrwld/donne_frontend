@@ -3,6 +3,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { useSelector } from 'react-redux';
 
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
 export default function UserScreen() {
 
   const user = useSelector((state) => state.user.value);
@@ -11,6 +13,12 @@ export default function UserScreen() {
     <View style={styles.container}>
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
      
+        <View style={styles.header}>
+        <FontAwesome name='arrow-left'/>
+        <Text style={styles.headerText}>MON COMPTE</Text>
+        </View>
+
+
        <View style={styles.user}>
          <View style={styles.image}>
          <Text>+</Text>
@@ -23,8 +31,8 @@ export default function UserScreen() {
        </View>
 
         <View style={styles.title}>
-         <Text style={styles.text}>MES DONS</Text>
-         <Text style={styles.text}>MES CATCHS</Text>
+         <Text style={styles.text1}>MES DONS</Text>
+         <Text style={styles.text2}>MES CATCHS</Text>
         </View>
 
      </View>
@@ -41,15 +49,22 @@ const styles = StyleSheet.create({
     width: "100%",
     position: "absolute",
   },
-  text: {
-    margin: 30,
-    marginBottom: 50,
+  text1: {
+    marginBottom: 150,
     marginTop: 80,
     borderWidth: 1,
     borderColor: 'grey',
     padding: 10,
-
   },
+
+  text2: {
+    marginBottom: 125,
+    marginTop: 5,
+    borderWidth: 1,
+    borderColor: 'grey',
+    padding: 10,
+  },
+
   user: {
     alignItems: "center",
     flexDirection: "row",
@@ -58,8 +73,19 @@ const styles = StyleSheet.create({
   image: {
     borderWidth: 1,
     backgroundColor: 'white',
-    borderRadius: '100%',
+    borderRadius: '50%',
     padding: 50,
+    marginTop: 50,
+  },
+  header: {
+    borderBottomWidth: 1,
+    padding: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  headerText: {
+    fontSize: 20,
+    fontWeight: '800'
   },
 
 });

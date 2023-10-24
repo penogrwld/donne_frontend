@@ -21,10 +21,14 @@ export default function LikedScreen({navigation}) {
         <FontAwesome name='exchange' size={20} color={'black'} onPress={() => handleSwap()}/>
       </View>
       {swap ? (<View style={styles.div}>
-        <Image style={styles.img} source={{
-          // uri: 'https://reactnative.dev/img/tiny_logo.png',
-          uri: 'https://www.ikea.com/fr/fr/images/products/ekedalen-table-extensible-bouleau__0736961_pe740825_s5.jpg'
-        }}/>
+        <View>
+          <Image style={styles.imgItem} source={{
+            uri: 'https://www.ikea.com/fr/fr/images/products/ekedalen-table-extensible-bouleau__0736961_pe740825_s5.jpg'
+          }}/>
+          <Image style={styles.imgUser} onPress={() => navigation.navigate('Profile')} source={{
+            uri: 'https://reactnative.dev/img/tiny_logo.png'
+          }}/>
+        </View>
         <View style={styles.textes}>
           <Text style={styles.titleText}>Table blanc de qualité PREND !!</Text>
           <Text>Acceptez vous de donner cette objet ?</Text>
@@ -37,11 +41,9 @@ export default function LikedScreen({navigation}) {
       <View style={styles.div}>
         <View>
           <Image style={styles.imgItem} source={{
-            // uri: 'https://reactnative.dev/img/tiny_logo.png',
             uri: 'https://www.ikea.com/fr/fr/images/products/ekedalen-table-extensible-bouleau__0736961_pe740825_s5.jpg'
           }}/>
           <Image style={styles.imgUser} onPress={() => navigation.navigate('Profile')} source={{
-            // uri: 'https://reactnative.dev/img/tiny_logo.png',
             uri: 'https://reactnative.dev/img/tiny_logo.png'
           }}/>
         </View>
