@@ -167,7 +167,7 @@ export default function DonationScreen({ navigation }) {
       </View>
       <View style={styles.goBtn}>
       <TouchableOpacity>
-        <Text style={styles.goText}>GO !</Text>
+        <Text style={styles.goText} onPress={() => navigation.navigate('Thanks')}>GO !</Text>
       </TouchableOpacity>
       </View>
     </View>
