@@ -17,6 +17,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useEffect, useState } from 'react';
 import user from "../reducers/user";
 import object from "../reducers/object";
+import { addGift, addLocation } from "../reducers/object";
 
 
 export default function DonationScreen({ navigation }) {
@@ -25,23 +26,44 @@ export default function DonationScreen({ navigation }) {
   const [isSelectedOne, setSelectionOne] = useState(false);
   const [isSelectedTwo, setSelectionTwo] = useState(false)
   const [modalVisible, setModalVisible] = useState(false)
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [condition, setCondition] = useState('')
   const [city, setCity] = useState('');
   const [postalCode, setPostalCode] = useState('')
+  const [isLocation, setIsLocation] = useState(false)
 
   const user = useSelector((state)=> state.user.value)
   const object = useSelector((state)=> state.object.value)
  
 
-
-  handleSelectOne = () => {
+  const handleSelectOne = () => {
     setSelectionOne(!isSelectedOne)
     setSelectionTwo(false)
+    setCondition('Ready to use')
   }
-  handleSelectTwo = () => {
+  const handleSelectTwo = () => {
     setSelectionTwo(!isSelectedTwo)
     setSelectionOne(false)
+    setCondition('À retaper')
   }
 
+  const handleAddLocation = () => {
+    fetch(`https://api-adresse.data.gouv.fr/search/?q=${city}&postcode=${postalCode}`)
+    .then((response) => response.json())
+    .then(data => {
+      const myCity = data.features[1]
+      const location = {
+        city: myCity.properties.city,
+        postalCode: myCity.properties.postcode
+      };
+      dispatch(addLocation({city: location.city, postalCode: location.postalCode}))
+    })
+    setIsLocation(true)
+  }
+
+
+  // console.log(object.localisation)
   return (
     <View style={styles.container}>
       <Modal animationType="slide"
@@ -63,7 +85,9 @@ export default function DonationScreen({ navigation }) {
             </TouchableOpacity>
             <TouchableOpacity
               style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}>
+              onPress={() => {
+                handleAddLocation()
+                setModalVisible(!modalVisible)}}>
               <Text style={styles.textStyle}>Add</Text>
             </TouchableOpacity>
           </View>
@@ -129,10 +153,16 @@ export default function DonationScreen({ navigation }) {
             <Text>À retaper</Text>
         </View>
         <View>
-          <Text style={styles.localisationText}>LOCALISATION :</Text>
+          <Text style={styles.localisationTitle}>LOCALISATION :</Text>
+          {!isLocation ? (
           <TouchableOpacity onPress={()=> setModalVisible(true)} style={styles.addLocalisation}>
             <Text style={styles.addLocalisationText}>Ajoutez votre adresse</Text>
-          </TouchableOpacity>
+          </TouchableOpacity>) : (
+            <View style={styles.localisation}>
+            <Text style={styles.localisationText}>{object.localisation.city}</Text>
+            <Text style={styles.localisationText}>{object.localisation.postalCode}</Text>
+            </View>
+          )}
         </View>
       </View>
       <View style={styles.goBtn}>
@@ -147,7 +177,7 @@ export default function DonationScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    
+    justifyContent: "center",
   },
   background: {
     height: "100%",
@@ -231,10 +261,10 @@ const styles = StyleSheet.create({
   addDescription: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: '-5%'
+    marginTop: '-10%'
   },
   addState: {
-    marginTop: '-40%',
+    marginTop: '-45%',
     height: '15%',
   },
   titleState: {
@@ -259,7 +289,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     width: '20%'
   },
-  localisationText: {
+  localisationTitle: {
     fontSize: 18,
     textDecorationLine: 'underline',
     marginTop: 10,
@@ -280,7 +310,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 1.0,
   },
   addLocalisationText: {
-    color: 'white'
+    color: 'white',
+    textAlign: 'center'
   },
   centeredView: {
     flex: 1,
@@ -350,7 +381,13 @@ const styles = StyleSheet.create({
   },
   goText: {
     color: 'white'
+  },
+  localisation: {
+    marginTop: 10,
+    marginLeft: 30,
+  },
+  localisationText: {
+    fontSize: 16
   }
-
 });
 
