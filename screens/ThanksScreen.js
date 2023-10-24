@@ -6,10 +6,10 @@ export default function ThanksScreen({navigation}) {
   return (
     <View style={styles.container}>
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
-      <Text>MERCI POUR VOTRE DON !</Text>
+      <Text style={styles.header}>MERCI POUR VOTRE DON !</Text>
         <View style={styles.containerButton}>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.textButton}>Voir mes dons</Text>
+            <Text style={styles.textButton} onPress={() => navigation.navigate('User')}>Voir mes dons</Text>
           </TouchableOpacity>
         </View>
     </View>
@@ -27,6 +27,9 @@ const styles = StyleSheet.create({
     width: "100%",
     position: "absolute",
   },
+  header:{
+    fontWeight: 'bold'
+  },
   containerButton: {
     width: "80%",
     alignItems: "center",
@@ -42,8 +45,9 @@ const styles = StyleSheet.create({
     shadowColor: "grey",
     shadowOpacity: 1.0,
   },
-  textButton: {
-    color: "white",
+    textButton: {
+    color: "000000",
+    textDecorationLine: 'underline',
   },
   
 });
