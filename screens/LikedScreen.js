@@ -17,7 +17,7 @@ export default function LikedScreen({navigation}) {
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
       <View style={styles.header}>
         <FontAwesome name='arrow-left' size={20} color={'black'} onPress={() => navigation.navigate('Donation')}/>
-      {swap ? (<Text style={styles.headerText} >Coté donneur</Text>) : (<Text style={styles.headerText}>Coté Dénicheur</Text>) }  
+      {swap ? (<Text style={styles.headerText} >Coté Donneur</Text>) : (<Text style={styles.headerText}>Coté Dénicheur</Text>) }  
         <FontAwesome name='exchange' size={20} color={'black'} onPress={() => handleSwap()}/>
       </View>
       {swap ? (<View style={styles.div}>

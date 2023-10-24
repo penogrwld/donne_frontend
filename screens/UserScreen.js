@@ -36,21 +36,17 @@ export default function UserScreen() {
        <Text>MES DONS</Text>
        </View>
 
-        <View>
          <View style={styles.dons}>
           <Text>+</Text>
          </View>
-        </View>
 
        <View style={styles.text2}>
        <Text>MES CATCHS</Text>
        </View>
 
-       <View>
          <View style={styles.catchs}>
           <Text>+</Text>
          </View>
-        </View>
 
 
      </View>
@@ -71,7 +67,7 @@ const styles = StyleSheet.create({
     marginBottom: 150,
     marginTop: 80,
     borderTopWidth: 1,
-    borderColor: 'grey',
+    borderColor: 'black',
     padding: 10,
   },
 
@@ -79,7 +75,7 @@ const styles = StyleSheet.create({
     marginBottom: 125,
     marginTop: 5,
     borderTopWidth: 1,
-    borderColor: 'grey',
+    borderColor: 'black',
     padding: 10,
   },
 
