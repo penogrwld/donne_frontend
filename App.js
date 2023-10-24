@@ -15,6 +15,7 @@ import UserScreen from "./screens/UserScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import ThanksScreen from "./screens/ThanksScreen";
 import TutoScreen from "./screens/TutoScreen";
+import SnapScreen from './screens/SnapScreen'
 
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -22,13 +23,14 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import user from "./reducers/user";
+import object from "./reducers/object";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 
 const store = configureStore({
-  reducer: { user },
+  reducer: { user, object }
 });
 
 
@@ -79,7 +81,7 @@ export default function App() {
           <Stack.Screen name="SignIn" component={SignInScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
           <Stack.Screen name="Choices" component={ChoicesScreen} />
-
+          <Stack.Screen name="Snap" component={SnapScreen} />
           <Stack.Screen name="TabNavigator" component={TabNavigator} />
 
         </Stack.Navigator>

@@ -29,15 +29,15 @@ export default function signInScreen({ navigation }) {
 			body: JSON.stringify({ username: signInUsername, password: signInPassword }),
 		}).then(response => response.json())
 			.then(data => {
-				if (data.result) {
+				// if (data.result) {
 					dispatch(signIn({ username: signInUsername, token: data.token }));
           navigation.navigate("Choices")
 					setSignInUsername('');
 					setSignInPassword('');
           setErrorField(false)
-				} else {
-          setErrorField(true)
-        }
+				// } else {
+        //   setErrorField(true)
+        // }
 			});
 	};
 
