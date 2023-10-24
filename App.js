@@ -12,6 +12,7 @@ import HomeScreen from "./screens/HomeScreen";
 import LikedScreen from "./screens/LikedScreen";
 import DonationScreen from "./screens/DonationScreen";
 import UserScreen from "./screens/UserScreen";
+import CguScreen from "./screens/CguScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import ThanksScreen from "./screens/ThanksScreen";
 import TutoScreen from "./screens/TutoScreen";
@@ -78,6 +79,7 @@ export default function App() {
 
           <Stack.Screen name="SignIn" component={SignInScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
+          <Stack.Screen name="Cgu" component={CguScreen} />
           <Stack.Screen name="Choices" component={ChoicesScreen} />
 
           <Stack.Screen name="TabNavigator" component={TabNavigator} />

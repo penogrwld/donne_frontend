@@ -76,7 +76,7 @@ export default function SignUpScreen({ navigation }) {
           />) } 
           <Text style={styles.textValid}>  J'accepte les </Text>
           {/* // Redirige vers la page CGU */}
-          <Text style={styles.link}>conditions générales d'utilisations</Text>
+          <Text style={styles.link} onPress={() => navigation.navigate('Cgu')}>conditions générales d'utilisations</Text>
         </View>
         <TouchableOpacity
           style={styles.buttons}

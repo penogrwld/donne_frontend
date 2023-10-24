@@ -1,19 +1,18 @@
 import { View, Text , StyleSheet, TouchableOpacity  } from 'react-native'
 import { LinearGradient } from "expo-linear-gradient";
 import React from 'react'
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export default function CguScreen({navigation}) {
   return (
     <View style={styles.container}>
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
-            <TouchableOpacity style={styles.itemBack}>
-               <Text>icon={faArrowLeft}</Text>
+            <TouchableOpacity style={styles.backItem} onPress={() => navigation.navigate('SignUp')}>
+              <FontAwesome name="arrow-left" size={25} color="#000000" />
             </TouchableOpacity>
+            
+      <View style={styles.text}>
             <Text>CGU lorem ipsum</Text>
-      <View style={styles.containerButton}>
-            <TouchableOpacity style={styles.buttons}>
-               <Text style={styles.text}>ACCEPTER</Text>
-            </TouchableOpacity>
       </View>
     </View>
   );
@@ -30,26 +29,19 @@ const styles = StyleSheet.create({
     width: "100%",
     position: "absolute",
   },
-  containerButton: {
+
+  text: {
     width: "80%",
     alignItems: "flex-end",
     justifyContent: "center",
   },
-  buttons: {
-    backgroundColor: "#74D48F",
-    padding: 20,
-    margin: 10,
-    alignItems: "center",
-    borderRadius: 10,
-    shadowOffset: { width: 5, height: 5 },
-    shadowColor: "grey",
-    shadowOpacity: 1.0,
-  },
+  
   text: {
     color: "white",
   },
-  itemBack: {
-    color: "black",
+  backItem: {
+    color: "white",
+    fontWeight: "bold" ,
 
   }
 });
