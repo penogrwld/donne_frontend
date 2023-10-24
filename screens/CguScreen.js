@@ -7,11 +7,11 @@ export default function CguScreen({navigation}) {
   return (
     <View style={styles.container}>
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
-            <TouchableOpacity style={styles.backItem} onPress={() => navigation.navigate('SignUp')}>
-              <FontAwesome name="arrow-left" size={25} color="#000000" />
+            <TouchableOpacity onPress={() => navigation.navigate('Si')}>
+              <FontAwesome name="arrow-left" size={25} color="#000000" style={styles.backItem} />
             </TouchableOpacity>
             
-      <View style={styles.text}>
+      <View >
             <Text>CGU lorem ipsum</Text>
       </View>
     </View>
@@ -24,24 +24,30 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+
   background: {
     height: "100%",
     width: "100%",
     position: "absolute",
   },
+    
+  backItem: {
+    
+    fontWeight: "bold" ,
+    flex: 0.7,
+    flexDirection:"row",
+    alignItems: "flex-end",
+    justifyContent:"space-between",
+   
 
-  text: {
+  }
+
+   /*text: {
     width: "80%",
     alignItems: "flex-end",
     justifyContent: "center",
-  },
+    
   
-  text: {
-    color: "white",
-  },
-  backItem: {
-    color: "white",
-    fontWeight: "bold" ,
-
-  }
+  },*/
+  
 });
