@@ -23,14 +23,19 @@ import {
   
   
     const handleConnexion = () => {
-          fetch('http://192.168.123.127:3000/users/signin', {
+          fetch('http://10.3.0.14:3000/users/signin', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ username: signInUsername, password: signInPassword }),
           }).then(response => response.json())
               .then(data => {
                   if (data.result) {
-                      dispatch(signIn({ username: signInUsername, token: data.token }));
+                      dispatch(signIn(
+                        { username: signInUsername, 
+                          token: data.token, 
+                          lastname: data.lastname, 
+                          firstname: data.firstname,
+                          email: data.email  }));
             navigation.navigate("Choices")
                       setSignInUsername('');
                       setSignInPassword('');
