@@ -1,19 +1,18 @@
 import { View, Text , StyleSheet, TouchableOpacity  } from 'react-native'
 import { LinearGradient } from "expo-linear-gradient";
 import React from 'react'
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export default function CguScreen({navigation}) {
   return (
     <View style={styles.container}>
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
-            <TouchableOpacity style={styles.itemBack}>
-               <Text>icon={faArrowLeft}</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('Si')}>
+              <FontAwesome name="arrow-left" size={25} color="#000000" style={styles.backItem} />
             </TouchableOpacity>
+            
+      <View >
             <Text>CGU lorem ipsum</Text>
-      <View style={styles.containerButton}>
-            <TouchableOpacity style={styles.buttons}>
-               <Text style={styles.text}>ACCEPTER</Text>
-            </TouchableOpacity>
       </View>
     </View>
   );
@@ -25,31 +24,30 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+
   background: {
     height: "100%",
     width: "100%",
     position: "absolute",
   },
-  containerButton: {
+    
+  backItem: {
+    
+    fontWeight: "bold" ,
+    flex: 0.7,
+    flexDirection:"row",
+    alignItems: "flex-end",
+    justifyContent:"space-between",
+   
+
+  }
+
+   /*text: {
     width: "80%",
     alignItems: "flex-end",
     justifyContent: "center",
-  },
-  buttons: {
-    backgroundColor: "#74D48F",
-    padding: 20,
-    margin: 10,
-    alignItems: "center",
-    borderRadius: 10,
-    shadowOffset: { width: 5, height: 5 },
-    shadowColor: "grey",
-    shadowOpacity: 1.0,
-  },
-  text: {
-    color: "white",
-  },
-  itemBack: {
-    color: "black",
-
-  }
+    
+  
+  },*/
+  
 });

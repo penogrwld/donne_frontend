@@ -84,6 +84,7 @@ export default function App() {
           <Stack.Screen name="Profile" component={ProfileScreen} />
           <Stack.Screen name="Cgu" component={CguScreen} />
           <Stack.Screen name="Snap" component={SnapScreen} />
+          <Stack.Screen name="Thanks" component={ThanksScreen} />
           <Stack.Screen name="TabNavigator" component={TabNavigator} />
 
         </Stack.Navigator>
