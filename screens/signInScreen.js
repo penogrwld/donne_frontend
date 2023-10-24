@@ -14,7 +14,7 @@ import { signIn } from "../reducers/user";
 import React from "react";
 
 
-export default function signInScreen({ navigation }) {
+export default function SignInScreen({ navigation }) {
 
   const dispatch = useDispatch()
   const [signInUsername, setSignInUsername] = useState('')
@@ -23,7 +23,7 @@ export default function signInScreen({ navigation }) {
 
 
   const handleConnexion = () => {
-		fetch('http://10.3.0.21:3000/users/signin', {
+		fetch('http://192.168.123.127:3000/users/signin', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ username: signInUsername, password: signInPassword }),
