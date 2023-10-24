@@ -25,9 +25,9 @@ export default function LikedScreen({navigation}) {
           <Image style={styles.imgItem} source={{
             uri: 'https://www.ikea.com/fr/fr/images/products/ekedalen-table-extensible-bouleau__0736961_pe740825_s5.jpg'
           }}/>
-          <Image style={styles.imgUser} onPress={() => navigation.navigate('Profile')} source={{
-            uri: 'https://reactnative.dev/img/tiny_logo.png'
-          }}/>
+          <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+          <Image style={styles.imgUser}  source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}/>
+          </TouchableOpacity>
         </View>
         <View style={styles.textes}>
           <Text style={styles.titleText}>Table blanc de qualité PREND !!</Text>

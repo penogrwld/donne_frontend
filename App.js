@@ -81,6 +81,7 @@ export default function App() {
           <Stack.Screen name="Si" component={SiScreen} />
           <Stack.Screen name="Su" component={SuScreen} />
           <Stack.Screen name="Choices" component={ChoicesScreen} />
+          <Stack.Screen name="Profile" component={ProfileScreen} />
           <Stack.Screen name="Cgu" component={CguScreen} />
           <Stack.Screen name="Snap" component={SnapScreen} />
           <Stack.Screen name="Thanks" component={ThanksScreen} />
