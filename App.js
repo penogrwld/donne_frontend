@@ -75,19 +75,15 @@ const TabNavigator = () => {
 export default function App() {
   return (
     <Provider store={store}>
-      {/* <View style={styles.container}>
-
-    </View> */}
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
 
           <Stack.Screen name="Si" component={SiScreen} />
           <Stack.Screen name="Su" component={SuScreen} />
           <Stack.Screen name="Choices" component={ChoicesScreen} />
-
-          {/* A SUPPRIMER */}
+          <Stack.Screen name="Profile" component={ProfileScreen} />
           <Stack.Screen name="Cgu" component={CguScreen} />
-          {/* <Stack.Screen name="Liked" component={LikedScreen} /> */}
+
           
 
           <Stack.Screen name="TabNavigator" component={TabNavigator} />
