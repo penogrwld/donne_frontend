@@ -13,9 +13,14 @@ export const objectSlice = createSlice({
     addPhoto: (state, action) => {
         state.value.image.push(action.payload)
     },
-
+    removePhoto: (state, action) => {
+        state.value.image = state.value.image.filter((data) => data !== action.payload)
+      },
+      removeAll: (state, action) => {
+        state.value.image = []
+      }
   },
 });
 
-export const { addPhoto } = objectSlice.actions;
+export const { addPhoto, removePhoto, removeAll } = objectSlice.actions;
 export default objectSlice.reducer;
