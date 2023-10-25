@@ -19,8 +19,6 @@ import TutoScreen from "./screens/TutoScreen";
 import SnapScreen from './screens/SnapScreen'
 import CguScreen from './screens/CguScreen';
 
-
-
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -36,7 +34,6 @@ const Tab = createBottomTabNavigator();
 const store = configureStore({
   reducer: { user, object }
 });
-
 
 
 const TabNavigator = () => {

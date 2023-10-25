@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, SafeAreaView, Image, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import React from "react";
 
@@ -14,6 +15,8 @@ export default function LikedScreen({navigation}) {
     setAccepted(!accepted)
   }
   
+
+
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
