@@ -10,6 +10,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import HomeScreen from "./screens/HomeScreen";
 import LikedScreen from "./screens/LikedScreen";
+import DonneurScreen from "./screens/DonneurScreen";
 import DonationScreen from "./screens/DonationScreen";
 import UserScreen from "./screens/UserScreen";
 import ProfileScreen from "./screens/ProfileScreen";
@@ -66,6 +67,7 @@ const TabNavigator = () => {
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Donation" component={DonationScreen} />
       <Tab.Screen name="Liked" component={LikedScreen} />
+      <Tab.Screen name="Donneur" component={DonneurScreen} />
       <Tab.Screen name="Tuto" component={TutoScreen} />
     </Tab.Navigator>
   );

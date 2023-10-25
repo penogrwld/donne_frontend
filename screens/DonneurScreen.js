@@ -4,10 +4,10 @@ import { useState } from 'react'
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import React from "react";
 
-export default function LikedScreen({navigation}) {
+export default function DonneurScreen({navigation}) {
 
-  const [swap, setSwap] = useState(true)
   const [accepted, setAccepted] = useState(false)
+
 
 
   const handleAccept = () => {
@@ -19,8 +19,8 @@ export default function LikedScreen({navigation}) {
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
       <View style={styles.header}>
         <FontAwesome name='arrow-left' size={20} color={'black'} onPress={() => navigation.navigate('Donation')}/>
-      {swap ? (<Text style={styles.headerText} >Coté Denicheur</Text>) : (<Text style={styles.headerText}>Coté Dénicheur</Text>) }  
-        <FontAwesome name='exchange' size={20} color={'black'} onPress={() => navigation.navigate('Donneur')}/>
+        <Text style={styles.headerText} >Coté Donneur</Text>
+        <FontAwesome name='exchange' size={20} color={'black'} onPress={() => navigation.navigate('Liked')}/>
       </View>
       {!accepted ? (<View style={styles.div}>
         <View>
@@ -33,19 +33,20 @@ export default function LikedScreen({navigation}) {
         </View>
         <View style={styles.textes}>
           <Text style={styles.titleText}>Table blanc de qualité PREND !!</Text>
-          <Text>Etes vous sûr de vouloir cette objet ?</Text>
-          <View style={styles.buttons}>
+          <Text>Acceptez vous de donnez cet objet ?</Text>
+          <View style={styles.buttonsOne}>
             <TouchableOpacity style={styles.buttonNo}><Text>NON</Text></TouchableOpacity>
             <TouchableOpacity style={styles.buttonYes} onPress={() => handleAccept()}><Text>OUI</Text></TouchableOpacity>
           </View>
         </View>
-      </View>) : (<View style={styles.accepted}>
+      </View>) : 
+      (<View style={styles.accepted}>
         <Text>La donnation a-t-elle été effectuée ?</Text>
-        <View style={styles.buttons}>
+        <View style={styles.buttonsTwo}>
             <TouchableOpacity style={styles.buttonNo} onPress={() => handleAccept()}><Text>NON</Text></TouchableOpacity>
             <TouchableOpacity style={styles.buttonYes}><Text>OUI</Text></TouchableOpacity>
         </View>
-      </View>) }  
+      </View>) } 
     </SafeAreaView>
   );
 }
@@ -105,11 +106,19 @@ const styles = StyleSheet.create({
   },
 
   // Style des boutons
-  buttons: {
+  buttonsOne: {
     flexDirection: "row",
     justifyContent: "space-around",
+    // borderWidth: 1,
     marginTop: 30,
-
+  },
+  buttonsTwo: {
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: '100%',
+    // borderWidth: 1,
+    marginTop: 30,
   },
   buttonNo: {
     backgroundColor: "#A896CF",
@@ -140,7 +149,13 @@ const styles = StyleSheet.create({
     height: 50
   },
   accepted: {
-    marginTop: 10
+    marginTop: 10,
+    // justifyContent: "center",
+    alignItems: "center",
+    padding: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#BBBBBB'
+    // borderWidth:1
     // borderWidth: 1,
     // flexDirection: 'column',
   }
