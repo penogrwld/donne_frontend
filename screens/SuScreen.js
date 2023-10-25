@@ -34,7 +34,7 @@ import {
     }
   
     const handleRegister = () => {
-          if(isSelected){fetch('http://192.168.130.172:3000/users/signup', {
+          if(isSelected){fetch('http://10.3.0.14:3000/users/signup', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({firstname: signUpFirstName, lastname: signUpLastName, username: signUpUsername, email: signUpEmail, password: signUpPassword }),
