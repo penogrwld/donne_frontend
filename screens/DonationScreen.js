@@ -17,7 +17,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useEffect, useState } from 'react';
 import user from "../reducers/user";
 import object from "../reducers/object";
-import { addGift, addLocation } from "../reducers/object";
+import { removePhoto, removeAll } from "../reducers/object";
 
 
 export default function DonationScreen({ navigation }) {
@@ -57,13 +57,33 @@ export default function DonationScreen({ navigation }) {
         city: myCity.properties.city,
         postalCode: myCity.properties.postcode
       };
-      dispatch(addLocation({city: location.city, postalCode: location.postalCode}))
+      setCity(location.city)
+      setPostalCode(location.postalCode)
     })
     setIsLocation(true)
   }
 
+  const handleSubmit = () => {
+    
+    fetch('http://10.3.0.40:3000/objects/add' , {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ image: object.image, title: title, description: description, condition: condition,
+      localisation: {city: city, postalCode: postalCode}, user: user, token: user.token, likedBy: null, caughtBy: null}),
+    })
+    .then((response) => response.json())
+    .then(data => {
+      dispatch(removeAll())
+      setCity('')
+      setCondition('')
+      setDescription('')
+      setSelectionOne(false)
+      setSelectionTwo(false)
+      setIsLocation(false)
+      setTitle('')
+    })
+  }
 
-  // console.log(object.localisation)
   return (
     <View style={styles.container}>
       <Modal animationType="slide"
@@ -103,35 +123,62 @@ export default function DonationScreen({ navigation }) {
         {object.image.length === 0 ? (<TouchableOpacity style={styles.addPhoto} onPress={() => navigation.navigate("Snap")}>
           <Text>+</Text>
         </TouchableOpacity>) : (
-        <Image style={styles.image} source={{ uri: object.image[0] }} />)}
+              <View style={styles.deleteContainer}>
+                <Image style={styles.image} source={{ uri: object.image[0] }} />
+                <TouchableOpacity onPress={() => dispatch(removePhoto(object.image[0]))}>
+                <FontAwesome name='times' size={20} color='#000000' style={styles.deleteIcon} />
+                </TouchableOpacity>
+              </View>)}
         {object.image.length <= 1 ? (<TouchableOpacity style={styles.addPhoto} onPress={() => navigation.navigate("Snap")}>
           <Text>+</Text>
         </TouchableOpacity>) : (
-        <Image style={styles.image} source={{ uri: object.image[1] }} />)}
+        <View style={styles.deleteContainer}>
+        <Image style={styles.image} source={{ uri: object.image[1] }} />
+        <TouchableOpacity onPress={() => dispatch(removePhoto(object.image[1]))}>
+        <FontAwesome name='times' size={20} color='#000000' style={styles.deleteIcon} />
+        </TouchableOpacity>
+      </View>)}
         {object.image.length <= 2 ? (<TouchableOpacity style={styles.addPhoto} onPress={() => navigation.navigate("Snap")}>
           <Text>+</Text>
         </TouchableOpacity>) : (
-        <Image style={styles.image} source={{ uri: object.image[2] }} />)}
+        <View style={styles.deleteContainer}>
+        <Image style={styles.image} source={{ uri: object.image[2] }} />
+        <TouchableOpacity onPress={() => dispatch(removePhoto(object.image[2]))}>
+        <FontAwesome name='times' size={20} color='#000000' style={styles.deleteIcon} />
+        </TouchableOpacity>
+      </View>)}
         {object.image.length <= 3 ? (<TouchableOpacity style={styles.addPhoto} onPress={() => navigation.navigate("Snap")}>
           <Text>+</Text>
         </TouchableOpacity>) : (
-          <Image style={styles.image} source={{ uri: object.image[3] }} />)}
+          <View style={styles.deleteContainer}>
+          <Image style={styles.image} source={{ uri: object.image[3] }} />
+          <TouchableOpacity onPress={() => dispatch(removePhoto(object.image[3]))}>
+          <FontAwesome name='times' size={20} color='#000000' style={styles.deleteIcon} />
+          </TouchableOpacity>
+        </View>)}
         {object.image.length <= 4 ? (<TouchableOpacity style={styles.addPhoto} onPress={() => navigation.navigate("Snap")}>
           <Text>+</Text>
         </TouchableOpacity>) : (
-          <Image style={styles.image} source={{ uri: object.image[4] }} />)}
+          <View style={styles.deleteContainer}>
+          <Image style={styles.image} source={{ uri: object.image[4] }} />
+          <TouchableOpacity onPress={() => dispatch(removePhoto(object.image[4]))}>
+          <FontAwesome name='times' size={20} color='#000000' style={styles.deleteIcon} />
+          </TouchableOpacity>
+        </View>)}
         
       </View>
       <View>
         <Text style={styles.titleText}>TITRE :</Text>
         <View style={styles.addTitle}>
-          <TextInput style={styles.inputTitle} placeholder="Ajouter un titre"></TextInput>
+          <TextInput style={styles.inputTitle} placeholder="Ajouter un titre" 
+          onChangeText={(value) => setTitle(value)} value={title}></TextInput>
         </View>
         <View>
       </View>
           <Text style={styles.descriptionText}>DESCRIPTION :</Text>
           <View style={styles.addDescription}>
-            <TextInput style={styles.inputDescription} placeholder="Ajouter une description"></TextInput>
+            <TextInput style={styles.inputDescription} placeholder="Ajouter une description"
+            onChangeText={(value) => setDescription(value)} value={description}></TextInput>
           </View>
         </View>
       <View style={styles.addState}>
@@ -159,15 +206,18 @@ export default function DonationScreen({ navigation }) {
             <Text style={styles.addLocalisationText}>Ajoutez votre adresse</Text>
           </TouchableOpacity>) : (
             <View style={styles.localisation}>
-            <Text style={styles.localisationText}>{object.localisation.city}</Text>
-            <Text style={styles.localisationText}>{object.localisation.postalCode}</Text>
+            <Text style={styles.localisationText}>{city}</Text>
+            <Text style={styles.localisationText}>{postalCode}</Text>
             </View>
           )}
         </View>
       </View>
       <View style={styles.goBtn}>
-      <TouchableOpacity>
-        <Text style={styles.goText} onPress={() => navigation.navigate('Thanks')}>GO !</Text>
+      <TouchableOpacity onPress={() => {
+          navigation.navigate('Thanks')
+          handleSubmit()
+          }}>
+        <Text style={styles.goText} >GO !</Text>
       </TouchableOpacity>
       </View>
     </View>
@@ -218,12 +268,20 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 1,
     marginRight: 10,
-    marginLeft: 10
+    marginLeft: 10,
   },
   image: {
-    margin: 15,
+    marginTop: 15,
     width: 70,
     height: 70,
+  },
+  deleteIcon: {
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+  },
+  deleteContainer: {
+    flexDirection: 'row',
+    marginRight: 15,
   },
   addTitle: {
     justifyContent: 'center',

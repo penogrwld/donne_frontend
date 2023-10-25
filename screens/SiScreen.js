@@ -113,7 +113,7 @@ import {
       padding: 10,
     },
     errorMsg: {
-      backgroundColor: 'red',
+      backgroundColor: '#A896CF',
       color: 'white',
       padding: 10,
       marginBottom: 10
