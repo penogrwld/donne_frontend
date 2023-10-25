@@ -1,17 +1,25 @@
 import { View, Text, StyleSheet, SafeAreaView, Image, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import React from "react";
 
 export default function LikedScreen({navigation}) {
 
   const [swap, setSwap] = useState(true)
+  const [accepted, setAccepted] = useState(false)
 
   const handleSwap = () => {
     setSwap(!swap)
   }
+
+  const handleAccept = () => {
+    setAccepted(!accepted)
+  }
   
+
+
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
@@ -34,7 +42,7 @@ export default function LikedScreen({navigation}) {
           <Text>Acceptez vous de donner cette objet ?</Text>
           <View style={styles.buttons}>
             <TouchableOpacity style={styles.buttonNo}><Text>NON</Text></TouchableOpacity>
-            <TouchableOpacity style={styles.buttonYes}><Text>OUI</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.buttonYes} onPress={() => handleAccept()}><Text>OUI</Text></TouchableOpacity>
           </View>
         </View>
       </View>) : (
@@ -55,8 +63,15 @@ export default function LikedScreen({navigation}) {
             <TouchableOpacity style={styles.buttonYes}><Text>OUI</Text></TouchableOpacity>
           </View>
         </View>
-      </View>) 
-      } 
+      </View>)
+      }
+      {accepted ? <View style={styles.accepted}>
+        <Text>La donnation a-t-elle été effectuée ?</Text>
+        <View style={styles.buttons}>
+            <TouchableOpacity style={styles.buttonNo} onPress={() => handleAccept()}><Text>NON</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.buttonYes}><Text>OUI</Text></TouchableOpacity>
+        </View>
+      </View> : null} 
     </SafeAreaView>
   );
 }
@@ -149,6 +164,11 @@ const styles = StyleSheet.create({
     // marginTop: 10,
     width: 70,
     height: 50
+  },
+  accepted: {
+    marginTop: 10
+    // borderWidth: 1,
+    // flexDirection: 'column',
   }
 });
 
