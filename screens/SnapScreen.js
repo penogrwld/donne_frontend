@@ -5,10 +5,9 @@ import { useDispatch } from 'react-redux';
 import { addPhoto } from '../reducers/image';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useIsFocused } from "@react-navigation/native";
+import { localFetch } from "../localFetch";
 
 export default function SnapScreen({navigation}) {
-
-  const localFetch = '10.3.0.40'
 
   const dispatch = useDispatch();
   const isFocused = useIsFocused();

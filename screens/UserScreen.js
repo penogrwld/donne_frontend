@@ -2,13 +2,12 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { addProfilePic, removeProfilePic } from "../reducers/user";
+import { removeProfilePic } from "../reducers/user";
+import { localFetch } from "../localFetch";
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export default function UserScreen({navigation}) {
-
-  const localFetch = '10.3.0.40'
 
   const user = useSelector((state) => state.user.value)
   const image = useSelector((state)=> state.image.value)

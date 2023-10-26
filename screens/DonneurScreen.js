@@ -12,10 +12,11 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import React from "react";
+import { localFetch } from "../localFetch";
 
 export default function DonneurScreen({ navigation }) {
 
-  const localFetch = '10.3.0.40'
+  
   const user = useSelector((state) => state.user.value);
 
   const [accepted, setAccepted] = useState(false);

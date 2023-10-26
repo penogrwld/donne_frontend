@@ -12,12 +12,11 @@ import {
   import { useDispatch } from "react-redux";
   import { signIn } from "../reducers/user";
   import React from "react";
+  import { localFetch } from "../localFetch";
   
   
   export default function SiScreen({ navigation }) {
 
-    const localFetch = '10.3.0.40'
-  
     const dispatch = useDispatch()
     const [signInUsername, setSignInUsername] = useState('')
     const [signInPassword, setSignInPassword] = useState('')

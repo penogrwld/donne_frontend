@@ -13,11 +13,12 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from 'react';
 import { removePhoto, removeAll } from "../reducers/image";
+import { localFetch } from "../localFetch";
 
 
 export default function DonationScreen({ navigation }) {
 
-  const localFetch = '10.3.0.40'
+  
 
   const dispatch = useDispatch()
   const [isSelectedOne, setSelectionOne] = useState(false);
