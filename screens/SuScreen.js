@@ -12,11 +12,12 @@ import {
   import { LinearGradient } from "expo-linear-gradient";
   import FontAwesome from 'react-native-vector-icons/FontAwesome';
   import React from "react";
+  import { localFetch } from "../localFetch";
   
   const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   
   export default function SuScreen({ navigation }) {
-  
+ 
     const dispatch = useDispatch()
     // case cocher (pas cocher = false / cocher = true)
     const [isSelected, setSelection] = useState(false);
@@ -33,14 +34,14 @@ import {
     }
   
     const handleRegister = () => {
-          if(isSelected){fetch('http://10.3.0.21:3000/users/signup', {
+          if(isSelected){fetch(`http://${localFetch}:3000/users/signup`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({firstname: signUpFirstName, lastname: signUpLastName, username: signUpUsername, email: signUpEmail, password: signUpPassword }),
+              body: JSON.stringify({firstname: signUpFirstName, avatar: null, lastname: signUpLastName, username: signUpUsername, email: signUpEmail, password: signUpPassword }),
           }).then(response => response.json())
               .then(data => {
                   if (data.result && EMAIL_REGEX.test(signUpEmail)) {
-                      dispatch(signUp({firstname: signUpFirstName, lastname: signUpLastName, username: signUpUsername, email: signUpEmail, token: data.token }));
+                      dispatch(signUp({firstname: signUpFirstName, avatar: null, lastname: signUpLastName, username: signUpUsername, email: signUpEmail, token: data.token }));
             // vide les champs après inscription
                       setSignUpLastname('');
                       setSignUpFirstname('');

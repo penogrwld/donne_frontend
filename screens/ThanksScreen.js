@@ -2,14 +2,19 @@ import { View, Text , StyleSheet, TouchableOpacity  } from 'react-native'
 import { LinearGradient } from "expo-linear-gradient";
 import React from 'react'
 
+// import LottieView from 'lottie-react-native';
+
 export default function ThanksScreen({navigation}) {
   return (
     <View style={styles.container}>
+      {/* <LottieView>
+        source={require('../assets/animation_lo78wxb0.json')}
+      </LottieView> */}
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
       <Text style={styles.header}>MERCI POUR VOTRE DON !</Text>
         <View style={styles.containerButton}>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.textButton} onPress={() => navigation.navigate('User')}>Voir mes dons</Text>
+            <Text style={styles.textButton} onPress={() => navigation.navigate('Profil')}>Voir mes dons</Text>
           </TouchableOpacity>
         </View>
     </View>

@@ -8,11 +8,11 @@ export default function ChoicesScreen({ navigation }) {
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
       <View style={styles.containerButtons}>
         <TouchableOpacity style={styles.buttons} 
-        onPress={() => navigation.navigate('TabNavigator', {screen :'Donation'})}>
+        onPress={() => navigation.navigate('TabNavigator', {screen :'Donner'})}>
           <Text style={styles.text}>JE DONNE</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttons}
-        onPress={() => navigation.navigate('TabNavigator', {screen :'Home'})}>
+        onPress={() => navigation.navigate('TabNavigator', {screen :'Trouver'})}>
           <Text style={styles.text}>JE TROUVE</Text>
         </TouchableOpacity>
       </View>
