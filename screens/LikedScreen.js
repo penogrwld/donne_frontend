@@ -16,6 +16,21 @@ export default function LikedScreen({navigation}) {
     setAccepted(!accepted)
   }
   
+  const user = useSelector((state) => state.user.value);
+
+  const [objectData, setObjectData] = useState(0);
+  
+  console.log(objectData)
+
+  useEffect(() => {
+    fetch(`http://10.3.0.21:3000/users/${user.token}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setObjectData(5-data.finalObj.likedObjects.length);
+      });
+  }, [user.token]);
+
+  
 
 
   return (
@@ -50,6 +65,9 @@ export default function LikedScreen({navigation}) {
             <TouchableOpacity style={styles.buttonYes}><Text>OUI</Text></TouchableOpacity>
         </View>
       </View>) }  
+        <View style={styles.reste}>
+          <Text style={styles.resteText}>Il te reste {objectData} likes !</Text>
+        </View>
     </SafeAreaView>
   );
 }
@@ -147,7 +165,22 @@ const styles = StyleSheet.create({
     marginTop: 10
     // borderWidth: 1,
     // flexDirection: 'column',
+  },
+
+  reste: {
+
+    alignItems: "center",
+    justifyContent: "center",
+
+  },
+
+  resteText: {
+    fontWeight: '700',
+    fontSize: 20,
+    fontStyle: 'oblique',
+    margin: 100,
   }
+
 });
 
 
