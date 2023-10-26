@@ -1,1 +1,1 @@
-export const localFetch = '192.168.162.127'
+export const localFetch = '10.3.0.40'

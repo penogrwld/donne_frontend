@@ -44,6 +44,7 @@ export default function ItemCard(props) {
           <Text style={styles.title}>{props.item.title}</Text>
           <Text style={styles.condition}>{props.item.condition}</Text>
           <Text style={styles.description}>{props.item.description}</Text>
+          <Text style={styles.description}>{props.item.localisation.city}</Text>
           
     </View>
   </ScrollView> 
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
     galleryContainer: {
       flexWrap: 'wrap',
       flexDirection: 'row',
-      paddingBottom: 60,
+      paddingBottom: 40,
       backgroundColor : 'white',
       borderRadius: 18,
       
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
     },
     photo: { 
       width: 300,
-      height: 300,
+      height: 250,
       borderRadius: 18,
       borderWidth: 10,
       borderColor: 'white',
