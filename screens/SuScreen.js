@@ -18,7 +18,7 @@ import {
   
   export default function SuScreen({ navigation }) {
 
-    const localFetch = '10.3.0.40'
+    const localFetch = '10.3.0.21'
   
     const dispatch = useDispatch()
     // case cocher (pas cocher = false / cocher = true)
