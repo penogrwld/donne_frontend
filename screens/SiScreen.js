@@ -12,6 +12,7 @@ import {
   import { useDispatch } from "react-redux";
   import { signIn } from "../reducers/user";
   import React from "react";
+  import { localFetch } from "../localFetch";
   
   
   export default function SiScreen({ navigation }) {
