@@ -17,25 +17,17 @@ export default function HomeScreen({navigation}) {
 
   const [ don, setDon] = useState([])
 
-  // const photosData = [
-  //     {image: ['https://www.monsieur-meuble.com/wp-content/uploads/2021/03/Table_treteaux_Garance_3quart.jpg','https://www.monsieur-meuble.com/wp-content/uploads/2021/03/Table_treteaux_Garance_3quart.jpg'], title:'Table', condition: 'super état', description : 'blablabla il est super jolie'},
-  //     {image: ['https://cdn.sklum.com/fr/wk/2461957/chaise-avec-accoudoirs-en-bois-de-style-lali.jpg'], title:'Chaise', condition: 'à bricoler', description : 'blablabla il est super jolie'},
-  //     {image: ['https://cdn.themasie.com/fr/2065886/lampara-de-mesa-de-hierro-o20-seta.jpg','https://cdn.themasie.com/fr/2224880/lampara-de-mesa-de-hierro-o20-seta.jpg'], title:'Lampe', condition: 'bon état', description : 'blablabla il est super jolie'},
-  //     {image: ['https://cdn.shopify.com/s/files/1/0571/4673/6685/products/2346-033-0004-1_3000x.jpg?v=1658850311','https://cdn.shopify.com/s/files/1/0571/4673/6685/products/2346-033-0004-1_3000x.jpg?v=1658850311','https://cdn.shopify.com/s/files/1/0571/4673/6685/products/2346-033-0004-1_3000x.jpg?v=1658850311'], title:'Set de couvert', condition: 'super état', description : 'blablabla il est super jolie'},
-  // ];
-
-
   useEffect(() => {
     fetch(`http://${localFetch}:3000/objects/${user.token}`)
     .then((response) => response.json())
     .then(data => {
-      setDon(data.result)  
+      setDon(data.result);  
     })
   }, []);
 
   const [currentItemIndex, setCurrentItemIndex] = useState(0)
 
-  const card =  [don[currentItemIndex]].map( data => {
+  const card =  [don[currentItemIndex]].map(data => {
     console.log(data)
       return <ItemCard key={data.title} item = {data} /> 
   }); 
