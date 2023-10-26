@@ -34,7 +34,7 @@ export default function LikedScreen({navigation}) {
 
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
       <View style={styles.header}>
         <FontAwesome name='arrow-left' size={20} color={'black'} onPress={() => navigation.navigate('Donation')}/>
@@ -52,7 +52,7 @@ export default function LikedScreen({navigation}) {
         </View>
         <View style={styles.textes}>
           <Text style={styles.titleText}>Table blanc de qualité PREND !!</Text>
-          <Text>Etes vous sûr de vouloir cette objet ?</Text>
+          <Text>Es tu sûr de vouloir cet objet ?</Text>
           <View style={styles.buttons}>
             <TouchableOpacity style={styles.buttonNo}><Text>NON</Text></TouchableOpacity>
             <TouchableOpacity style={styles.buttonYes} onPress={() => handleAccept()}><Text>OUI</Text></TouchableOpacity>
@@ -68,7 +68,7 @@ export default function LikedScreen({navigation}) {
         <View style={styles.reste}>
           <Text style={styles.resteText}>Il te reste {objectData} likes !</Text>
         </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   // Style pour l'en-tête
   header: {
     borderBottomWidth: 1,
-    padding: 25,
+    padding: 50,
     justifyContent: "space-around",
     flexDirection: 'row',
     alignItems: 'center',
