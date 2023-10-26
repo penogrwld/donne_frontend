@@ -116,6 +116,7 @@ export default function DonationScreen({ navigation }) {
 
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
       <View style={styles.header}>
+        <FontAwesome name='arrow-left' size={32} color={'black'} onPress={() => navigation.navigate('Choices')} style={styles.arrowLeft}/>
         <Text style={styles.headerText}>FAIRE UN DON</Text>
       </View>
         <Text style={styles.photoText}>AJOUTER DES PHOTOS :</Text>
@@ -236,13 +237,24 @@ const styles = StyleSheet.create({
   },
   header: {
     borderBottomWidth: 1,
-    padding: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+    marginTop:35,
+    marginLeft:10,
+    padding: 10,
+    flexDirection:"row",
+    alignItems:"center",
+    justifyContent:"flex-start"
+    },
+
+    arrowLeft: {
+     alignItems: "flex-start",
+    },
+    
   headerText: {
     fontSize: 20,
-    fontWeight: '800'
+    fontWeight: '800',
+    justifyContent:"center",
+    paddingLeft:65
+   
   },
   photos: {
     alignItems: 'center',
