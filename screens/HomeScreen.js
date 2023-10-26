@@ -21,6 +21,7 @@ const Header = () => {
 };
 
 export default function HomeScreen() {
+  const localFetch = '10.3.0.40'
 
   const photosData = [
       {image: ['https://www.monsieur-meuble.com/wp-content/uploads/2021/03/Table_treteaux_Garance_3quart.jpg','https://www.monsieur-meuble.com/wp-content/uploads/2021/03/Table_treteaux_Garance_3quart.jpg'], title:'Table', condition: 'super état', description : 'blablabla il est super jolie'},

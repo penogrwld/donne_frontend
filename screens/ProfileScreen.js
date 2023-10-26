@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import React from "react";
 
 export default function ProfileScreen() {
+  const localFetch = '10.3.0.40'
 
   const user = useSelector((state) => state.user.value);
 
