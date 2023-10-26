@@ -15,23 +15,27 @@ export default function HomeScreen({navigation}) {
   
   const user = useSelector((state)=> state.user.value)
 
-  const [ don, setDon] = useState([])
+  const [don, setDon] = useState([])
+
 
   useEffect(() => {
     fetch(`http://${localFetch}:3000/objects/${user.token}`)
     .then((response) => response.json())
     .then(data => {
-      setDon(data.result);  
+      setDon(data.result) 
     })
   }, []);
 
   const [currentItemIndex, setCurrentItemIndex] = useState(0)
 
-  const card =  [don[currentItemIndex]].map(data => {
-    console.log(data)
-      return <ItemCard key={data.title} item = {data} /> 
-  }); 
-  
+  let card
+
+  if(don.length > 0) { // Pour vérifier qu'il y a bien des objets à donner
+    card =  [don[currentItemIndex]].map( data => {
+          return <ItemCard key={data.title} item = {data} /> 
+      })
+      }
+
 
   const handleDislike = () => {   // clic sur le bouton X
     setCurrentItemIndex((currentItemIndex + 1) % don.length); // affiche le prochain element du tableauu
