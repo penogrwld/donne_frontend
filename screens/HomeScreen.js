@@ -45,21 +45,16 @@ export default function HomeScreen() {
   };
       
   return (
-    <SafeAreaView style={styles.container}>
-
+    <View style={styles.container}>
         <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
         <Header />
-
-        <Text style={styles.headertext}>Quoi de neuf par chez moi ?</Text>
-        
-        {card}       
-            
+        <Text style={styles.headertext}>Quoi de neuf par chez moi ?</Text>       
+        {card}                   
         <View style={styles.likeornot}>
             <Icon name="times" onPress={handleDislike} style={styles.cross} size={160} color='#A896CF'/>
             <FontAwesome name='heart' onPress={handleLike} style={styles.heart} size={138} color='#74D48F' /> 
         </View>
-
-    </SafeAreaView>
+    </View>
   );
 }
 
