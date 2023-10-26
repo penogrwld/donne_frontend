@@ -4,10 +4,10 @@ import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import React from "react";
+import { localFetch } from "../localFetch";
 
 export default function LikedScreen({navigation}) {
-  const localFetch = '10.3.0.40'
-
+ 
   const [swap, setSwap] = useState(true)
   const [accepted, setAccepted] = useState(false)
 
