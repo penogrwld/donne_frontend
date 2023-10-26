@@ -6,6 +6,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import React from "react";
 
 export default function LikedScreen({navigation}) {
+  const localFetch = '10.3.0.40'
 
   const [swap, setSwap] = useState(true)
   const [accepted, setAccepted] = useState(false)

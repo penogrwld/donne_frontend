@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, TouchableOpacity, View, Image } from 'react-native';
 import { Camera, CameraType, FlashMode } from 'expo-camera';
-import { useDispatch } from 'react-redux';
-import { addPhoto } from '../reducers/image';
+import { useDispatch, useSelector } from 'react-redux';
+import { addProfilePic } from '../reducers/user';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useIsFocused } from "@react-navigation/native";
 
@@ -12,6 +12,8 @@ export default function SnapScreen({navigation}) {
 
   const dispatch = useDispatch();
   const isFocused = useIsFocused();
+  const user = useSelector((state)=> state.user.value)
+  const image = useSelector((state)=> state.image.value)
 
   const [hasPermission, setHasPermission] = useState(false);
   const [type, setType] = useState(CameraType.back);
@@ -32,27 +34,36 @@ export default function SnapScreen({navigation}) {
     setCapturedPhoto(photo);
   }
 
-    const handleValid = () => {
-      setCapturedPhoto(null)
-      if(capturedPhoto?.uri){
-        
-        const formData = new FormData()
-        formData.append('photoFromFront', {
-          uri: capturedPhoto.uri,
-          name: 'photo.jpg',
-          type: 'image/jpeg',
-         })
-         
-         fetch(`http://${localFetch}:3000/objects/upload`, {
-          method: 'POST',
-          body: formData,
-         }).then((response) => response.json())
-          .then((data) => {
-            console.log(data.url)
-           data.result && dispatch(addPhoto(data.url));
-         })
-      }
-      }
+  const handleValid = () => {
+    setCapturedPhoto(null);
+  
+    if (capturedPhoto?.uri) {
+      const formData = new FormData();
+      formData.append('photoFromFront', {
+        uri: capturedPhoto.uri,
+        name: 'photo.jpg',
+        type: 'image/jpeg',
+      })
+  
+      fetch(`http://${localFetch}:3000/objects/upload`, {
+        method: 'POST',
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.result) {
+            dispatch(addProfilePic(data.url))
+  
+            fetch(`http://${localFetch}:3000/users/avatar/${user.token}`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ avatar: data.url })
+            })
+          }
+        })
+  }
+  }
+  
     
   if (!hasPermission || !isFocused) {
     return <View />;
@@ -66,7 +77,7 @@ export default function SnapScreen({navigation}) {
         <FontAwesome onPress={() => setCapturedPhoto(null)} name="times" style={styles.deleteIcon} />
         <FontAwesome onPress={() => {
           handleValid()
-          navigation.navigate("Donner")
+          navigation.navigate("User")
           }} 
          name="send" style={styles.sendIcon} />
     </View>
@@ -78,7 +89,7 @@ export default function SnapScreen({navigation}) {
           onPress={() => setType(type === CameraType.back ? CameraType.front : CameraType.back)}
           style={styles.button}/>
           <FontAwesome name='remove' size={40} color='#ffffff'  
-          onPress={()=> navigation.navigate("Donner")}
+          onPress={()=> navigation.navigate("User")}
           style={styles.button}/>
           <FontAwesome name='flash' size={30} color={flashMode === FlashMode.off ? '#ffffff' : '#e8be4b'}
           onPress={() => setFlashMode(flashMode === FlashMode.off ? FlashMode.torch : FlashMode.off)}
