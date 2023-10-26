@@ -1,26 +1,23 @@
 import React from "react";
 import {
   Image,
-  SafeAreaView,
-  ScrollView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
   Modal,
-  Pressable
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { LinearGradient } from "expo-linear-gradient";
-import { useEffect, useState } from 'react';
-import user from "../reducers/user";
-import object from "../reducers/object";
-import { removePhoto, removeAll } from "../reducers/object";
+import { useState } from 'react';
+import { removePhoto, removeAll } from "../reducers/image";
 
 
 export default function DonationScreen({ navigation }) {
+
+  const localFetch = '10.3.0.40'
 
   const dispatch = useDispatch()
   const [isSelectedOne, setSelectionOne] = useState(false);
@@ -34,18 +31,26 @@ export default function DonationScreen({ navigation }) {
   const [isLocation, setIsLocation] = useState(false)
 
   const user = useSelector((state)=> state.user.value)
-  const object = useSelector((state)=> state.object.value)
+  const image = useSelector((state)=> state.image.value)
+
+  const photosObject = image.object
  
 
   const handleSelectOne = () => {
     setSelectionOne(!isSelectedOne)
     setSelectionTwo(false)
     setCondition('Ready to use')
+    if(isSelectedOne){
+      setCondition('')
+    }
   }
   const handleSelectTwo = () => {
     setSelectionTwo(!isSelectedTwo)
     setSelectionOne(false)
     setCondition('À retaper')
+    if(isSelectedTwo){
+      setCondition('')
+    }
   }
 
   const handleAddLocation = () => {
@@ -65,25 +70,29 @@ export default function DonationScreen({ navigation }) {
 
   const handleSubmit = () => {
     
-    fetch('http://10.3.0.40:3000/objects/add' , {
+    fetch(`http://${localFetch}:3000/objects/add` , {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ image: object.image, title: title, description: description, condition: condition,
+      body: JSON.stringify({ image: photosObject, title: title, description: description, condition: condition,
       localisation: {city: city, postalCode: postalCode}, user: user, token: user.token, likedBy: null, caughtBy: null}),
     })
     .then((response) => response.json())
     .then(data => {
-      dispatch(removeAll())
-      setCity('')
-      setCondition('')
-      setDescription('')
-      setSelectionOne(false)
-      setSelectionTwo(false)
-      setIsLocation(false)
-      setTitle('')
+      if(data.result){
+        navigation.navigate('Thanks')
+        dispatch(removeAll())
+        setCity('')
+        setCondition('')
+        setDescription('')
+        setSelectionOne(false)
+        setSelectionTwo(false)
+        setIsLocation(false)
+        setTitle('')
+
+      }
     })
   }
-
+console.log(image.object)
   return (
     <View style={styles.container}>
       <Modal animationType="slide"
@@ -120,49 +129,49 @@ export default function DonationScreen({ navigation }) {
       </View>
         <Text style={styles.photoText}>AJOUTER DES PHOTOS :</Text>
       <View style={styles.photos} >
-        {object.image.length === 0 ? (<TouchableOpacity style={styles.addPhoto} onPress={() => navigation.navigate("Snap")}>
+        {photosObject.length === 0 ? (<TouchableOpacity style={styles.addPhoto} onPress={() => navigation.navigate("Snap")}>
           <Text>+</Text>
         </TouchableOpacity>) : (
               <View style={styles.deleteContainer}>
-                <Image style={styles.image} source={{ uri: object.image[0] }} />
-                <TouchableOpacity onPress={() => dispatch(removePhoto(object.image[0]))}>
-                <FontAwesome name='times' size={20} color='#000000' style={styles.deleteIcon} />
+                <Image style={styles.image} source={{ uri: photosObject[0] }} />
+                <TouchableOpacity onPress={() => dispatch(removePhoto(photosObject[0]))}>
+                <FontAwesome name='times-circle-o' size={20} color='#000000' style={styles.deleteIcon} />
                 </TouchableOpacity>
               </View>)}
-        {object.image.length <= 1 ? (<TouchableOpacity style={styles.addPhoto} onPress={() => navigation.navigate("Snap")}>
+        {photosObject.length <= 1 ? (<TouchableOpacity style={styles.addPhoto} onPress={() => navigation.navigate("Snap")}>
           <Text>+</Text>
         </TouchableOpacity>) : (
         <View style={styles.deleteContainer}>
-        <Image style={styles.image} source={{ uri: object.image[1] }} />
-        <TouchableOpacity onPress={() => dispatch(removePhoto(object.image[1]))}>
-        <FontAwesome name='times' size={20} color='#000000' style={styles.deleteIcon} />
+        <Image style={styles.image} source={{ uri: photosObject[1] }} />
+        <TouchableOpacity onPress={() => dispatch(removePhoto(photosObject[1]))}>
+        <FontAwesome name='times-circle-o' size={20} color='#000000' style={styles.deleteIcon} />
         </TouchableOpacity>
       </View>)}
-        {object.image.length <= 2 ? (<TouchableOpacity style={styles.addPhoto} onPress={() => navigation.navigate("Snap")}>
+        {photosObject.length <= 2 ? (<TouchableOpacity style={styles.addPhoto} onPress={() => navigation.navigate("Snap")}>
           <Text>+</Text>
         </TouchableOpacity>) : (
         <View style={styles.deleteContainer}>
-        <Image style={styles.image} source={{ uri: object.image[2] }} />
-        <TouchableOpacity onPress={() => dispatch(removePhoto(object.image[2]))}>
-        <FontAwesome name='times' size={20} color='#000000' style={styles.deleteIcon} />
+        <Image style={styles.image} source={{ uri: photosObject[2] }} />
+        <TouchableOpacity onPress={() => dispatch(removePhoto(photosObject[2]))}>
+        <FontAwesome name='times-circle-o' size={20} color='#000000' style={styles.deleteIcon} />
         </TouchableOpacity>
       </View>)}
-        {object.image.length <= 3 ? (<TouchableOpacity style={styles.addPhoto} onPress={() => navigation.navigate("Snap")}>
+        {photosObject.length <= 3 ? (<TouchableOpacity style={styles.addPhoto} onPress={() => navigation.navigate("Snap")}>
           <Text>+</Text>
         </TouchableOpacity>) : (
           <View style={styles.deleteContainer}>
-          <Image style={styles.image} source={{ uri: object.image[3] }} />
-          <TouchableOpacity onPress={() => dispatch(removePhoto(object.image[3]))}>
-          <FontAwesome name='times' size={20} color='#000000' style={styles.deleteIcon} />
+          <Image style={styles.image} source={{ uri: photosObject[3] }} />
+          <TouchableOpacity onPress={() => dispatch(removePhoto(photosObject[3]))}>
+          <FontAwesome name='times-circle-o' size={20} color='#000000' style={styles.deleteIcon} />
           </TouchableOpacity>
         </View>)}
-        {object.image.length <= 4 ? (<TouchableOpacity style={styles.addPhoto} onPress={() => navigation.navigate("Snap")}>
+        {photosObject.length <= 4 ? (<TouchableOpacity style={styles.addPhoto} onPress={() => navigation.navigate("Snap")}>
           <Text>+</Text>
         </TouchableOpacity>) : (
           <View style={styles.deleteContainer}>
-          <Image style={styles.image} source={{ uri: object.image[4] }} />
-          <TouchableOpacity onPress={() => dispatch(removePhoto(object.image[4]))}>
-          <FontAwesome name='times' size={20} color='#000000' style={styles.deleteIcon} />
+          <Image style={styles.image} source={{ uri: photosObject[4] }} />
+          <TouchableOpacity onPress={() => dispatch(removePhoto(photosObject[4]))}>
+          <FontAwesome name='times-circle-o' size={20} color='#000000' style={styles.deleteIcon} />
           </TouchableOpacity>
         </View>)}
         
@@ -213,10 +222,9 @@ export default function DonationScreen({ navigation }) {
         </View>
       </View>
       <View style={styles.goBtn}>
-      <TouchableOpacity onPress={() => {
-          navigation.navigate('Thanks')
+      <TouchableOpacity onPress={() => 
           handleSubmit()
-          }}>
+          }>
         <Text style={styles.goText} >GO !</Text>
       </TouchableOpacity>
       </View>

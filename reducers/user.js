@@ -4,6 +4,7 @@ const initialState = {
   value: { 
     photo: null,
     token: null, 
+    avatar: null,
     email: null,
     password: null,
     firstname: null, 
@@ -18,6 +19,7 @@ export const userSlice = createSlice({
   reducers: {
     signUp: (state, action) => {
         state.value.token = action.payload.token;
+        state.value.avatar = action.payload.avatar;
         state.value.firstname = action.payload.firstname;
         state.value.lastname = action.payload.lastname;
         state.value.username = action.payload.username;
@@ -27,6 +29,7 @@ export const userSlice = createSlice({
       },
       signIn: (state, action) => {
         state.value.token = action.payload.token;
+        state.value.avatar = action.payload.avatar;
         state.value.username = action.payload.username;
         state.value.firstname = action.payload.firstname;
         state.value.lastname = action.payload.lastname;
@@ -39,8 +42,14 @@ export const userSlice = createSlice({
       state.value.username = null;
       state.value.isConnected = false
     },
+    addProfilePic: (state, action) => {
+      state.value.avatar = action.payload
+    },
+    removeProfilePic: (state, action) => {
+      state.value.avatar = null
+    }
   },
 });
 
-export const { signUp, signIn, logout } = userSlice.actions;
+export const { signUp, signIn, logout, addProfilePic, removeProfilePic } = userSlice.actions;
 export default userSlice.reducer;
