@@ -14,13 +14,15 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import React from "react";
 
 export default function DonneurScreen({ navigation }) {
+
+  const localFetch = '10.3.0.40'
   const user = useSelector((state) => state.user.value);
 
   const [accepted, setAccepted] = useState(false);
   const [objectData, setObjectData] = useState([]);
 
   useEffect(() => {
-    fetch(`http://10.3.0.21:3000/users/${user.token}/object`)
+    fetch(`http://${localFetch}:3000/users/${user.token}/object`)
       .then((response) => response.json())
       .then((data) => {
         // setObjectData(data[0].likedBy);
