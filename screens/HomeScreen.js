@@ -42,19 +42,24 @@ export default function HomeScreen() {
     
   };
   
-  const handleLike = () => {  // clic sur le bouton COEUR
+  const handleLike = () => {  // clic sur le bouton COEUR qui modifie le tabBarBadge
   };
       
   return (
     <View style={styles.container}>
+
         <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
         <Header />
-        <Text style={styles.headertext}>Quoi de neuf par chez moi ?</Text>       
-        {card}                   
+
+        <Text style={styles.headertext}>Quoi de neuf autour de moi ?</Text>
+        
+        {card}       
+            
         <View style={styles.likeornot}>
-            <Icon name="times" onPress={handleDislike} style={styles.cross} size={160} color='#A896CF'/>
-            <FontAwesome name='heart' onPress={handleLike} style={styles.heart} size={138} color='#74D48F' /> 
+            <Icon name="times" onPress={handleDislike} style={styles.cross} size={120} color='#A896CF'/>
+            <FontAwesome name='heart' onPress={handleLike} style={styles.heart} size={100} color='#74D48F' /> 
         </View>
+
     </View>
   );
 }
@@ -73,7 +78,7 @@ const styles = StyleSheet.create({
   likeornot: {
     flexDirection: 'row',
     width: 400,
-    height : 200,
+    height : 160,
     justifyContent: 'space-around',
     
   },
@@ -82,7 +87,6 @@ const styles = StyleSheet.create({
   },
   header: {
     width: '100%',
-    borderBottomWidth: 1,
     margin: 30,
     padding: 20,
     justifyContent: "flex-start",
@@ -90,20 +94,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headertext: {
-    fontSize: 24,
+    fontSize: 18,
     paddingBottom: 10,
     marginBottom: 10,
   },
+  
   heart: {
     paddingTop: 13,
-    textShadowColor: 'rgba(0, 0, 0, 0.75)', // Couleur de l'ombre
-    textShadowOffset: { width: 1, height: 2 }, // Décalage de l'ombre
-    textShadowRadius: 3, // Rayon de l'ombre
+    shadowOffset: { width: 5, height: 5 },
+    shadowColor: "grey",
+    shadowOpacity: 1.0,
+
   },
   cross : {
-    textShadowColor: 'rgba(0, 0, 0, 0.75)', // Couleur de l'ombre
-    textShadowOffset: { width: 1, height: 2 }, // Décalage de l'ombre
-    textShadowRadius: 3, // Rayon de l'ombre
+    shadowOffset: { width: 5, height: 5 },
+    shadowColor: "grey",
+    shadowOpacity: 1.0,
 
   }
 

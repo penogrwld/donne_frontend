@@ -51,10 +51,15 @@ import {
     return (
       <View style={styles.container}>
         <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
+
+        <View>
+        <Text style={styles.title}>DONNE</Text>
+        </View>
+
         <View style={styles.containerInput}>
           { errorField && <Text style={styles.errorMsg}>Le nom d'utilisateur ou le mot de passe est invalide</Text>}
-          <TextInput style={styles.input} placeholder="UserName" onChangeText={(value) => setSignInUsername(value)} value={signInUsername}></TextInput>
-          <TextInput style={styles.input} placeholder="Password" secureTextEntry={true} onChangeText={(value) => setSignInPassword(value)} value={signInPassword}></TextInput>
+          <TextInput style={styles.input} placeholder="Pseudo" onChangeText={(value) => setSignInUsername(value)} value={signInUsername}></TextInput>
+          <TextInput style={styles.input} placeholder="Mot de passe" secureTextEntry={true} onChangeText={(value) => setSignInPassword(value)} value={signInPassword}></TextInput>
           <TouchableOpacity
             style={styles.buttons}
             onPress={() => handleConnexion()}
@@ -70,7 +75,7 @@ import {
                 onPress={() => navigation.navigate("Su")}
                 style={styles.link}
               >
-                Inscription
+Inscription
               </Text>
             </Text>
             <Text style={styles.connectWith}>Se connecter avec: </Text>
@@ -94,6 +99,7 @@ import {
   }
   
   const styles = StyleSheet.create({
+    
     container: {
       flex: 1,
       alignItems: "center",
@@ -148,5 +154,10 @@ import {
     social: {
       padding: 30,
     },
+    title: {
+      padding: 30,
+      fontSize: 30,
+      fontFamily: 'Avenir',
+    }
   });
   

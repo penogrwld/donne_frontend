@@ -45,14 +45,14 @@ export default function DonneurScreen({ navigation }) {
           name="arrow-left"
           size={20}
           color={"black"}
-          onPress={() => navigation.navigate("Donation")}
+          onPress={() => navigation.navigate("Donner")}
           />
         <Text style={styles.headerText}>Coté Donneur</Text>
         <FontAwesome
           name="exchange"
           size={20}
           color={"black"}
-          onPress={() => navigation.navigate("Liked")}
+          onPress={() => navigation.navigate("Likes")}
         />
       </View>
       {!accepted ? (
