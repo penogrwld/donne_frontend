@@ -44,7 +44,7 @@ export default function DonneurScreen({ navigation }) {
           name="arrow-left"
           size={20}
           color={"black"}
-          onPress={() => navigation.navigate("Donner")}
+          onPress={() => navigation.navigate("Trouver")}
           />
         <Text style={styles.headerText}>Coté Donneur</Text>
         <FontAwesome
