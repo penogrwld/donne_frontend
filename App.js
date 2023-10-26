@@ -16,8 +16,9 @@ import UserScreen from "./screens/UserScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import ThanksScreen from "./screens/ThanksScreen";
 import TutoScreen from "./screens/TutoScreen";
-import SnapScreen from "./screens/SnapScreen";
-import CguScreen from "./screens/CguScreen";
+import SnapScreen from './screens/SnapScreen'
+import CguScreen from './screens/CguScreen';
+import UserSnapScreen from './screens/UserSnapScreen'
 
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -25,13 +26,13 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import user from "./reducers/user";
-import object from "./reducers/object";
+import image from "./reducers/image";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const store = configureStore({
-  reducer: { user, object },
+  reducer: { user, image }
 });
 
 const TabNavigator = () => {
@@ -80,6 +81,7 @@ export default function App() {
           <Stack.Screen name="Profile" component={ProfileScreen} />
           <Stack.Screen name="Cgu" component={CguScreen} />
           <Stack.Screen name="Snap" component={SnapScreen} />
+          <Stack.Screen name="UserSnap" component={UserSnapScreen} />
           <Stack.Screen name="Thanks" component={ThanksScreen} />
           <Stack.Screen name="Donneur" component={DonneurScreen} />
           <Stack.Screen name="TabNavigator" component={TabNavigator} />
