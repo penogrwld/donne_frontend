@@ -18,9 +18,9 @@ export default function DonneurScreen({navigation}) {
     <SafeAreaView style={styles.container}>
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
       <View style={styles.header}>
-        <FontAwesome name='arrow-left' size={20} color={'black'} onPress={() => navigation.navigate('Donation')}/>
+        <FontAwesome name='arrow-left' size={20} color={'black'} onPress={() => navigation.navigate('Donner')}/>
         <Text style={styles.headerText} >Coté Donneur</Text>
-        <FontAwesome name='exchange' size={20} color={'black'} onPress={() => navigation.navigate('Liked')}/>
+        <FontAwesome name='exchange' size={20} color={'black'} onPress={() => navigation.navigate('Likes')}/>
       </View>
       {!accepted ? (<View style={styles.div}>
         <View>

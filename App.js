@@ -5,6 +5,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SiScreen from "./screens/SiScreen";
 import SuScreen from "./screens/SuScreen";
 import ChoicesScreen from "./screens/ChoicesScreen";
+import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react'
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
@@ -37,18 +39,36 @@ const store = configureStore({
 
 
 const TabNavigator = () => {
+
+
+  const user = useSelector((state) => state.user.value);
+
+  const [objectData, setObjectData] = useState(0);
+  
+  useEffect(() => {
+    fetch(`http://10.3.0.21:3000/users/${user.token}/object`)
+      .then((response) => response.json())
+      .then((data) => {
+        setObjectData(data[0].likedBy.length);
+      });
+  }, [user.token]);
+
+  
+
   return (
+
+
     <Tab.Navigator screenOptions={({ route }) => ({
       tabBarIcon: ({ color, size }) => {
         let iconName = '';
  
-        if (route.name === 'Home') {
-          iconName = 'home';
-        } else if (route.name === 'User') {
+        if (route.name === 'Trouver') {
+          iconName = 'search';
+        } else if (route.name === 'Profil') {
           iconName = 'user-o';
-        } else if (route.name === 'Liked') {
+        } else if (route.name === 'Likes') {
           iconName = 'heart-o';
-        } else if (route.name === 'Donation') {
+        } else if (route.name === 'Donner') {
           iconName = 'plus-circle';
         } else if (route.name === 'Tuto') {
           iconName = 'hand-peace-o';
@@ -60,11 +80,10 @@ const TabNavigator = () => {
       tabBarInactiveTintColor: 'black',
       headerShown: false,
     })}>
-      <Tab.Screen name="User" component={UserScreen} />
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Donation" component={DonationScreen} />
-      <Tab.Screen name="Liked" component={LikedScreen} />
-      <Tab.Screen name="Donneur" component={DonneurScreen} />
+      <Tab.Screen name="Profil" component={UserScreen} />
+      <Tab.Screen name="Trouver" component={HomeScreen} />
+      <Tab.Screen name="Donner" component={DonationScreen} />
+      <Tab.Screen name="Likes" component={LikedScreen} options={{ tabBarBadge: objectData, tabBarBadgeStyle: { backgroundColor: '#74D48F' }  }}  />
       <Tab.Screen name="Tuto" component={TutoScreen} />
     </Tab.Navigator>
   );
