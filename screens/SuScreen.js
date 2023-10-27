@@ -151,7 +151,6 @@ import {
     },
     text: {
       color: "white",
-      fontFamily: "Montserrat",
     },
   });
   

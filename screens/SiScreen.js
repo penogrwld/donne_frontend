@@ -75,7 +75,7 @@ import {
                 onPress={() => navigation.navigate("Su")}
                 style={styles.link}
               >
-Inscription
+              Inscription
               </Text>
             </Text>
             <Text style={styles.connectWith}>Se connecter avec: </Text>
@@ -139,7 +139,6 @@ Inscription
     },
     text: {
       color: "white",
-      fontFamily: "Montserrat",
     },
     connectWith: {
       margin: 15,

@@ -101,6 +101,7 @@ export default function App() {
           <Stack.Screen name="Snap" component={SnapScreen} />
           <Stack.Screen name="Thanks" component={ThanksScreen} />
           <Stack.Screen name="Donneur" component={DonneurScreen} />
+          <Stack.Screen name="UserSnap" component={UserSnapScreen} />
           <Stack.Screen name="TabNavigator" component={TabNavigator} />
         </Stack.Navigator>
       </NavigationContainer>
