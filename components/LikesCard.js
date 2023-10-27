@@ -7,14 +7,33 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { localFetch } from "../localFetch";
 
 export default function DonneurCard(props) {
+
+
+  const user = useSelector((state) => state.user.value);
   const [accepted, setAccepted] = useState(false);
 
   const handleAccept = () => {
     setAccepted(!accepted);
   };
+
+  const handleRefuse = () => {
+    if(!user.token){
+      return;
+    }
+    console.log(props)
+    fetch(`http://${localFetch}:3000/users/unlike/${user.token}`, {
+      method: 'PUT',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ object: props })
+    })
+    .then(response => response.json) 
+    .then(data => console.log(data))
+  }
 
   return (
     <View>
@@ -31,7 +50,7 @@ export default function DonneurCard(props) {
           <Text style={styles.titleText}>{props.title}</Text>
           <Text>Acceptez-vous de donner cet objet ?</Text>
           <View style={styles.buttonsOne}>
-            <TouchableOpacity style={styles.buttonNo}>
+            <TouchableOpacity style={styles.buttonNo} onPress={() => handleRefuse()}>
               <Text>NON</Text>
             </TouchableOpacity>
             <TouchableOpacity

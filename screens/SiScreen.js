@@ -16,8 +16,6 @@ import {
   
   
   export default function SiScreen({ navigation }) {
-
-    const localFetch = '10.3.0.21'
   
     const dispatch = useDispatch()
     const [signInUsername, setSignInUsername] = useState('')
@@ -77,7 +75,7 @@ import {
                 onPress={() => navigation.navigate("Su")}
                 style={styles.link}
               >
-Inscription
+                Inscription
               </Text>
             </Text>
             <Text style={styles.connectWith}>Se connecter avec: </Text>
@@ -141,7 +139,6 @@ Inscription
     },
     text: {
       color: "white",
-      fontFamily: "Montserrat",
     },
     connectWith: {
       margin: 15,
