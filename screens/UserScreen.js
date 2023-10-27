@@ -4,13 +4,16 @@ import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { removeProfilePic } from "../reducers/user";
 import { localFetch } from "../localFetch";
+import { logout } from "../reducers/user";
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export default function UserScreen({navigation}) {
 
+
   const user = useSelector((state) => state.user.value)
   const image = useSelector((state)=> state.image.value)
+  const dispatch = useDispatch()
 
   const handleRemove = () => {
     fetch(`http://${localFetch}:3000/users/remove/${user.token}`, {
@@ -20,7 +23,6 @@ export default function UserScreen({navigation}) {
     .then(dispatch(removeProfilePic()))
   }
 
-  const dispatch = useDispatch()
 
   return (
     <View style={styles.container}>

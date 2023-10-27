@@ -53,7 +53,6 @@ let currentItemIndex = Math.floor(Math.random()*don.length)
     .then((response) => response.json())
     .then(data => {
       setDon(data.result) 
-     
     }))
    
   };
