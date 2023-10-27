@@ -18,56 +18,56 @@ export default function LikedScreen({navigation}) {
   
   const user = useSelector((state) => state.user.value);
 
-  const [objectData, setObjectData] = useState(0);
-  
-  console.log(objectData)
+  const [nbrLikes, setNbrLikes] = useState(0);
+  const [objData, setObjData] = useState([])
+
 
   useEffect(() => {
     fetch(`http://10.3.0.21:3000/users/${user.token}`)
       .then((response) => response.json())
       .then((data) => {
-        setObjectData(5-data.finalObj.likedObjects.length);
+        setNbrLikes(5-data.finalObj.likedObjects.length);
+        setObjData(data.finalObj.likedObjects[0])
+        // console.log(data.finalObj.likedObjects[0])
       });
   }, [user.token]);
 
-  
+  if(nbrLikes.length > 0) {const obj =  objData.map((data, i) => {
+    console.log(obj)
+    // return <LikesCard key={i} item = {data} /> 
+})};
 
 
   return (
     <View style={styles.container}>
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
+
       <View style={styles.header}>
         <FontAwesome name='arrow-left' size={20} color={'black'} onPress={() => navigation.navigate('Donation')}/>
       {swap ? (<Text style={styles.headerText} >Coté Denicheur</Text>) : (<Text style={styles.headerText}>Coté Dénicheur</Text>) }  
         <FontAwesome name='exchange' size={20} color={'black'} onPress={() => navigation.navigate('Donneur')}/>
       </View>
-      {!accepted ? (<View style={styles.div}>
+
+    <View style={styles.div}>
         <View>
           <Image style={styles.imgItem} source={{
-            uri: 'https://www.ikea.com/fr/fr/images/products/ekedalen-table-extensible-bouleau__0736961_pe740825_s5.jpg'
+            uri: `${objData.image}`
           }}/>
           <Image style={styles.imgUser} onPress={() => navigation.navigate('Profile')} source={{
             uri: 'https://reactnative.dev/img/tiny_logo.png'
           }}/>
         </View>
         <View style={styles.textes}>
-          <Text style={styles.titleText}>Table blanc de qualité PREND !!</Text>
-          <Text>Es tu sûr de vouloir cet objet ?</Text>
-          <View style={styles.buttons}>
-            <TouchableOpacity style={styles.buttonNo}><Text>NON</Text></TouchableOpacity>
-            <TouchableOpacity style={styles.buttonYes} onPress={() => handleAccept()}><Text>OUI</Text></TouchableOpacity>
-          </View>
+          <Text style={styles.titleText}>{objData.title}</Text>
+
         </View>
-      </View>) : (<View style={styles.accepted}>
-        <Text>La donnation a-t-elle été effectuée ?</Text>
-        <View style={styles.buttons}>
-            <TouchableOpacity style={styles.buttonNo} onPress={() => handleAccept()}><Text>NON</Text></TouchableOpacity>
-            <TouchableOpacity style={styles.buttonYes}><Text>OUI</Text></TouchableOpacity>
-        </View>
-      </View>) }  
+
+      </View>
+
         <View style={styles.reste}>
-          <Text style={styles.resteText}>Il te reste {objectData} likes !</Text>
+          <Text style={styles.resteText}>Il te reste {nbrLikes} likes !</Text>
         </View>
+
     </View>
   );
 }
