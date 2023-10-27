@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
   resteText: {
     fontWeight: '700',
     fontSize: 20,
-    fontStyle: 'oblique',
+    fontStyle: 'italic',
     margin: 100,
   }
 

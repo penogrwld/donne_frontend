@@ -63,10 +63,12 @@ export default function DonationScreen({ navigation }) {
         city: myCity.properties.city,
         postalCode: myCity.properties.postcode
       };
+      if(data.features){
+        setIsLocation(true)
       setCity(location.city)
       setPostalCode(location.postalCode)
+      }
     })
-    setIsLocation(true)
   }
 
   const handleSubmit = () => {
@@ -108,8 +110,6 @@ console.log(image.object)
           <TouchableOpacity
               onPress={() =>  setModalVisible(!modalVisible)}>
                 <FontAwesome name="times-circle" style={styles.modalCloseBtn} size={30}/>
-             
-              
             </TouchableOpacity>  
             <TextInput placeholder='Ajoutez votre ville...'  placeholderTextColor='grey' onChangeText={(value) => setCity(value)} value={city} style={styles.input}/>
             <TextInput placeholder='Ajoutez votre code postal...'  placeholderTextColor='grey' onChangeText={(value) => setPostalCode(value)} value={postalCode} style={styles.input}/>
@@ -397,12 +397,12 @@ const styles = StyleSheet.create({
     width: '50%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'palevioletred',
+    backgroundColor: '#A896CF',
     padding: 6,
     shadowOffset: { width: 2, height: 2 },
     shadowColor: "grey",
     shadowOpacity: 1.0,
-    borderWidth:.5,
+    // borderWidth:.5,
     borderRadius:20
   },
   addLocalisationText: {
@@ -453,7 +453,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#74D48F',
   },
   buttonClose: {
-    backgroundColor: 'palevioletred',
+    backgroundColor: '#A896CF',
     shadowOffset: { width: 1, height: 1 },
     shadowColor: "grey",
     shadowOpacity: 1.0,
@@ -471,9 +471,9 @@ const styles = StyleSheet.create({
   flexDirection:'row',
   alignItems:'flex-start',
   justifyContent:'flex-start',
-  marginLeft:-130,
-  marginTop:-35,
-  color:'palevioletred'
+  marginLeft: '-18%',
+  marginTop: '-10%',
+  color:'#A896CF'
 
   },
   buttonAdd: {
@@ -510,7 +510,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 1.0,
     position:'relative',
     size:15,
-    borderWidth:2,
+    // borderWidth:2,
     borderColor:'grey'
   },
   goText: {
