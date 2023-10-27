@@ -63,10 +63,12 @@ export default function DonationScreen({ navigation }) {
         city: myCity.properties.city,
         postalCode: myCity.properties.postcode
       };
+      if(data.features){
+        setIsLocation(true)
       setCity(location.city)
       setPostalCode(location.postalCode)
+      }
     })
-    setIsLocation(true)
   }
 
   const handleSubmit = () => {
@@ -105,27 +107,29 @@ console.log(image.object)
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
+          <TouchableOpacity
+              onPress={() =>  setModalVisible(!modalVisible)}>
+                <FontAwesome name="times-circle" style={styles.modalCloseBtn} size={30}/>
+            </TouchableOpacity>  
             <TextInput placeholder='Ajoutez votre ville...'  placeholderTextColor='grey' onChangeText={(value) => setCity(value)} value={city} style={styles.input}/>
             <TextInput placeholder='Ajoutez votre code postal...'  placeholderTextColor='grey' onChangeText={(value) => setPostalCode(value)} value={postalCode} style={styles.input}/>
+            
+            
             <TouchableOpacity
-              style={[styles.button, styles.buttonClose]}
-              onPress={() =>  setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>Close</Text>
-              
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonAdd]}
               onPress={() => {
                 handleAddLocation()
                 setModalVisible(!modalVisible)}}>
               <Text style={styles.textStyle}>Add</Text>
             </TouchableOpacity>
           </View>
+          
         </View>
         </Modal>
 
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
       <View style={styles.header}>
+        <FontAwesome name='arrow-left' size={32} color={'black'} onPress={() => navigation.navigate('Choices')} style={styles.arrowLeft}/>
         <Text style={styles.headerText}>FAIRE UN DON</Text>
       </View>
         <Text style={styles.photoText}>AJOUTER DES PHOTOS :</Text>
@@ -193,27 +197,29 @@ console.log(image.object)
         </View>
       <View style={styles.addState}>
         <Text style={styles.titleState}>ETAT :</Text>
+        <View name="StateContainer" style={styles.stateContainer}>
         <View style={styles.checkOne}>
         {isSelectedOne ? ( 
-            <FontAwesome name='check-square' size={20} color={'#74D48F'} onPress={()=> handleSelectOne()}/> 
+            <FontAwesome name='check-square' size={25} color={'#74D48F'} onPress={()=> handleSelectOne()}/> 
           ) : (
-            <FontAwesome name='square-o' size={20} color={'black'} onPress={()=> handleSelectOne()} />
+            <FontAwesome name='square-o' size={25} color={'black'} onPress={()=> handleSelectOne()} />
             )}
             <Text>Ready to use</Text>
             </View>
             <View style={styles.checkTwo}>
             {isSelectedTwo ? ( 
-            <FontAwesome name='check-square' size={20} color={'#74D48F'} onPress={()=> handleSelectTwo()}/> 
+            <FontAwesome name='check-square' size={25} color={'#74D48F'} onPress={()=> handleSelectTwo()}/> 
           ) : (
-            <FontAwesome name='square-o' size={20} color={'black'} onPress={()=> handleSelectTwo()} />
+            <FontAwesome name='square-o' size={25} color={'black'} onPress={()=> handleSelectTwo()} />
             )}
             <Text>À retaper</Text>
         </View>
-        <View>
+        </View>
+        <View style={styles.localisationContainer}>
           <Text style={styles.localisationTitle}>LOCALISATION :</Text>
           {!isLocation ? (
           <TouchableOpacity onPress={()=> setModalVisible(true)} style={styles.addLocalisation}>
-            <Text style={styles.addLocalisationText}>Ajoutez votre adresse</Text>
+            <Text style={styles.addLocalisationText}>Ajouter une adresse</Text>
           </TouchableOpacity>) : (
             <View style={styles.localisation}>
             <Text style={styles.localisationText}>{city}</Text>
@@ -245,13 +251,26 @@ const styles = StyleSheet.create({
   },
   header: {
     borderBottomWidth: 1,
-    padding: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+    marginTop:35,
+    marginLeft:0,
+    padding: 10,
+    flexDirection:"row",
+    alignItems:"center",
+    justifyContent:"flex-start"
+    },
+
+    arrowLeft: {
+     alignItems: "flex-start",
+     marginLeft: 15,
+     marginTop: 5
+    },
+    
   headerText: {
     fontSize: 20,
-    fontWeight: '800'
+    fontWeight: '800',
+    justifyContent:"center",
+    paddingLeft:60
+   
   },
   photos: {
     alignItems: 'center',
@@ -261,7 +280,7 @@ const styles = StyleSheet.create({
     height: '25%',
     },
   photoText: {
-    fontSize: 18,
+    fontSize: 13,
     textDecorationLine: 'underline',
     marginTop: 15,
     marginLeft: 30,
@@ -297,7 +316,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   titleText: {
-    fontSize: 18,
+    fontSize: 13,
     textDecorationLine: 'underline',
     marginLeft: 30,
   },
@@ -311,7 +330,7 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   descriptionText: {
-    fontSize: 18,
+    fontSize: 13,
     textDecorationLine: 'underline',
     marginTop: 10,
     marginLeft: 30,
@@ -334,8 +353,13 @@ const styles = StyleSheet.create({
     marginTop: '-45%',
     height: '15%',
   },
+  stateContainer:{
+  flexDirection:"row",
+  justifyContent:"space-arround"
+  
+  },
   titleState: {
-    fontSize: 18,
+    fontSize: 13,
     textDecorationLine: 'underline',
     marginLeft: 30,
 
@@ -345,7 +369,7 @@ const styles = StyleSheet.create({
       marginLeft: 30,
       flexDirection: 'row',
       justifyContent: 'space-evenly',
-      width: '25%',
+      width: '40%',
       marginBottom: -10
       
   },
@@ -354,10 +378,13 @@ const styles = StyleSheet.create({
     marginLeft: 30,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    width: '20%'
+    width: '35%'
+  },
+  localisationContainer:{
+    marginTop:20
   },
   localisationTitle: {
-    fontSize: 18,
+    fontSize: 13,
     textDecorationLine: 'underline',
     marginTop: 10,
     marginLeft: 30,
@@ -367,18 +394,20 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginTop: 10,
     borderRadius: 10,
-    width: '30%',
+    width: '50%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#74D48F',
+    backgroundColor: '#A896CF',
     padding: 6,
     shadowOffset: { width: 2, height: 2 },
     shadowColor: "grey",
     shadowOpacity: 1.0,
+    // borderWidth:.5,
+    borderRadius:20
   },
   addLocalisationText: {
     color: 'white',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   centeredView: {
     flex: 1,
@@ -391,6 +420,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     marginBottom: 10,
   },
+  modalContainerBtn:{
+    flexDirection:'row',
+    alignItems:'flex-end',
+    borderWidth:1,
+    borderColor:"orange"
+  },
   modalView: {
     margin: 20,
     backgroundColor: 'white',
@@ -402,9 +437,11 @@ const styles = StyleSheet.create({
       width: 0,
       height: 2,
     },
-    shadowOpacity: 0.25,
+    shadowOpacity: .25,
     shadowRadius: 4,
     elevation: 5,
+    borderColor:'grey',
+    borderWidth:3
   },
   button: {
     borderRadius: 10,
@@ -416,15 +453,41 @@ const styles = StyleSheet.create({
     backgroundColor: '#74D48F',
   },
   buttonClose: {
+    backgroundColor: '#A896CF',
+    shadowOffset: { width: 1, height: 1 },
+    shadowColor: "grey",
+    shadowOpacity: 1.0,
+    flexDirection:'row',
+    alignItems:'flex-start',
+    justifyContent:'flex-start',
+    marginLeft:-230,
+    marginTop:-20,
+    height:30,
+    marginBottom:10
+
+
+  },
+  modalCloseBtn:{
+  flexDirection:'row',
+  alignItems:'flex-start',
+  justifyContent:'flex-start',
+  marginLeft: '-18%',
+  marginTop: '-10%',
+  color:'#A896CF'
+
+  },
+  buttonAdd: {
     backgroundColor: '#74D48F',
     shadowOffset: { width: 1, height: 1 },
     shadowColor: "grey",
     shadowOpacity: 1.0,
+    marginBottom:-20
   },
   textStyle: {
     color: 'white',
     fontWeight: 'bold',
     textAlign: 'center',
+    
   },
   modalText: {
     marginBottom: 15,
@@ -435,26 +498,32 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     marginTop: '10%',
-    marginLeft: '80%',
+    marginLeft: '75%',
+    margin:20 ,
     borderRadius: 10,
     width: 60,
     height: 50,
-    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#74D48F',
     shadowOffset: { width: 2, height: 2 },
     shadowColor: "grey",
     shadowOpacity: 1.0,
+    position:'relative',
+    size:15,
+    // borderWidth:2,
+    borderColor:'grey'
   },
   goText: {
-    color: 'white'
+    color: 'white',
+    fontSize: 15
   },
   localisation: {
     marginTop: 10,
     marginLeft: 30,
   },
   localisationText: {
-    fontSize: 16
+    fontSize: 13
   }
+
 });
 

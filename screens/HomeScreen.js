@@ -1,7 +1,7 @@
 import { View, Text, SafeAreaView, StyleSheet,} from "react-native";
 import React, { useEffect, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import { FontAwesome5 } from '@expo/vector-icons';
+
 import { localFetch } from "../localFetch";
 import { useSelector } from "react-redux";
 
@@ -16,6 +16,7 @@ export default function HomeScreen({navigation}) {
   const user = useSelector((state)=> state.user.value)
 
   const [don, setDon] = useState([])
+  const [disliked, setDisliked] = useState(false)
 
 
   useEffect(() => {
@@ -24,25 +25,36 @@ export default function HomeScreen({navigation}) {
     .then(data => {
       setDon(data.result) 
     })
-  }, []);
+  }, [disliked]);
 
-  const [currentItemIndex, setCurrentItemIndex] = useState(0)
+let currentItemIndex = Math.floor(Math.random()*don.length)
 
-  let card
-
-  if(don.length > 0) { // Pour vérifier qu'il y a bien des objets à donner
+  let card = <></>
+  if(don.length > 0 && currentItemIndex < don.length) { // Pour vérifier qu'il y a bien des objets à donner
     card =  [don[currentItemIndex]].map( data => {
-          return <ItemCard key={data.title} item = {data} /> 
+          return <ItemCard key={data.title} item = {data}/> 
       })
       }
 
 
   const handleDislike = () => {   // clic sur le bouton X
-    setCurrentItemIndex((currentItemIndex + 1) % don.length); // affiche le prochain element du tableauu
+    setDisliked(!disliked) // affiche le prochain element du tableauu
     
   };
   
-  const handleLike = () => {  // clic sur le bouton COEUR qui modifie le tabBarBadge
+  const handleLike = () => { 
+    fetch(`http://${localFetch}:3000/users/like/${user.token}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({object: don})
+    })
+    .then((response)=>response.json())
+    .then(data => fetch(`http://${localFetch}:3000/objects/${user.token}`)
+    .then((response) => response.json())
+    .then(data => {
+      setDon(data.result) 
+    }))
+   
   };
       
   return (
@@ -50,7 +62,7 @@ export default function HomeScreen({navigation}) {
 
         <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
         <View style={styles.header}>
-        <FontAwesome5 name="arrow-left" onPress={() => navigation.navigate('Choices')} size={28} color="#000" />
+        <FontAwesome name='arrow-left' size={32} color={'black'} onPress={() => navigation.navigate('Choices')} style={styles.arrowLeft}/>
        </View>
 
         <Text style={styles.headertext}>Quoi de neuf autour de moi ?</Text>

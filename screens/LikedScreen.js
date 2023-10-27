@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import React from "react";
 import { localFetch } from "../localFetch";
+import DenicheurCard from "../components/DenicheurCard";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function LikedScreen({navigation}) {
  
@@ -18,56 +20,50 @@ export default function LikedScreen({navigation}) {
   
   const user = useSelector((state) => state.user.value);
 
-  const [objectData, setObjectData] = useState(0);
-  
-  console.log(objectData)
+  const [nbrLikes, setNbrLikes] = useState(5);
+  const [objData, setObjData] = useState([])
 
+  console.log(objData)
+ 
   useEffect(() => {
-    fetch(`http://10.3.0.21:3000/users/${user.token}`)
+    fetch(`http://${localFetch}:3000/users/${user.token}`)
       .then((response) => response.json())
       .then((data) => {
-        setObjectData(5-data.finalObj.likedObjects.length);
+
+        setNbrLikes(5-data.finalObj.likedObjects.length);
+
+        const allObject = data.finalObj.likedObjects.map((obj, key) => {
+          return <DenicheurCard key={key} 
+          image={obj.image[0]} 
+          title={obj.title} 
+          avatar={obj.user.avatar}
+          description={obj.description}
+          condition={obj.condition}/> 
+
+        });
+
+        setObjData(allObject)
+
       });
   }, [user.token]);
-
-  
 
 
   return (
     <View style={styles.container}>
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
+
       <View style={styles.header}>
-        <FontAwesome name='arrow-left' size={20} color={'black'} onPress={() => navigation.navigate('Donation')}/>
+        <FontAwesome name='arrow-left' size={32} color={'black'} onPress={() => navigation.navigate('Donation')}/>
       {swap ? (<Text style={styles.headerText} >Coté Denicheur</Text>) : (<Text style={styles.headerText}>Coté Dénicheur</Text>) }  
-        <FontAwesome name='exchange' size={20} color={'black'} onPress={() => navigation.navigate('Donneur')}/>
+        <FontAwesome name='exchange' size={32} color={'black'} onPress={() => navigation.navigate('Donneur')}/>
       </View>
-      {!accepted ? (<View style={styles.div}>
-        <View>
-          <Image style={styles.imgItem} source={{
-            uri: 'https://www.ikea.com/fr/fr/images/products/ekedalen-table-extensible-bouleau__0736961_pe740825_s5.jpg'
-          }}/>
-          <Image style={styles.imgUser} onPress={() => navigation.navigate('Profile')} source={{
-            uri: 'https://reactnative.dev/img/tiny_logo.png'
-          }}/>
-        </View>
-        <View style={styles.textes}>
-          <Text style={styles.titleText}>Table blanc de qualité PREND !!</Text>
-          <Text>Es tu sûr de vouloir cet objet ?</Text>
-          <View style={styles.buttons}>
-            <TouchableOpacity style={styles.buttonNo}><Text>NON</Text></TouchableOpacity>
-            <TouchableOpacity style={styles.buttonYes} onPress={() => handleAccept()}><Text>OUI</Text></TouchableOpacity>
-          </View>
-        </View>
-      </View>) : (<View style={styles.accepted}>
-        <Text>La donnation a-t-elle été effectuée ?</Text>
-        <View style={styles.buttons}>
-            <TouchableOpacity style={styles.buttonNo} onPress={() => handleAccept()}><Text>NON</Text></TouchableOpacity>
-            <TouchableOpacity style={styles.buttonYes}><Text>OUI</Text></TouchableOpacity>
-        </View>
-      </View>) }  
+
+      {objData}
+
         <View style={styles.reste}>
-          <Text style={styles.resteText}>Il te reste {objectData} likes !</Text>
+          <Text style={styles.resteText}>Il te reste {nbrLikes} likes !</Text>
         </View>
+
     </View>
   );
 }
@@ -75,35 +71,38 @@ export default function LikedScreen({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "center",
   },
   background: {
     height: "100%",
     width: "100%",
     position: "absolute",
   },
-
-  // Style pour l'en-tête
   header: {
     borderBottomWidth: 1,
-    padding: 50,
-    justifyContent: "space-around",
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
+    marginTop:-215,
+    marginLeft:0,
+    padding: 10,
+    flexDirection:"row",
+    alignItems:"center",
+    justifyContent:"space-between",
+    
+    
+    },
+
+    arrowLeft: {
+     alignItems: "flex-start",
+     paddingLeft: 20,
+     marginTop: 5
+    },
+
   headerText: {
     fontSize: 20,
     fontWeight: '800'
   },
 
   // Style pour chaque composant
-  div: {
-    // justifyContent: "space-around",
-    // alignItems: "center",
-    flexDirection: 'row',
-    padding: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#BBBBBB'
-  },
+
   imgItem: {
     width: 70,
     height: 70,
@@ -177,12 +176,9 @@ const styles = StyleSheet.create({
   resteText: {
     fontWeight: '700',
     fontSize: 20,
-    fontStyle: 'oblique',
+    fontStyle: 'italic',
     margin: 100,
   }
 
 });
 
-
-
-      
