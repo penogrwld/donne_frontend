@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import React from "react";
 import { localFetch } from "../localFetch";
+import DenicheurCard from "../components/DenicheurCard";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function LikedScreen({navigation}) {
  
@@ -18,24 +20,32 @@ export default function LikedScreen({navigation}) {
   
   const user = useSelector((state) => state.user.value);
 
-  const [nbrLikes, setNbrLikes] = useState(0);
+  const [nbrLikes, setNbrLikes] = useState(5);
   const [objData, setObjData] = useState([])
 
-
+  console.log(objData)
+ 
   useEffect(() => {
-    fetch(`http://10.3.0.21:3000/users/${user.token}`)
+    fetch(`http://${localFetch}:3000/users/${user.token}`)
       .then((response) => response.json())
       .then((data) => {
+
         setNbrLikes(5-data.finalObj.likedObjects.length);
-        setObjData(data.finalObj.likedObjects[0])
-        // console.log(data.finalObj.likedObjects[0])
+
+        const allObject = data.finalObj.likedObjects.map((obj, key) => {
+          return <DenicheurCard key={key} 
+          image={obj.image[0]} 
+          title={obj.title} 
+          avatar={obj.user.avatar}
+          description={obj.description}
+          condition={obj.condition}/> 
+
+        });
+
+        setObjData(allObject)
+
       });
   }, [user.token]);
-
-  if(nbrLikes.length > 0) {const obj =  objData.map((data, i) => {
-    console.log(obj)
-    // return <LikesCard key={i} item = {data} /> 
-})};
 
 
   return (
@@ -48,21 +58,7 @@ export default function LikedScreen({navigation}) {
         <FontAwesome name='exchange' size={20} color={'black'} onPress={() => navigation.navigate('Donneur')}/>
       </View>
 
-    <View style={styles.div}>
-        <View>
-          <Image style={styles.imgItem} source={{
-            uri: `${objData.image}`
-          }}/>
-          <Image style={styles.imgUser} onPress={() => navigation.navigate('Profile')} source={{
-            uri: 'https://reactnative.dev/img/tiny_logo.png'
-          }}/>
-        </View>
-        <View style={styles.textes}>
-          <Text style={styles.titleText}>{objData.title}</Text>
-
-        </View>
-
-      </View>
+      {objData}
 
         <View style={styles.reste}>
           <Text style={styles.resteText}>Il te reste {nbrLikes} likes !</Text>
@@ -96,14 +92,7 @@ const styles = StyleSheet.create({
   },
 
   // Style pour chaque composant
-  div: {
-    // justifyContent: "space-around",
-    // alignItems: "center",
-    flexDirection: 'row',
-    padding: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#BBBBBB'
-  },
+
   imgItem: {
     width: 70,
     height: 70,
@@ -183,6 +172,3 @@ const styles = StyleSheet.create({
 
 });
 
-
-
-      

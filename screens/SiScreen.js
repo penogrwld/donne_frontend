@@ -17,7 +17,6 @@ import {
   
   export default function SiScreen({ navigation }) {
 
-    const localFetch = '10.3.0.21'
   
     const dispatch = useDispatch()
     const [signInUsername, setSignInUsername] = useState('')
@@ -141,7 +140,6 @@ Inscription
     },
     text: {
       color: "white",
-      fontFamily: "Montserrat",
     },
     connectWith: {
       margin: 15,
