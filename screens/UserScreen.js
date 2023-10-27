@@ -4,6 +4,7 @@ import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { removeProfilePic } from "../reducers/user";
 import { localFetch } from "../localFetch";
+import { logout } from "../reducers/user";
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
@@ -32,7 +33,6 @@ export default function UserScreen({navigation}) {
 
 
        <View style={styles.user}>
-         
          <View style={styles.photos}>
          {!user.avatar ? (<TouchableOpacity style={styles.addPhoto} onPress={() => navigation.navigate("UserSnap")}>
           <Text>+</Text>
@@ -48,6 +48,12 @@ export default function UserScreen({navigation}) {
          <View style={styles.infos}>
          <Text>{user.firstname} {user.lastname}</Text>
          <Text>{user.email}</Text>
+         <TouchableOpacity onPress={()=> {
+          dispatch(logout())
+          navigation.navigate('Si')
+          }}>
+          <Text>LOGOUT</Text>
+         </TouchableOpacity>
          </View>
        </View>
 
@@ -153,7 +159,7 @@ const styles = StyleSheet.create({
   image: {
     borderWidth: 1,
     backgroundColor: 'white',
-    borderRadius: '100%',
+    borderRadius: 100,
     padding: 50,
     marginTop: 50,
   },

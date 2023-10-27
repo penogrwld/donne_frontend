@@ -17,8 +17,6 @@ import {
   
   export default function SiScreen({ navigation }) {
   
-
-  
     const dispatch = useDispatch()
     const [signInUsername, setSignInUsername] = useState('')
     const [signInPassword, setSignInPassword] = useState('')
