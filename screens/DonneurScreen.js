@@ -32,33 +32,32 @@ export default function DonneurScreen({ navigation }) {
           return {
             title: item.title,
             image: item.image,
-            avatar: item.likedBy[key].avatar,
-            username: item.likedBy[key].username,
+            likedBy:item.likedBy,
+            // avatar: item.likedBy[key].avatar,
+            // username: item.likedBy[key].username,
           };
         });
         setObjectData(allObject);
       });
-  }, [user.token]);
-
-  const objet = objectData.map((data, i) => {
-    return <Likes key={i} title={data.title} avatar={data.avatar} image={data.image} username={data.username} />
-    console.log(data);
+    }, [user.token]);
+    
+    const objet = objectData.map((data, i) => {
+      return data.likedBy.map((item, key) => {
+      //  console.log(item);
+      return <Likes key={key} title={data.title} avatar={item.avatar} image={data.image} username={item.username} />
+    })    
   })
 
 
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        <LinearGradient
-          colors={["#D7C4AB", "white"]}
-          style={styles.background}
-        />
-        <View style={styles.header}>
-          <FontAwesome
-            name="arrow-left"
-            size={20}
-            color={"black"}
-            onPress={() => navigation.navigate("Donner")}
+      <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
+      <View style={styles.header}>
+        <FontAwesome
+          name="arrow-left"
+          size={20}
+          color={"black"}
+          onPress={() => navigation.navigate("Trouver")}
           />
           <Text style={styles.headerText}>Coté Donneur</Text>
           <FontAwesome
@@ -67,11 +66,11 @@ export default function DonneurScreen({ navigation }) {
             color={"black"}
             onPress={() => navigation.navigate("Likes")}
           />
-        </View>
+
+      </View>
         <View>
           {objet}
         </View>
-      </View>
     </SafeAreaView>
   );
 }
