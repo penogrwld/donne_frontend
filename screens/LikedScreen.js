@@ -37,9 +37,9 @@ export default function LikedScreen({navigation}) {
     <View style={styles.container}>
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
       <View style={styles.header}>
-        <FontAwesome name='arrow-left' size={20} color={'black'} onPress={() => navigation.navigate('Donation')}/>
+        <FontAwesome name='arrow-left' size={32} color={'black'} onPress={() => navigation.navigate('Donation')}/>
       {swap ? (<Text style={styles.headerText} >Coté Denicheur</Text>) : (<Text style={styles.headerText}>Coté Dénicheur</Text>) }  
-        <FontAwesome name='exchange' size={20} color={'black'} onPress={() => navigation.navigate('Donneur')}/>
+        <FontAwesome name='exchange' size={32} color={'black'} onPress={() => navigation.navigate('Donneur')}/>
       </View>
       {!accepted ? (<View style={styles.div}>
         <View>
@@ -75,21 +75,31 @@ export default function LikedScreen({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "center",
   },
   background: {
     height: "100%",
     width: "100%",
     position: "absolute",
   },
-
-  // Style pour l'en-tête
   header: {
     borderBottomWidth: 1,
-    padding: 50,
-    justifyContent: "space-around",
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
+    marginTop:-215,
+    marginLeft:0,
+    padding: 10,
+    flexDirection:"row",
+    alignItems:"center",
+    justifyContent:"space-between",
+    
+    
+    },
+
+    arrowLeft: {
+     alignItems: "flex-start",
+     paddingLeft: 20,
+     marginTop: 5
+    },
+
   headerText: {
     fontSize: 20,
     fontWeight: '800'
