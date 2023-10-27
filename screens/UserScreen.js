@@ -27,11 +27,10 @@ export default function UserScreen({navigation}) {
   return (
     <View style={styles.container}>
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
-     
-        <View style={styles.header}>
-        <FontAwesome name='arrow-left'/>
+      <View style={styles.header}>
+        <FontAwesome name='arrow-left' size={32} color={'black'} onPress={() => navigation.navigate('Choices')} style={styles.arrowLeft}/>
         <Text style={styles.headerText}>MON COMPTE</Text>
-        </View>
+      </View>
 
 
        <View style={styles.user}>
@@ -79,17 +78,41 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
+
+    
   },
   background: {
     height: "100%",
     width: "100%",
     position: "absolute",
   },
+  header: {
+    borderBottomWidth: 1,
+    marginTop:0,
+    marginLeft:0,
+    padding: 10,
+    flexDirection:"row",
+    alignItems:"center",
+    justifyContent:"flex-start"
+
+  },
+  arrowLeft:{
+    alignItems: "flex-start",
+    marginLeft: 15,
+    marginTop: 5
+  },
+   headerText: {
+    fontSize: 20,
+    fontWeight: '800',
+    justifyContent:'center',
+    paddingLeft:60
+  },
   user: {
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "space-evenly",
     marginRight: '20%',
+  
   }, 
   photos: {
     alignItems: 'center',
@@ -136,18 +159,8 @@ const styles = StyleSheet.create({
     padding: 50,
     marginTop: 50,
   },
-  header: {
-    borderBottomWidth: 1,
-    padding: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: "row",
-
-  },
-  headerText: {
-    fontSize: 20,
-    fontWeight: '800'
-  },
+  
+ 
   dons: {
     borderWidth: 1,
     backgroundColor: 'white',

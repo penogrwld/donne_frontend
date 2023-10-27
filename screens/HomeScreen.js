@@ -1,7 +1,7 @@
 import { View, Text, SafeAreaView, StyleSheet,} from "react-native";
 import React, { useEffect, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import { FontAwesome5 } from '@expo/vector-icons';
+
 import { localFetch } from "../localFetch";
 import { useSelector } from "react-redux";
 
@@ -62,7 +62,7 @@ let currentItemIndex = Math.floor(Math.random()*don.length)
 
         <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
         <View style={styles.header}>
-        <FontAwesome5 name="arrow-left" onPress={() => navigation.navigate('Choices')} size={28} color="#000" />
+        <FontAwesome name='arrow-left' size={32} color={'black'} onPress={() => navigation.navigate('Choices')} style={styles.arrowLeft}/>
        </View>
 
         <Text style={styles.headertext}>Quoi de neuf autour de moi ?</Text>

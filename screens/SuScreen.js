@@ -14,6 +14,7 @@ import {
   import React from "react";
   import { localFetch } from "../localFetch";
   
+  
   const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   
   export default function SuScreen({ navigation }) {
@@ -60,8 +61,7 @@ import {
           <View style={styles.header}>
              <FontAwesome name="arrow-left" onPress={() => navigation.navigate('Choices')} size={32} color="#000" />
           </View>
-          <View name="Container vide"style={styles.containerVide}> 
-          </View>              
+                       
           <View style={styles.containerInput}>
              <TextInput style={styles.input} placeholder="Nom" onChangeText={(value) => setSignUpLastname(value)} value={signUpLastName}></TextInput>
              <TextInput style={styles.input} placeholder="Prénom" onChangeText={(value) => setSignUpFirstname(value)} value={signUpFirstName}></TextInput>
@@ -122,15 +122,13 @@ import {
       width: "100%",
       alignItems:"flex-start",
       flexDirection:"row",
-      margin: 10,
-      padding: 20
+      margin: 0,
+      padding: 20,
+      position:'absolute',
+      paddingBottom:720
     },
 
-    containerVide:{
-      flex: .8,
-      aligItems:"flex-start",
-      height:"50%",
-    },
+    
 
     containerInput: {
       width: "80%",
@@ -191,7 +189,8 @@ import {
 
     agreedContainer: {
       flexDirection:"row",
-      marginTop:-5
+      marginTop:20,
+      marginBottom:20
     },
 
     textAgreedBtn: {
