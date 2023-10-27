@@ -5,21 +5,21 @@ import {
   SafeAreaView,
   Image,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import React from "react";
+import Likes from '../components/LikesCard'
 import { localFetch } from "../localFetch";
 
 export default function DonneurScreen({ navigation }) {
-
-  
+  const localFetch = "10.3.0.21";
   const user = useSelector((state) => state.user.value);
 
-  const [accepted, setAccepted] = useState(false);
+
   const [objectData, setObjectData] = useState([]);
 
   useEffect(() => {
@@ -27,84 +27,50 @@ export default function DonneurScreen({ navigation }) {
       .then((response) => response.json())
       .then((data) => {
         // setObjectData(data[0].likedBy);
-        console.log(data);
+        // console.log(data[0].likedBy);
+        const allObject = data.map((item, key) => {
+          return {
+            title: item.title,
+            image: item.image,
+            likedBy:item.likedBy,
+            // avatar: item.likedBy[key].avatar,
+            // username: item.likedBy[key].username,
+          };
+        });
+        setObjectData(allObject);
       });
-  }, [user.token]);
+    }, [user.token]);
+    
+    const objet = objectData.map((data, i) => {
+      return data.likedBy.map((item, key) => {
+      //  console.log(item);
+      return <Likes key={key} title={data.title} avatar={item.avatar} image={data.image} username={item.username} />
+    })    
+  })
 
-  const handleAccept = () => {
-    setAccepted(!accepted);
-  };
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
-
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
       <View style={styles.header}>
         <FontAwesome
           name="arrow-left"
           size={20}
           color={"black"}
-          onPress={() => navigation.navigate("Donner")}
+          onPress={() => navigation.navigate("Trouver")}
           />
-        <Text style={styles.headerText}>Coté Donneur</Text>
-        <FontAwesome
-          name="exchange"
-          size={20}
-          color={"black"}
-          onPress={() => navigation.navigate("Likes")}
-        />
+          <Text style={styles.headerText}>Coté Donneur</Text>
+          <FontAwesome
+            name="exchange"
+            size={20}
+            color={"black"}
+            onPress={() => navigation.navigate("Likes")}
+          />
+
       </View>
-      {!accepted ? (
-        <View >
-          {/* {objectData.map((item, key) => (
-            <View key={key} >       
-              {item.likedBy.map((likedUser, likedKey) => (
-                <View style={styles.div} key={key}>
-                <Image style={styles.imgItem} source={{ uri: item.image }} />
-                <Image
-                  style={styles.imgUser}
-                  onPress={() => navigation.navigate("Profile")}
-                  source={{ uri: "https://reactnative.dev/img/tiny_logo.png" }}
-                  />
-                <Text>{likedUser}</Text>
-                <View style={styles.textes}>
-                  <Text style={styles.titleText}>{item.title}</Text>
-                  <Text>Acceptez-vous de donner cet objet ?</Text>
-                  <View style={styles.buttonsOne}>
-                    <TouchableOpacity style={styles.buttonNo}>
-                      <Text>NON</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={styles.buttonYes}
-                      onPress={() => handleAccept()}
-                      >
-                      <Text>OUI</Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              </View>
-             ))}
-            </View>
-          ))} */}
+        <View>
+          {objet}
         </View>
-      ) : (
-        <View style={styles.accepted}>
-          <Text>La donation a-t-elle été effectuée ?</Text>
-          <View style={styles.buttonsTwo}>
-            <TouchableOpacity
-              style={styles.buttonNo}
-              onPress={() => handleAccept()}
-              >
-              <Text>NON</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonYes}>
-              <Text>OUI</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      )}
-      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -158,7 +124,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderBottomWidth: 1,
     borderBottomColor: "#BBBBBB",
-    borderWidth:1
+    borderWidth: 1,
   },
   imgItem: {
     width: 70,
