@@ -129,7 +129,6 @@ console.log(image.object)
 
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
       <View style={styles.header}>
-        <FontAwesome name='arrow-left' size={32} color={'black'} onPress={() => navigation.navigate('Choices')} style={styles.arrowLeft}/>
         <Text style={styles.headerText}>FAIRE UN DON</Text>
       </View>
         <Text style={styles.photoText}>AJOUTER DES PHOTOS :</Text>
@@ -252,11 +251,10 @@ const styles = StyleSheet.create({
   header: {
     borderBottomWidth: 1,
     marginTop:35,
-    marginLeft:0,
     padding: 10,
     flexDirection:"row",
     alignItems:"center",
-    justifyContent:"flex-start"
+    justifyContent:"center"
     },
 
     arrowLeft: {
@@ -269,7 +267,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '800',
     justifyContent:"center",
-    paddingLeft:60
    
   },
   photos: {

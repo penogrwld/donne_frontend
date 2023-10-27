@@ -28,7 +28,6 @@ export default function UserScreen({navigation}) {
     <View style={styles.container}>
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
       <View style={styles.header}>
-        <FontAwesome name='arrow-left' size={32} color={'black'} onPress={() => navigation.navigate('Choices')} style={styles.arrowLeft}/>
         <Text style={styles.headerText}>MON COMPTE</Text>
       </View>
 
@@ -88,12 +87,10 @@ const styles = StyleSheet.create({
   },
   header: {
     borderBottomWidth: 1,
-    marginTop:0,
-    marginLeft:0,
     padding: 10,
     flexDirection:"row",
     alignItems:"center",
-    justifyContent:"flex-start"
+    justifyContent:"center"
 
   },
   arrowLeft:{
@@ -105,7 +102,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '800',
     justifyContent:'center',
-    paddingLeft:60
+
   },
   user: {
     alignItems: "center",

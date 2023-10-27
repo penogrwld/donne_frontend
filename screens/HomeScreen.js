@@ -62,7 +62,6 @@ let currentItemIndex = Math.floor(Math.random()*don.length)
 
         <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
         <View style={styles.header}>
-        <FontAwesome name='arrow-left' size={32} color={'black'} onPress={() => navigation.navigate('Choices')} style={styles.arrowLeft}/>
        </View>
 
         <Text style={styles.headertext}>Quoi de neuf autour de moi ?</Text>
