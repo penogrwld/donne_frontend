@@ -16,6 +16,7 @@ export default function HomeScreen({navigation}) {
   const user = useSelector((state)=> state.user.value)
 
   const [don, setDon] = useState([])
+  const [disliked, setDisliked] = useState(false)
 
 
   useEffect(() => {
@@ -24,25 +25,37 @@ export default function HomeScreen({navigation}) {
     .then(data => {
       setDon(data.result) 
     })
-  }, []);
+  }, [disliked]);
 
-  const [currentItemIndex, setCurrentItemIndex] = useState(0)
+let currentItemIndex = Math.floor(Math.random()*don.length)
 
-  let card
-
-  if(don.length > 0) { // Pour vérifier qu'il y a bien des objets à donner
+  let card = <></>
+  if(don.length > 0 && currentItemIndex < don.length) { // Pour vérifier qu'il y a bien des objets à donner
     card =  [don[currentItemIndex]].map( data => {
-          return <ItemCard key={data.title} item = {data} /> 
+          return <ItemCard key={data.title} item = {data}/> 
       })
       }
 
 
   const handleDislike = () => {   // clic sur le bouton X
-    setCurrentItemIndex((currentItemIndex + 1) % don.length); // affiche le prochain element du tableauu
+    setDisliked(!disliked) // affiche le prochain element du tableauu
     
   };
   
-  const handleLike = () => {  // clic sur le bouton COEUR qui modifie le tabBarBadge
+  const handleLike = () => { 
+    fetch(`http://${localFetch}:3000/users/like/${user.token}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({object: don})
+    })
+    .then((response)=>response.json())
+    .then(data => fetch(`http://${localFetch}:3000/objects/${user.token}`)
+    .then((response) => response.json())
+    .then(data => {
+      setDon(data.result) 
+     
+    }))
+   
   };
       
   return (
