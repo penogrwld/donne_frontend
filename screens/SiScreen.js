@@ -17,6 +17,7 @@ import {
   
   export default function SiScreen({ navigation }) {
   
+  
     const dispatch = useDispatch()
     const [signInUsername, setSignInUsername] = useState('')
     const [signInPassword, setSignInPassword] = useState('')
@@ -75,7 +76,7 @@ import {
                 onPress={() => navigation.navigate("Su")}
                 style={styles.link}
               >
-              Inscription
+Inscription
               </Text>
             </Text>
             <Text style={styles.connectWith}>Se connecter avec: </Text>

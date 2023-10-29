@@ -60,6 +60,7 @@ export default function LikedScreen({navigation}) {
       {allObject}
     </ScrollView>
 
+    </ScrollView>
         <View style={styles.reste}>
           <Text style={styles.resteText}>Il te reste {nbrLikes} likes !</Text>
         </View>
@@ -79,7 +80,8 @@ const styles = StyleSheet.create({
   },
   header: {
     borderBottomWidth: 1,
-    marginTop: 60,
+    marginTop:40,
+    marginLeft:0,
     padding: 10,
     flexDirection:"row",
     alignItems:"center",

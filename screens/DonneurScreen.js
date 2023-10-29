@@ -12,12 +12,11 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import React from "react";
-import Likes from '../components/LikesCard'
+import LikesCard from "../components/LikesCard";
 import { localFetch } from "../localFetch";
 
 export default function DonneurScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);
-
 
   const [objectData, setObjectData] = useState([]);
 
@@ -32,21 +31,32 @@ export default function DonneurScreen({ navigation }) {
           return {
             title: item.title,
             image: item.image,
-            likedBy:item.likedBy,
+            likedBy: item.likedBy,
+            uniqid: item.uniqid
             // avatar: item.likedBy[key].avatar,
             // username: item.likedBy[key].username,
           };
         });
         setObjectData(allObject);
       });
-    }, [user.token]);
-    
-    const objet = objectData.map((data, i) => {
-      return data.likedBy.map((item, key) => {
-      return <Likes key={key} objectId={data._id} title={data.title} avatar={item.avatar} image={data.image} username={item.username} />
-    })    
-  })
+  }, []);
 
+  const objet = objectData.map((data, i) => {
+    return data.likedBy.map((item, key) => {
+      //  console.log(item);
+      return (
+        <LikesCard
+          key={key}
+          title={data.title}
+          uniqid={data.uniqid}
+          avatar={item.avatar}
+          image={data.image}
+          username={item.username}
+          token={item.token}
+        />
+      );
+    });
+  });
 
   return (
     <View style={styles.container}>
@@ -57,41 +67,23 @@ export default function DonneurScreen({ navigation }) {
           size={20}
           color={"black"}
           onPress={() => navigation.navigate("Trouver")}
-          />
-          <Text style={styles.headerText}>Coté Donneur</Text>
-          <FontAwesome
-            name="exchange"
-            size={20}
-            color={"black"}
-            onPress={() => navigation.navigate("Likes")}
-          />
-
+        />
+        <Text style={styles.headerText}>Coté Donneur</Text>
+        <FontAwesome
+          name="exchange"
+          size={20}
+          color={"black"}
+          onPress={() => navigation.navigate("Likes")}
+        />
       </View>
-        <ScrollView>
-          {objet}
-        </ScrollView>
-    </View>
+      <ScrollView>
+
+      <View>{objet}</View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
-// (<View style={styles.div}>
-//   <View>
-//     <Image style={styles.imgItem} source={{
-//       uri: 'https://www.ikea.com/fr/fr/images/products/ekedalen-table-extensible-bouleau__0736961_pe740825_s5.jpg'
-//     }}/>
-//     <Image style={styles.imgUser} onPress={() => navigation.navigate('Profile')} source={{
-//       uri: 'https://reactnative.dev/img/tiny_logo.png'
-//     }}/>
-//   </View>
-//   <View style={styles.textes}>
-//     <Text style={styles.titleText}>Table blanc de qualité PREND !!</Text>
-//     <Text>Acceptez vous de donnez cet objet ?</Text>
-//     <View style={styles.buttonsOne}>
-//       <TouchableOpacity style={styles.buttonNo}><Text>NON</Text></TouchableOpacity>
-//       <TouchableOpacity style={styles.buttonYes} onPress={() => handleAccept()}><Text>OUI</Text></TouchableOpacity>
-//     </View>
-//   </View>
-// </View>)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
