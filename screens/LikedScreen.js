@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, SafeAreaView, Image, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, SafeAreaView, Image, TouchableOpacity, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux';
@@ -6,7 +6,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import React from "react";
 import { localFetch } from "../localFetch";
 import DenicheurCard from "../components/DenicheurCard";
-import { ScrollView } from "react-native-gesture-handler";
+// import { ScrollView } from "react-native-gesture-handler";
 
 export default function LikedScreen({navigation}) {
  
@@ -57,9 +57,11 @@ export default function LikedScreen({navigation}) {
       {swap ? (<Text style={styles.headerText} >Coté Denicheur</Text>) : (<Text style={styles.headerText}>Coté Dénicheur</Text>) }  
         <FontAwesome name='exchange' size={32} color={'black'} onPress={() => navigation.navigate('Donneur')}/>
       </View>
+    <ScrollView>
 
       {objData}
 
+    </ScrollView>
         <View style={styles.reste}>
           <Text style={styles.resteText}>Il te reste {nbrLikes} likes !</Text>
         </View>
@@ -80,7 +82,7 @@ const styles = StyleSheet.create({
   },
   header: {
     borderBottomWidth: 1,
-    marginTop:-215,
+    marginTop:40,
     marginLeft:0,
     padding: 10,
     flexDirection:"row",

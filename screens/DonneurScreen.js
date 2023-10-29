@@ -12,13 +12,11 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import React from "react";
-import LikesCard from '../components/LikesCard'
+import LikesCard from "../components/LikesCard";
 import { localFetch } from "../localFetch";
 
 export default function DonneurScreen({ navigation }) {
-
   const user = useSelector((state) => state.user.value);
-
 
   const [objectData, setObjectData] = useState([]);
 
@@ -32,22 +30,31 @@ export default function DonneurScreen({ navigation }) {
           return {
             title: item.title,
             image: item.image,
-            likedBy:item.likedBy,
+            likedBy: item.likedBy,
+            uniqid: item.uniqid
             // avatar: item.likedBy[key].avatar,
             // username: item.likedBy[key].username,
           };
         });
         setObjectData(allObject);
       });
-    }, []);
-    
-    const objet = objectData.map((data, i) => {
-      return data.likedBy.map((item, key) => {
-      //  console.log(item);
-      return <LikesCard key={key} title={data.title}  avatar={item.avatar} image={data.image} username={item.username} />
-    })    
-  })
+  }, []);
 
+  const objet = objectData.map((data, i) => {
+    return data.likedBy.map((item, key) => {
+      //  console.log(item);
+      return (
+        <LikesCard
+          key={key}
+          title={data.title}
+          uniqid={data.uniqid}
+          avatar={item.avatar}
+          image={data.image}
+          username={item.username}
+        />
+      );
+    });
+  });
 
   return (
     <SafeAreaView style={styles.container}>
@@ -58,23 +65,22 @@ export default function DonneurScreen({ navigation }) {
           size={20}
           color={"black"}
           onPress={() => navigation.navigate("Trouver")}
-          />
-          <Text style={styles.headerText}>Coté Donneur</Text>
-          <FontAwesome
-            name="exchange"
-            size={20}
-            color={"black"}
-            onPress={() => navigation.navigate("Likes")}
-          />
-
+        />
+        <Text style={styles.headerText}>Coté Donneur</Text>
+        <FontAwesome
+          name="exchange"
+          size={20}
+          color={"black"}
+          onPress={() => navigation.navigate("Likes")}
+        />
       </View>
-        <View>
-          {objet}
-        </View>
+      <ScrollView>
+
+      <View>{objet}</View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
