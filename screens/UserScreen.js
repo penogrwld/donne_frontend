@@ -34,7 +34,6 @@ export default function UserScreen({navigation}) {
 
 
        <View style={styles.user}>
-         
          <View style={styles.photos}>
          {!user.avatar ? (<TouchableOpacity style={styles.addPhoto} onPress={() => navigation.navigate("UserSnap")}>
           <Text>+</Text>
@@ -50,6 +49,12 @@ export default function UserScreen({navigation}) {
          <View style={styles.infos}>
          <Text>{user.firstname} {user.lastname}</Text>
          <Text>{user.email}</Text>
+         <TouchableOpacity onPress={()=> {
+          dispatch(logout())
+          navigation.navigate('Si')
+          }}>
+          <Text>LOGOUT</Text>
+         </TouchableOpacity>
          </View>
        </View>
 

@@ -40,11 +40,15 @@ export default function ItemCard(props) {
               
             />
           {pagination()}
+         <View style={styles.textcontainer}>
 
           <Text style={styles.title}>{props.item.title}</Text>
+
           <Text style={styles.condition}>{props.item.condition}</Text>
-          <Text style={[styles.description, { maxWidth: 270 }]}>{props.item.description}</Text>
+          <Text style={styles.description}>{props.item.description}</Text>
           <Text style={styles.description}>{props.item.localisation.city}</Text>
+
+         </View>
           
     </View>
   </ScrollView> 
@@ -64,6 +68,7 @@ const styles = StyleSheet.create({
     photoContainer: {
       alignItems: 'center',
       justifyContent: 'space-around',
+      width: 300,
   
     },
     photo: { 
@@ -83,7 +88,7 @@ const styles = StyleSheet.create({
       fontStyle: 'italic'
     },
     description: {
-
+      flexWrap: 'wrap',
     },
     carouselItem: {
       alignItems: 'center',
@@ -110,6 +115,10 @@ const styles = StyleSheet.create({
       borderRadius: 5,
       backgroundColor: 'darkgray', // Couleur des dots inactifs
     },
+    textcontainer: {
+      alignItems: 'center',
+      
+    }
   
    
   });
