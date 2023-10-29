@@ -1,38 +1,42 @@
 import { View, Text, SafeAreaView, StyleSheet,} from "react-native";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 
 import { localFetch } from "../localFetch";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import ItemCard from "../components/ItemCard";
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { addLike } from "../reducers/user";
 
 
 export default function HomeScreen({navigation}) {
   
   const user = useSelector((state)=> state.user.value)
+  const dispatch = useDispatch()
 
   const [don, setDon] = useState([])
   const [disliked, setDisliked] = useState(false)
+  const [currentItemIndex, setCurrentItemIndex] = useState(0)
 
+  // let currentItemIndex = Math.floor(Math.random()*don.length)
 
   useEffect(() => {
     fetch(`http://${localFetch}:3000/objects/${user.token}`)
     .then((response) => response.json())
     .then(data => {
       setDon(data.result) 
+      setCurrentItemIndex(Math.floor(Math.random() * data.result.length))
     })
   }, [disliked]);
 
-let currentItemIndex = Math.floor(Math.random()*don.length)
 
   let card = <></>
   if(don.length > 0 && currentItemIndex < don.length) { // Pour vérifier qu'il y a bien des objets à donner
     card =  [don[currentItemIndex]].map( data => {
-          return <ItemCard key={data.title} item = {data}/> 
+          return <ItemCard key={data.image[0]} item = {data}/> 
       })
       }
 
@@ -46,17 +50,18 @@ let currentItemIndex = Math.floor(Math.random()*don.length)
     fetch(`http://${localFetch}:3000/users/like/${user.token}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({object: don})
+      body: JSON.stringify({object: don[currentItemIndex]})
     })
     .then((response)=>response.json())
     .then(data => fetch(`http://${localFetch}:3000/objects/${user.token}`)
     .then((response) => response.json())
     .then(data => {
       setDon(data.result) 
+      dispatch(addLike())
     }))
    
   };
-      
+
   return (
     <View style={styles.container}>
 

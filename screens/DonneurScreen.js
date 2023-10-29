@@ -16,7 +16,6 @@ import Likes from '../components/LikesCard'
 import { localFetch } from "../localFetch";
 
 export default function DonneurScreen({ navigation }) {
-  const localFetch = "10.3.0.21";
   const user = useSelector((state) => state.user.value);
 
 
@@ -29,6 +28,7 @@ export default function DonneurScreen({ navigation }) {
         // setObjectData(data[0].likedBy);
         // console.log(data[0].likedBy);
         const allObject = data.map((item, key) => {
+          console.log(data)
           return {
             title: item.title,
             image: item.image,
@@ -43,14 +43,13 @@ export default function DonneurScreen({ navigation }) {
     
     const objet = objectData.map((data, i) => {
       return data.likedBy.map((item, key) => {
-      //  console.log(item);
-      return <Likes key={key} title={data.title} avatar={item.avatar} image={data.image} username={item.username} />
+      return <Likes key={key} objectId={data._id} title={data.title} avatar={item.avatar} image={data.image} username={item.username} />
     })    
   })
 
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
       <View style={styles.header}>
         <FontAwesome
@@ -68,10 +67,10 @@ export default function DonneurScreen({ navigation }) {
           />
 
       </View>
-        <View>
+        <ScrollView>
           {objet}
-        </View>
-    </SafeAreaView>
+        </ScrollView>
+    </View>
   );
 }
 
@@ -106,6 +105,7 @@ const styles = StyleSheet.create({
   // Style pour l'en-tête
   header: {
     borderBottomWidth: 1,
+    marginTop: 30,
     padding: 25,
     justifyContent: "space-around",
     flexDirection: "row",
