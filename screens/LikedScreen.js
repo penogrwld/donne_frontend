@@ -18,16 +18,6 @@ export default function LikedScreen({navigation}) {
   const [objData, setObjData] = useState([])
   const [refresh, setRefresh] = useState(false)
 
-  const handleRefresh = () => {
-    setRefresh(!refresh)
-    fetch(`http://${localFetch}:3000/users/${user.token}`)
-    .then((response) => response.json())
-    .then((data) => {
-      setNbrLikes(5-data.finalObj.likedObjects.length);
-      setObjData(data.finalObj.likedObjects)
-    });
-  }
-
   const handleAccept = () => {
     setAccepted(!accepted)
   }
