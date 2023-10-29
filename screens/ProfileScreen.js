@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import React from "react";
 import { localFetch } from "../localFetch";
 
-
 export default function ProfileScreen() {
  
 

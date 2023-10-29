@@ -51,6 +51,7 @@ export default function DonneurScreen({ navigation }) {
           avatar={item.avatar}
           image={data.image}
           username={item.username}
+          token={item.token}
         />
       );
     });

@@ -17,33 +17,38 @@ export default function DonneurCard(props) {
   const user = useSelector((state) => state.user.value);
   const image = useSelector((state) => state.image.value);
   const [accepted, setAccepted] = useState(false);
-
+  const [dislike, setDislike] = useState(false)
+  
   const handleAccept = () => {
     setAccepted(!accepted);
   };
 
-  const handleRefuse = () => {
-    if(!user.token){
-      return;
-    }
-    // console.log(props)
-    fetch(`http://${localFetch}:3000/users/dislike/${user.token}`, {
-      method: 'PUT',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ object: props.uniqid }),
-    })
-    .then((response) => response.json()) 
-    .then((data) => {
-      // // Traitez la réponse ici
-      if (data.result) {
-        // L'opération a réussi, mettez à jour l'interface si nécessaire
-        console.log('objet a été retiré de la liste des "aimés"');
-      } else {
-        // L'opération a échoué, affichez l'erreur si nécessaire
-        console.error(`Erreur mec`);
+
+    const handleRefuse = () => {
+      if(!user.token){
+        return;
       }
-    })
-  }
+      // console.log(props)
+      fetch(`http://${localFetch}:3000/users/dislike/${props.token}`, {
+        method: 'PUT',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ object: props.uniqid }),
+      })
+      .then((response) => response.json()) 
+      .then((data) => {
+        // // Traitez la réponse ici
+        if (data.result) {
+          // L'opération a réussi, mettez à jour l'interface si nécessaire
+          setDislike(true)
+          console.log('objet a été retiré de la liste des "aimés"');
+        } else {
+          // L'opération a échoué, affichez l'erreur si nécessaire
+          setDislike(false)
+          console.error(`Erreur mec`);
+        }
+      })
+    }
+  
 
   return (
     <View>
