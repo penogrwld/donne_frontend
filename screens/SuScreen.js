@@ -96,9 +96,9 @@ import {
               
             />) } 
             <View name="TextAgreedBtn"style={styles.textAgreedBtn}>
-              <Text style={styles.textValid}>  J'accepte les </Text>
+              <Text style={styles.textValid}> J'accepte les </Text>
                {/* // Redirige vers la page CGU */}
-              <Text style={styles.link} onPress={()=> navigation.navigate('Cgu')}>conditions générales d'utilisations (CGU)</Text>
+              <Text style={styles.link} onPress={()=> navigation.navigate('Cgu')}>conditions générales d'utilisation</Text>
             </View>
           </View>
           </View>
@@ -136,7 +136,6 @@ import {
       paddingBottom:720
     },
 
-  
     containerInput: {
       width: "80%",
       height:"60%",
@@ -169,15 +168,16 @@ import {
     //   marginRight: 20,
     // },
     textValid: {
-      marginLeft: -7,
       color: 'black',
-      marginTop:15
+      marginTop: 15,
+      fontSize: 13,
     },
 
     link: {
       textDecorationLine: "underline",
       textAlign:"left",
       fontWeight:"bold",
+      fontSize: 13,
     },
 
     buttons: {
@@ -196,13 +196,16 @@ import {
     },
 
     agreedContainer: {
-      flexDirection:"row",
       marginTop:20,
       marginBottom:20
     },
 
     textAgreedBtn: {
     marginLeft:20,
+    flexDirection:"row",
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
     },
 
     top: {
@@ -210,6 +213,7 @@ import {
       justifyContent: "center",
       paddingTop: 20, 
     },
+
     title: {
       fontSize: 20,
       fontFamily: 'Avenir',
