@@ -17,6 +17,8 @@ import {
   
   
   const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  const PHONE_REGEX = /^(0[6-7]\d(\s?\d){8})$/
   
   export default function SuScreen({ navigation }) {
 
@@ -29,8 +31,9 @@ import {
     const [signUpFirstName, setSignUpFirstname] = useState('');
     const [signUpLastName, setSignUpLastname] = useState('');
     const [signUpUsername, setSignUpUsername] = useState('');
+    const [signUpPhone, setSignUpPhone] = useState();
     const [signUpEmail, setSignUpEmail] = useState('');
-      const [signUpPassword, setSignUpPassword] = useState('');
+    const [signUpPassword, setSignUpPassword] = useState('');
   
     const handleSelect = () => {
       setSelection(!isSelected)
@@ -40,11 +43,11 @@ import {
           if(isSelected){fetch(`http://${localFetch}:3000/users/signup`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({firstname: signUpFirstName, avatar: null, lastname: signUpLastName, username: signUpUsername, email: signUpEmail, password: signUpPassword }),
+              body: JSON.stringify({firstname: signUpFirstName, avatar: null, lastname: signUpLastName, username: signUpUsername, phone: signUpPhone, email: signUpEmail, password: signUpPassword }),
           }).then(response => response.json())
               .then(data => {
-                  if (data.result && EMAIL_REGEX.test(signUpEmail)) {
-                      dispatch(signUp({firstname: signUpFirstName, avatar: null, lastname: signUpLastName, username: signUpUsername, email: signUpEmail, token: data.token }));
+                  if (data.result && EMAIL_REGEX.test(signUpEmail) && PHONE_REGEX.test(signUpPhone)) {
+                      dispatch(signUp({firstname: signUpFirstName, avatar: null, lastname: signUpLastName, username: signUpUsername, phone: signUpPhone, email: signUpEmail, token: data.token }));
             // vide les champs après inscription
                       setSignUpLastname('');
                       setSignUpFirstname('');
@@ -73,6 +76,7 @@ import {
              <TextInput style={styles.input} placeholder="Nom" onChangeText={(value) => setSignUpLastname(value)} value={signUpLastName}></TextInput>
              <TextInput style={styles.input} placeholder="Prénom" onChangeText={(value) => setSignUpFirstname(value)} value={signUpFirstName}></TextInput>
              <TextInput style={styles.input} placeholder="Pseudo" onChangeText={(value) => setSignUpUsername(value)} value={signUpUsername}></TextInput>
+             <TextInput style={styles.input} placeholder="Phone" onChangeText={(value) => setSignUpPhone(value)} value={signUpPhone}></TextInput>
              <TextInput style={styles.input} placeholder="Email" onChangeText={(value) => setSignUpEmail(value)} value={signUpEmail}></TextInput>
              <TextInput style={styles.input} secureTextEntry={true} placeholder="Mot de passe" onChangeText={(value) => setSignUpPassword(value)} value={signUpPassword}></TextInput>
              <View name="AgreedContainer" style={styles.agreedContainer}>
