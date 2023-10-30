@@ -18,7 +18,7 @@ import {
   
   const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-  const PHONE_REGEX = /^(0[6-7]\d(\s?\d){8})$/
+  const PHONE_REGEX = /^(0[6-7]\d{8})$/
   
   export default function SuScreen({ navigation }) {
 
@@ -31,7 +31,7 @@ import {
     const [signUpFirstName, setSignUpFirstname] = useState('');
     const [signUpLastName, setSignUpLastname] = useState('');
     const [signUpUsername, setSignUpUsername] = useState('');
-    const [signUpPhone, setSignUpPhone] = useState();
+    const [signUpPhone, setSignUpPhone] = useState('');
     const [signUpEmail, setSignUpEmail] = useState('');
     const [signUpPassword, setSignUpPassword] = useState('');
   
@@ -52,6 +52,7 @@ import {
                       setSignUpLastname('');
                       setSignUpFirstname('');
                       setSignUpUsername('');
+                      setSignUpPhone('');
                       setSignUpEmail('');
                       setSignUpPassword('');
                       navigation.navigate('TabNavigator',{ screen: 'Profil'})

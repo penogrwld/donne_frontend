@@ -13,88 +13,111 @@ import { localFetch } from "../localFetch";
 import { removeWhoLiked } from "../reducers/user";
 
 export default function DonneurCard(props) {
-
-
   const user = useSelector((state) => state.user.value);
   const image = useSelector((state) => state.image.value);
   const [accepted, setAccepted] = useState(false);
-  const [dislike, setDislike] = useState(false)
+  const [valid, setValid] = useState(false);
+  const [dislike, setDislike] = useState(false);
 
-  const dispatch = useDispatch()
-  
+  const dispatch = useDispatch();
+
   const handleAccept = () => {
     setAccepted(!accepted);
   };
-    const handleRefuse = () => {
-      if(!user.token){
-        return;
-      }
-      fetch(`http://${localFetch}:3000/users/unlike/${props.token}`, {
-        method: 'PUT',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({ object: props.id }),
-      })
-      .then((response) => response.json()) 
+
+  const handleValid = () => {
+    setValid(!valid);
+  };
+  const handleRefuse = () => {
+    if (!user.token) {
+      return;
+    }
+    fetch(`http://${localFetch}:3000/users/dislike/${props.token}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ object: props.id }),
+    })
+      .then((response) => response.json())
       .then((data) => {
         // // Traitez la réponse ici
         if (data.result) {
           // L'opération a réussi, mettez à jour l'interface si nécessaire
-          setDislike(true)
+          setDislike(true);
           console.log('objet a été retiré de la liste des "aimés"');
         } else {
           // L'opération a échoué, affichez l'erreur si nécessaire
-          setDislike(false)
+          setDislike(false);
           console.error(`Erreur mec`);
         }
-        dispatch(removeWhoLiked())
-      })
-    }
-  
+        dispatch(removeWhoLiked());
+      });
+  };
 
   return (
     <View>
       {!accepted ? (
         <View style={styles.div}>
-        <Image style={styles.imgItem} source={{ uri: props.image }} />
-        <Image
-          style={styles.imgUser}
-          onPress={() => navigation.navigate("Profile")}
-          source={{ uri: props.avatar }}
-        />
-        <Text>{props.username}</Text>
-        <View style={styles.textes}>
-          <Text style={styles.titleText}>{props.title}</Text>
-          <Text>Acceptez-vous de donner cet objet ?</Text>
-          <View style={styles.buttonsOne}>
-            <TouchableOpacity style={styles.buttonNo} onPress={() => handleRefuse()}>
-              <Text>NON</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.buttonYes}
-              onPress={() => handleAccept()}
-            >
-              <Text>OUI</Text>
-            </TouchableOpacity>
+          <Image style={styles.imgItem} source={{ uri: props.image }} />
+          <Image
+            style={styles.imgUser}
+            onPress={() => navigation.navigate("Profile")}
+            source={{ uri: props.avatar }}
+          />
+          <Text>{props.username}</Text>
+          <View style={styles.textes}>
+            <Text style={styles.titleText}>{props.title}</Text>
+            <Text>Acceptez-vous de donner cet objet ?</Text>
+            <View style={styles.buttonsOne}>
+              <TouchableOpacity
+                style={styles.buttonNo}
+                onPress={() => handleRefuse()}
+              >
+                <Text>NON</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.buttonYes}
+                onPress={() => handleAccept()}
+              >
+                <Text>OUI</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
-      </View>
       ) : (
-        <View style={styles.accepted}>
-          <Text>La donation a-t-elle été effectuée ?</Text>
-          <View style={styles.buttonsTwo}>
-            <TouchableOpacity
-              style={styles.buttonNo}
-              onPress={() => handleAccept()}
-            >
-              <Text>NON</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonYes}>
-              <Text>OUI</Text>
-            </TouchableOpacity>
-          </View>
+        <View style={styles.acceptContainer}>
+          {/* {!valid ? ( */}
+            <View style={styles.phone}>
+              <Text>
+                Contactez l'utilisateur avec le numéro suivant:
+              </Text>
+              <Text>0{props.phone}</Text>
+            </View>
+            <View style={styles.accepted}>
+              <Text>La donation a-t-elle été effectuée ?</Text>
+              <View style={styles.buttonsTwo}>
+                <TouchableOpacity
+                  style={styles.buttonNo}
+                  onPress={() => handleAccept()}
+                >
+                  <Text>NON</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.buttonYes}
+                  onPress={() => handleValid()}
+                >
+                  <Text>OUI</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          {/* ) : (
+            <View>
+              <Text>
+                Contactez l'utilisateur avec le numéro suivant: 0{props.phone}
+              </Text>
+            </View>
+          )} */}
         </View>
       )}
-
     </View>
   );
 }
@@ -106,9 +129,11 @@ const styles = StyleSheet.create({
     // alignItems: "center",
     flexDirection: "column",
     padding: 15,
+    borderTopWidth: 1,
+    borderTopColor: "#BBBBBB",
     borderBottomWidth: 1,
     borderBottomColor: "#BBBBBB",
-    borderWidth: 1,
+    // borderWidth: 1,
   },
   imgItem: {
     width: 70,
@@ -143,8 +168,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     width: "100%",
+    marginTop: 20,
     // borderWidth: 1,
-    marginTop: 30,
   },
   buttonNo: {
     backgroundColor: "#A896CF",
@@ -173,5 +198,25 @@ const styles = StyleSheet.create({
     // marginTop: 10,
     width: 70,
     height: 50,
+  },
+  acceptContainer: {
+    margin: 10,
+    // shadowColor: "#000000",
+    // shadowOpacity: 0.8,
+    // shadowRadius: 2,
+    // shadowOffset: {
+    //   height: 1,
+    //   width: 1
+    // }
+    // borderBottomWidth: 1,
+    // borderTopColor: 'black'
+  },
+  phone: {
+    marginTop: 10,
+    marginBottom: 30,
+    alignItems: "center",
+  },
+  accepted: {
+    alignItems: "center",
   },
 });

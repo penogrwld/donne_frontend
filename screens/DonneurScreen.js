@@ -48,6 +48,7 @@ export default function DonneurScreen({ navigation }) {
           key={key}
           title={data.title}
           // uniqid={data.uniqid}
+          phone={item.phone}
           avatar={item.avatar}
           image={data.image}
           username={item.username}
