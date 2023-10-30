@@ -27,32 +27,32 @@ export default function DonneurScreen({ navigation }) {
         // setObjectData(data[0].likedBy);
         // console.log(data[0].likedBy);
         const allObject = data.map((item, key) => {
-          console.log(data)
           return {
             title: item.title,
             image: item.image,
             likedBy: item.likedBy,
-            uniqid: item.uniqid
+            id: item.id
+            // uniqid: item.uniqid
             // avatar: item.likedBy[key].avatar,
             // username: item.likedBy[key].username,
           };
         });
         setObjectData(allObject);
       });
-  }, []);
-
+  }, [user.numberWhoLiked]);
   const objet = objectData.map((data, i) => {
+
     return data.likedBy.map((item, key) => {
-      //  console.log(item);
       return (
         <LikesCard
           key={key}
           title={data.title}
-          uniqid={data.uniqid}
+          // uniqid={data.uniqid}
           avatar={item.avatar}
           image={data.image}
           username={item.username}
           token={item.token}
+          id={data.id}
         />
       );
     });
@@ -68,7 +68,7 @@ export default function DonneurScreen({ navigation }) {
           color={"black"}
           onPress={() => navigation.navigate("Trouver")}
         />
-        <Text style={styles.headerText}>Coté Donneur</Text>
+        <Text style={styles.headerText}>Côté Donneur</Text>
         <FontAwesome
           name="exchange"
           size={20}
@@ -80,7 +80,7 @@ export default function DonneurScreen({ navigation }) {
 
       <View>{objet}</View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 

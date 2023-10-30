@@ -26,7 +26,7 @@ import {
       fetch(`http://${localFetch}:3000/users/unlike/${user.token}`, {
         method: "PUT",
         headers: {"Content-Type": "application/json"},
-        body:JSON.stringify({ object: props.objectId })
+        body:JSON.stringify({ object: props.id })
       })
         .then(response => response.json())
         .then(data => {
@@ -34,7 +34,6 @@ import {
         })
        }
       
-
     return (
 
 

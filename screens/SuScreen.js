@@ -50,7 +50,7 @@ import {
                       setSignUpUsername('');
                       setSignUpEmail('');
                       setSignUpPassword('');
-            navigation.navigate("Choices")
+                      navigation.navigate('TabNavigator',{ screen: 'Profil'})
                   }
               });
       }};
@@ -59,7 +59,7 @@ import {
       <View style={styles.container}>
         <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
           <View style={styles.header}>
-             <FontAwesome name="arrow-left" onPress={() => navigation.navigate('Choices')} size={32} color="#000" />
+             <FontAwesome name="arrow-left" onPress={() => navigation.navigate('Si')} size={32} color="#000" />
           </View>
                        
           <View style={styles.containerInput}>
@@ -76,7 +76,7 @@ import {
               value={isSelected}
               color={'#74D48F'}
               onPress={() => handleSelect()}
-              size={40}
+              size={30}
               margin={-12}
             />) : (<FontAwesome
               style={styles.checkbox}
@@ -84,7 +84,7 @@ import {
               value={isSelected}
               color={'black'}
               onPress={() => handleSelect()}
-              size={40}
+              size={30}
               margin={-12}
               
             />) } 
@@ -195,6 +195,7 @@ import {
 
     textAgreedBtn: {
     marginLeft:20,
+    
     }
     
   });

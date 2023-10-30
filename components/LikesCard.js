@@ -8,8 +8,9 @@ import {
   ScrollView,
 } from "react-native";
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { localFetch } from "../localFetch";
+import { removeWhoLiked } from "../reducers/user";
 
 export default function DonneurCard(props) {
 
@@ -18,21 +19,20 @@ export default function DonneurCard(props) {
   const image = useSelector((state) => state.image.value);
   const [accepted, setAccepted] = useState(false);
   const [dislike, setDislike] = useState(false)
+
+  const dispatch = useDispatch()
   
   const handleAccept = () => {
     setAccepted(!accepted);
   };
-
-
     const handleRefuse = () => {
       if(!user.token){
         return;
       }
-      // console.log(props)
-      fetch(`http://${localFetch}:3000/users/dislike/${props.token}`, {
+      fetch(`http://${localFetch}:3000/users/unlike/${props.token}`, {
         method: 'PUT',
         headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({ object: props.uniqid }),
+        body: JSON.stringify({ object: props.id }),
       })
       .then((response) => response.json()) 
       .then((data) => {
@@ -46,6 +46,7 @@ export default function DonneurCard(props) {
           setDislike(false)
           console.error(`Erreur mec`);
         }
+        dispatch(removeWhoLiked())
       })
     }
   

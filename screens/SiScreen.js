@@ -79,9 +79,9 @@ import {
 Inscription
               </Text>
             </Text>
-            <Text style={styles.connectWith}>Se connecter avec: </Text>
+            {/* <Text style={styles.connectWith}>Se connecter avec: </Text> */}
             {/* // Permet de s'incrire ou se connecter avec un réseau social */}
-            <SocialIcon
+            {/* <SocialIcon
               style={styles.social}
               title="Sign In With Facebook"
               button
@@ -92,7 +92,7 @@ Inscription
               title="Sign In With Google"
               button
               type="google"
-            />
+            /> */}
           </View>
         </View>
       </View>
@@ -113,6 +113,8 @@ Inscription
     },
     containerInput: {
       width: "80%",
+      marginTop: 30,
+      marginBottom: 20,
     },
     input: {
       borderWidth: 1,
@@ -120,6 +122,7 @@ Inscription
       marginBottom: 10,
       borderRadius: 10,
       padding: 10,
+      
     },
     errorMsg: {
       backgroundColor: '#A896CF',
@@ -136,7 +139,8 @@ Inscription
       shadowOffset: { width: 5, height: 5 },
       shadowColor: "grey",
       shadowOpacity: 1.0,
-      marginTop: 10,
+      marginTop: 30,
+      marginRight: 10
     },
     text: {
       color: "white",

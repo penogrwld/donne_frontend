@@ -12,7 +12,7 @@ const initialState = {
     username: null, 
     isConnected: false,
     numberLikes: 0,
-    isLiked: false
+    numberWhoLiked: 0,
   },
 };
 
@@ -56,9 +56,12 @@ export const userSlice = createSlice({
     },
     removeLike: (state, action) => {
       state.value.numberLikes -= 1
-    }
+    },
+    removeWhoLiked: (state, action) => {
+      state.value.numberWhoLiked -= 1
+    },
   },
 });
 
-export const { signUp, signIn, logout, addProfilePic, removeProfilePic, addLike, removeLike } = userSlice.actions;
+export const { signUp, signIn, logout, removeWhoLiked, addProfilePic, removeProfilePic, addLike, removeLike } = userSlice.actions;
 export default userSlice.reducer;

@@ -35,7 +35,7 @@ export default function LikedScreen({navigation}) {
   
   const allObject = objData.map((obj, key) => {
     return <DenicheurCard key={key} 
-    objectId={obj._id}
+    id = {obj._id}
     image={obj.image[0]} 
     title={obj.title} 
     avatar={obj.user.avatar}
@@ -51,8 +51,8 @@ export default function LikedScreen({navigation}) {
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
 
       <View style={styles.header}>
-        <FontAwesome name='arrow-left' size={32} color={'black'} onPress={() => navigation.navigate('Donation')}/>
-      {swap ? (<Text style={styles.headerText} >Coté Denicheur</Text>) : (<Text style={styles.headerText}>Coté Dénicheur</Text>) }  
+        <FontAwesome name='arrow-left' size={32} color={'black'} onPress={() => navigation.navigate('Trouver')}/>
+      {swap ? (<Text style={styles.headerText} >Côté Denicheur</Text>) : (<Text style={styles.headerText}>Côté Dénicheur</Text>) }  
         <FontAwesome name='exchange' size={32} color={'black'} onPress={() => navigation.navigate('Donneur')}/>
       </View>
     <ScrollView>
@@ -60,7 +60,6 @@ export default function LikedScreen({navigation}) {
       {allObject}
     </ScrollView>
 
-    </ScrollView>
         <View style={styles.reste}>
           <Text style={styles.resteText}>Il te reste {nbrLikes} likes !</Text>
         </View>

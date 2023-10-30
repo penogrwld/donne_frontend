@@ -107,6 +107,9 @@ console.log(image.object)
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
+            <View>
+              
+            </View>
           <TouchableOpacity
               onPress={() =>  setModalVisible(!modalVisible)}>
                 <FontAwesome name="times-circle" style={styles.modalCloseBtn} size={30}/>
@@ -129,7 +132,7 @@ console.log(image.object)
 
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
       <View style={styles.header}>
-        <FontAwesome name='arrow-left' size={32} color={'black'} onPress={() => navigation.navigate('Choices')} style={styles.arrowLeft}/>
+        {/* <FontAwesome name='arrow-left' size={32} color={'black'} onPress={() => navigation.navigate('Choices')} style={styles.arrowLeft}/> */}
         <Text style={styles.headerText}>FAIRE UN DON</Text>
       </View>
         <Text style={styles.photoText}>AJOUTER DES PHOTOS :</Text>
@@ -256,7 +259,7 @@ const styles = StyleSheet.create({
     padding: 10,
     flexDirection:"row",
     alignItems:"center",
-    justifyContent:"flex-start"
+    justifyContent:"center"
     },
 
     arrowLeft: {
@@ -269,7 +272,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '800',
     justifyContent:"center",
-    paddingLeft:60
+    paddingRight:10
    
   },
   photos: {
@@ -431,6 +434,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 20,
     padding: 35,
+    width: 300,
+    height: 150,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
@@ -460,7 +465,7 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     alignItems:'flex-start',
     justifyContent:'flex-start',
-    marginLeft:-230,
+    marginLeft:-20,
     marginTop:-20,
     height:30,
     marginBottom:10
@@ -471,9 +476,9 @@ const styles = StyleSheet.create({
   flexDirection:'row',
   alignItems:'flex-start',
   justifyContent:'flex-start',
-  marginLeft: '-18%',
+  marginLeft: -130,
   marginTop: '-10%',
-  color:'#A896CF'
+  color:'#A896CF',
 
   },
   buttonAdd: {
