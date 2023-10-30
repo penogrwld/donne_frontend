@@ -25,7 +25,7 @@ export default function LikedScreen({navigation}) {
   const user = useSelector((state) => state.user.value);
 
   useEffect(() => {
-    fetch(`http://${localFetch}:3000/users/${user.token}`)
+    fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/users/${user.token}`)
       .then((response) => response.json())
       .then((data) => {
         setNbrLikes(5-data.finalObj.likedObjects.length);

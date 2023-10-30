@@ -44,7 +44,7 @@ export default function SnapScreen({navigation}) {
         type: 'image/jpeg',
       })
   
-      fetch(`http://${localFetch}:3000/objects/upload`, {
+      fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/objects/upload`, {
         method: 'POST',
         body: formData,
       })
@@ -53,7 +53,7 @@ export default function SnapScreen({navigation}) {
           if (data.result) {
             dispatch(addProfilePic(data.url))
   
-            fetch(`http://${localFetch}:3000/users/avatar/${user.token}`, {
+            fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/users/avatar/${user.token}`, {
               method: 'PUT',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ avatar: data.url })

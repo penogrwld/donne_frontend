@@ -24,7 +24,7 @@ export default function HomeScreen({navigation}) {
   // let currentItemIndex = Math.floor(Math.random()*don.length)
 
   useEffect(() => {
-    fetch(`http://${localFetch}:3000/objects/${user.token}`)
+    fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/objects/${user.token}`)
     .then((response) => response.json())
     .then(data => {
       setDon(data.result) 
@@ -47,13 +47,13 @@ export default function HomeScreen({navigation}) {
   };
   
   const handleLike = () => { 
-    fetch(`http://${localFetch}:3000/users/like/${user.token}`, {
+    fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/users/like/${user.token}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({object: don[currentItemIndex]})
     })
     .then((response)=>response.json())
-    .then(data => fetch(`http://${localFetch}:3000/objects/${user.token}`)
+    .then(data => fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/objects/${user.token}`)
     .then((response) => response.json())
     .then(data => {
       setDon(data.result) 

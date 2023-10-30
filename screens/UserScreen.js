@@ -5,8 +5,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { removeProfilePic } from "../reducers/user";
 import { localFetch } from "../localFetch";
 import { logout } from "../reducers/user";
+import { useEffect, useState } from "react";
+
+import Dons from "../components/Dons";
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function UserScreen({navigation}) {
 
@@ -15,13 +19,41 @@ export default function UserScreen({navigation}) {
   const image = useSelector((state)=> state.image.value)
   const dispatch = useDispatch()
 
+
+
+  const [don, setDon] = useState([])
+  // const [catch, setCatch] = useState([])
+
+  useEffect(() => {
+    fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/users/${user.token}/object`)
+    .then((response) => response.json())
+    .then(data => {
+      setDon(data)
+
+    });
+
+    // fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/objects/${user.token}`)
+    // .then((response) => response.json()) 
+    // .then(data => {
+    //   console.log(data)
+    // })
+
+
+  }, [user.token]);
+
+const allObject = don.map((item, i) => {
+  return <Dons key= {i} image= {item.image} />
+});
+
+
   const handleRemove = () => {
-    fetch(`http://${localFetch}:3000/users/remove/${user.token}`, {
+    fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/users/remove/${user.token}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
     })
     .then(dispatch(removeProfilePic()))
   }
+
 
 
   return (
@@ -53,20 +85,32 @@ export default function UserScreen({navigation}) {
           dispatch(logout())
           navigation.navigate('Si')
           }}>
-          <Text>LOGOUT</Text>
+          <Text style={styles.textlogout}>LOGOUT</Text>
          </TouchableOpacity>
          </View>
        </View>
 
-       <View style={styles.text1}>
-       <Text>MES DONS</Text>
-       </View>
 
-          <TouchableOpacity onPress={()=>navigation.navigate('Donner')}>
-         <View style={styles.dons}>
-          <Text>+</Text>
+       <View style={styles.top}>
+
+        <Text style={styles.text1}>MES DONS</Text>
+
+
+
+        <View style={styles.objects}>
+         {allObject}
+        </View>
+
+
+  
+          <TouchableOpacity style={styles.dons} onPress={()=>navigation.navigate('Donner')}>
+         <View>
+          <Text style={styles.textButton}>DONNER</Text>
          </View>
           </TouchableOpacity>
+
+
+          </View>
 
        <View style={styles.text2}>
        <Text>MES CATCHS</Text>
@@ -84,36 +128,29 @@ export default function UserScreen({navigation}) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
 
-    
+  container: {
+paddingTop: 40,
   },
+
   background: {
     height: "100%",
     width: "100%",
     position: "absolute",
   },
+  
   header: {
     borderBottomWidth: 1,
     padding: 10,
-    flexDirection:"row",
-    alignItems:"center",
+    alignItems: "center",
     justifyContent:"center"
-
   },
-  // arrowLeft:{
-  //   alignItems: "flex-start",
-  //   marginLeft: 15,
-  //   marginTop: 5
-  // },
+
    headerText: {
     fontSize: 20,
     fontWeight: '800',
-    justifyContent:'center',
     paddingRight:5,
-    paddingTop: 20
+    paddingTop: 20,
   },
   user: {
     alignItems: "center",
@@ -144,20 +181,33 @@ const styles = StyleSheet.create({
     marginRight: 10,
     marginLeft: 10,
   },
-  text1: {
-    marginBottom: 150,
+
+  top: {
+    marginBottom: 40,
     marginTop: 80,
     borderTopWidth: 1,
-    borderColor: 'black',
     padding: 10,
   },
 
+  text1: {
+    padding: 10,
+  },
+
+  objects: {
+    paddingTop: 10,
+    paddingBottom: 30,
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    shadowOffset: { width: 4, height: 4 },
+    shadowColor: "grey",
+    shadowOpacity: 1.0,
+  },
+
   text2: {
-    marginBottom: 125,
-    marginTop: 5,
+    marginBottom: 200,
     borderTopWidth: 1,
     borderColor: 'black',
-    padding: 10,
+    padding: 20,
   },
 
   image: {
@@ -166,18 +216,27 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     padding: 50,
     marginTop: 50,
-  },
-  
- 
-  dons: {
-    borderWidth: 1,
-    backgroundColor: 'white',
-    borderRadius: 100,
-    padding: 10,
-    flexDirection: "row",
-    justifyContent: "space-evenly",
     
   },
+  
+  dons: {
+    borderRadius: 50,
+    padding: 10,
+    marginLeft: 150,
+    marginRight: 150,
+    flexDirection: "row",
+    justifyContent: "center",
+    backgroundColor: '#A896CF',
+    shadowOffset: { width: 4, height: 4 },
+    shadowColor: "grey",
+    shadowOpacity: 1.0,
+    
+  },
+
+  textButton: {
+    color: 'white',
+  },
+
   catchs: {
     borderWidth: 1,
     backgroundColor: 'white',
@@ -185,15 +244,24 @@ const styles = StyleSheet.create({
     padding: 10,
     flexDirection: "row",
     justifyContent: "center",
+
   },
   logout: {
-    borderWidth: 1,
     borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 30,
     backgroundColor: '#A896CF',
     height: 30,
+    width: 90,
+    shadowOffset: { width: 4, height: 4 },
+    shadowColor: "grey",
+    shadowOpacity: 1.0,
+
+  },
+  textlogout: {
+  color: 'white',
+  
   }
 
 });

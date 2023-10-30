@@ -73,7 +73,7 @@ export default function DonationScreen({ navigation }) {
 
   const handleSubmit = () => {
     
-    fetch(`http://${localFetch}:3000/objects/add` , {
+    fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/objects/add` , {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ image: photosObject, title: title, description: description, condition: condition,
