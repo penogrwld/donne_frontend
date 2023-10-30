@@ -5,6 +5,7 @@ import {
     TextInput,
     SafeAreaView,
     TouchableOpacity,
+    Image,
   } from "react-native";
   import { SocialIcon } from "react-native-elements";
   import { LinearGradient } from "expo-linear-gradient";
@@ -16,6 +17,7 @@ import {
   
   
   export default function SiScreen({ navigation }) {
+  
   
     const dispatch = useDispatch()
     const [signInUsername, setSignInUsername] = useState('')
@@ -52,7 +54,8 @@ import {
       <View style={styles.container}>
         <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
 
-        <View>
+        <View style={styles.top}>
+        <Image style={styles.logo} source={require("../assets/Logo.png")}/>
         <Text style={styles.title}>DONNE</Text>
         </View>
 
@@ -70,17 +73,15 @@ import {
           <View style={styles.question}>
             <Text>
               {/* // Au clique ramène vers la page SignUp */}
-              Pas encore inscrit ? 
-              <Text
+              Pas encore inscrit ? <Text
                 onPress={() => navigation.navigate("Su")}
                 style={styles.link}
-              >
-              Inscription
+              >Inscription
               </Text>
             </Text>
-            <Text style={styles.connectWith}>Se connecter avec: </Text>
+            {/* <Text style={styles.connectWith}>Se connecter avec: </Text> */}
             {/* // Permet de s'incrire ou se connecter avec un réseau social */}
-            <SocialIcon
+            {/* <SocialIcon
               style={styles.social}
               title="Sign In With Facebook"
               button
@@ -91,7 +92,7 @@ import {
               title="Sign In With Google"
               button
               type="google"
-            />
+            /> */}
           </View>
         </View>
       </View>
@@ -112,6 +113,8 @@ import {
     },
     containerInput: {
       width: "80%",
+      marginTop: 30,
+      marginBottom: 20,
     },
     input: {
       borderWidth: 1,
@@ -119,6 +122,7 @@ import {
       marginBottom: 10,
       borderRadius: 10,
       padding: 10,
+      
     },
     errorMsg: {
       backgroundColor: '#A896CF',
@@ -135,7 +139,8 @@ import {
       shadowOffset: { width: 5, height: 5 },
       shadowColor: "grey",
       shadowOpacity: 1.0,
-      marginTop: 10,
+      marginTop: 30,
+      marginRight: 10
     },
     text: {
       color: "white",
@@ -146,17 +151,28 @@ import {
     question: {
       alignItems: "center",
       marginTop: 10,
+      padding: 40,
+      margin: 10,
     },
     link: {
       textDecorationLine: "underline",
+      fontSize: 15,
     },
     social: {
       padding: 30,
     },
+    top: {
+      alignItems: "center",
+      justifyContent: "center",
+    },
     title: {
-      padding: 30,
       fontSize: 30,
       fontFamily: 'Avenir',
-    }
+      paddingTop: 15, 
+    },
+    logo: {
+      width: 250,
+      height: 150,
+    },
   });
   

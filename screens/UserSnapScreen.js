@@ -76,8 +76,8 @@ export default function SnapScreen({navigation}) {
         <FontAwesome onPress={() => setCapturedPhoto(null)} name="times" style={styles.deleteIcon} />
         <FontAwesome onPress={() => {
           handleValid()
-          navigation.navigate("Profil")
-          }} 
+          navigation.navigate('TabNavigator',{ screen: 'Profil'})
+        }} 
          name="send" style={styles.sendIcon} />
     </View>
     ) : ( 
@@ -88,7 +88,7 @@ export default function SnapScreen({navigation}) {
           onPress={() => setType(type === CameraType.back ? CameraType.front : CameraType.back)}
           style={styles.button}/>
           <FontAwesome name='remove' size={40} color='#ffffff'  
-          onPress={()=> navigation.navigate("Profil")}
+          onPress={()=> navigation.navigate('TabNavigator',{ screen: 'Profil'})}
           style={styles.button}/>
           <FontAwesome name='flash' size={30} color={flashMode === FlashMode.off ? '#ffffff' : '#e8be4b'}
           onPress={() => setFlashMode(flashMode === FlashMode.off ? FlashMode.torch : FlashMode.off)}

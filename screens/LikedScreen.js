@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, SafeAreaView, Image, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, SafeAreaView, Image, TouchableOpacity, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux';
@@ -6,13 +6,17 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import React from "react";
 import { localFetch } from "../localFetch";
 import DenicheurCard from "../components/DenicheurCard";
-import { ScrollView } from "react-native-gesture-handler";
 
 export default function LikedScreen({navigation}) {
  
   const [swap, setSwap] = useState(true)
   const [accepted, setAccepted] = useState(false)
 
+ 
+
+  const [nbrLikes, setNbrLikes] = useState(5);
+  const [objData, setObjData] = useState([])
+  const [refresh, setRefresh] = useState(false)
 
   const handleAccept = () => {
     setAccepted(!accepted)
@@ -20,32 +24,26 @@ export default function LikedScreen({navigation}) {
   
   const user = useSelector((state) => state.user.value);
 
-  const [nbrLikes, setNbrLikes] = useState(5);
-  const [objData, setObjData] = useState([])
-
-  console.log(objData)
- 
   useEffect(() => {
     fetch(`http://${localFetch}:3000/users/${user.token}`)
       .then((response) => response.json())
       .then((data) => {
-
         setNbrLikes(5-data.finalObj.likedObjects.length);
-
-        const allObject = data.finalObj.likedObjects.map((obj, key) => {
-          return <DenicheurCard key={key} 
-          image={obj.image[0]} 
-          title={obj.title} 
-          avatar={obj.user.avatar}
-          description={obj.description}
-          condition={obj.condition}/> 
-
-        });
-
-        setObjData(allObject)
-
+        setObjData(data.finalObj.likedObjects)
       });
-  }, [user.token]);
+  }, [user.numberLikes]);
+  
+  const allObject = objData.map((obj, key) => {
+    return <DenicheurCard key={key} 
+    id = {obj._id}
+    image={obj.image[0]} 
+    title={obj.title} 
+    avatar={obj.user.avatar}
+    description={obj.description}
+    condition={obj.condition}/> 
+  })
+  
+
 
 
   return (
@@ -53,11 +51,14 @@ export default function LikedScreen({navigation}) {
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
 
       <View style={styles.header}>
-      {swap ? (<Text style={styles.headerText} >Coté Denicheur</Text>) : (<Text style={styles.headerText}>Coté Dénicheur</Text>) }  
+        <FontAwesome name='arrow-left' size={32} color={'black'} onPress={() => navigation.navigate('Trouver')}/>
+      {swap ? (<Text style={styles.headerText} >Côté Denicheur</Text>) : (<Text style={styles.headerText}>Côté Dénicheur</Text>) }  
         <FontAwesome name='exchange' size={32} color={'black'} onPress={() => navigation.navigate('Donneur')}/>
       </View>
+    <ScrollView>
 
-      {objData}
+      {allObject}
+    </ScrollView>
 
         <View style={styles.reste}>
           <Text style={styles.resteText}>Il te reste {nbrLikes} likes !</Text>
@@ -70,7 +71,6 @@ export default function LikedScreen({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
   },
   background: {
     height: "100%",
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   },
   header: {
     borderBottomWidth: 1,
-    marginTop: 130,
+    marginTop:40,
     marginLeft:0,
     padding: 10,
     flexDirection:"row",
@@ -169,7 +169,6 @@ const styles = StyleSheet.create({
 
     alignItems: "center",
     justifyContent: "center",
-
   },
 
   resteText: {

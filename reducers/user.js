@@ -10,7 +10,10 @@ const initialState = {
     firstname: null, 
     lastname: null,
     username: null, 
-    isConnected: false },
+    isConnected: false,
+    numberLikes: 0,
+    numberWhoLiked: 0,
+  },
 };
 
 export const userSlice = createSlice({
@@ -47,9 +50,18 @@ export const userSlice = createSlice({
     },
     removeProfilePic: (state, action) => {
       state.value.avatar = null
-    }
+    },
+    addLike: (state, action) => {
+      state.value.numberLikes += 1
+    },
+    removeLike: (state, action) => {
+      state.value.numberLikes -= 1
+    },
+    removeWhoLiked: (state, action) => {
+      state.value.numberWhoLiked -= 1
+    },
   },
 });
 
-export const { signUp, signIn, logout, addProfilePic, removeProfilePic } = userSlice.actions;
+export const { signUp, signIn, logout, removeWhoLiked, addProfilePic, removeProfilePic, addLike, removeLike } = userSlice.actions;
 export default userSlice.reducer;

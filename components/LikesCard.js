@@ -7,14 +7,49 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { localFetch } from "../localFetch";
+import { removeWhoLiked } from "../reducers/user";
 
 export default function DonneurCard(props) {
-  const [accepted, setAccepted] = useState(false);
 
+
+  const user = useSelector((state) => state.user.value);
+  const image = useSelector((state) => state.image.value);
+  const [accepted, setAccepted] = useState(false);
+  const [dislike, setDislike] = useState(false)
+
+  const dispatch = useDispatch()
+  
   const handleAccept = () => {
     setAccepted(!accepted);
   };
+    const handleRefuse = () => {
+      if(!user.token){
+        return;
+      }
+      fetch(`http://${localFetch}:3000/users/unlike/${props.token}`, {
+        method: 'PUT',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ object: props.id }),
+      })
+      .then((response) => response.json()) 
+      .then((data) => {
+        // // Traitez la réponse ici
+        if (data.result) {
+          // L'opération a réussi, mettez à jour l'interface si nécessaire
+          setDislike(true)
+          console.log('objet a été retiré de la liste des "aimés"');
+        } else {
+          // L'opération a échoué, affichez l'erreur si nécessaire
+          setDislike(false)
+          console.error(`Erreur mec`);
+        }
+        dispatch(removeWhoLiked())
+      })
+    }
+  
 
   return (
     <View>
@@ -31,7 +66,7 @@ export default function DonneurCard(props) {
           <Text style={styles.titleText}>{props.title}</Text>
           <Text>Acceptez-vous de donner cet objet ?</Text>
           <View style={styles.buttonsOne}>
-            <TouchableOpacity style={styles.buttonNo}>
+            <TouchableOpacity style={styles.buttonNo} onPress={() => handleRefuse()}>
               <Text>NON</Text>
             </TouchableOpacity>
             <TouchableOpacity

@@ -4,6 +4,7 @@ import {
     TextInput,
     StyleSheet,
     TouchableOpacity,
+    Image,
       } from "react-native";
   //import { CheckBox } from "react-native-elements";
   import { useState } from "react";
@@ -50,7 +51,7 @@ import {
                       setSignUpUsername('');
                       setSignUpEmail('');
                       setSignUpPassword('');
-            navigation.navigate("Choices")
+                      navigation.navigate('TabNavigator',{ screen: 'Profil'})
                   }
               });
       }};
@@ -59,9 +60,15 @@ import {
       <View style={styles.container}>
         <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
           <View style={styles.header}>
-             <FontAwesome name="arrow-left" onPress={() => navigation.navigate('Choices')} size={32} color="#000" />
+             <FontAwesome name="arrow-left" onPress={() => navigation.navigate('Si')} size={32} color="#000" />
           </View>
                        
+        <View style={styles.top}>
+        <Image style={styles.logo} source={require("../assets/Logo.png")}/>
+        <Text style={styles.title}>DONNE</Text>
+        </View>
+
+
           <View style={styles.containerInput}>
              <TextInput style={styles.input} placeholder="Nom" onChangeText={(value) => setSignUpLastname(value)} value={signUpLastName}></TextInput>
              <TextInput style={styles.input} placeholder="Prénom" onChangeText={(value) => setSignUpFirstname(value)} value={signUpFirstName}></TextInput>
@@ -76,7 +83,7 @@ import {
               value={isSelected}
               color={'#74D48F'}
               onPress={() => handleSelect()}
-              size={40}
+              size={30}
               margin={-12}
             />) : (<FontAwesome
               style={styles.checkbox}
@@ -84,7 +91,7 @@ import {
               value={isSelected}
               color={'black'}
               onPress={() => handleSelect()}
-              size={40}
+              size={30}
               margin={-12}
               
             />) } 
@@ -112,6 +119,7 @@ import {
       flex: 1,
       alignItems: "center",
       justifyContent: "center",
+    
     },
     background: {
       height: "100%",
@@ -128,11 +136,11 @@ import {
       paddingBottom:720
     },
 
-    
-
+  
     containerInput: {
       width: "80%",
       height:"60%",
+      paddingTop: 70,
     },
 
     input: {
@@ -195,7 +203,23 @@ import {
 
     textAgreedBtn: {
     marginLeft:20,
-    }
+    },
+
+    top: {
+      alignItems: "center",
+      justifyContent: "center",
+      paddingTop: 20, 
+    },
+    title: {
+      fontSize: 20,
+      fontFamily: 'Avenir',
+      paddingTop: 15, 
+    },
+    logo: {
+      width: 140,
+      height: 80,
+      
+    },
     
   });
   

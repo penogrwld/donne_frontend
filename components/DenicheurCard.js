@@ -7,9 +7,10 @@ import {
     TouchableOpacity,
     ScrollView,
   } from "react-native";
-  import React, { useState } from "react";
+  import React, { useState, useEffect } from "react";
   import FontAwesome from 'react-native-vector-icons/FontAwesome';
   import { localFetch } from "../localFetch";
+  import { removeLike } from "../reducers/user";
 
 
   import { useDispatch, useSelector } from 'react-redux';
@@ -17,23 +18,22 @@ import {
 
   export default function DenicheurCard(props){
 
+
     const user = useSelector((state) => state.user.value);
-
-
+    const dispatch = useDispatch()
     const handleDelete = () => {
 
-      fetch(`http://${localFetch}:3000/users/dislike/${user.token}`, {
+      fetch(`http://${localFetch}:3000/users/unlike/${user.token}`, {
         method: "PUT",
         headers: {"Content-Type": "application/json"},
-        body:JSON.stringify({ objectId: props.objectId })
+        body:JSON.stringify({ object: props.id })
       })
         .then(response => response.json())
         .then(data => {
-    console.log('click')
-            })
-          }
+          dispatch(removeLike())
+        })
+       }
       
-
     return (
 
 
@@ -110,7 +110,7 @@ import {
     },
 
     trash: {
-    paddingLeft: 120,
+    // paddingLeft: 120,
     paddingBottom: 20,
     },
 

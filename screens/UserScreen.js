@@ -28,6 +28,7 @@ export default function UserScreen({navigation}) {
     <View style={styles.container}>
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
       <View style={styles.header}>
+        {/* <FontAwesome name='arrow-left' size={32} color={'black'} onPress={() => navigation.navigate('Choices')} style={styles.arrowLeft}/> */}
         <Text style={styles.headerText}>MON COMPTE</Text>
       </View>
 
@@ -48,7 +49,7 @@ export default function UserScreen({navigation}) {
          <View style={styles.infos}>
          <Text>{user.firstname} {user.lastname}</Text>
          <Text>{user.email}</Text>
-         <TouchableOpacity onPress={()=> {
+         <TouchableOpacity style={styles.logout} onPress={()=> {
           dispatch(logout())
           navigation.navigate('Si')
           }}>
@@ -61,17 +62,21 @@ export default function UserScreen({navigation}) {
        <Text>MES DONS</Text>
        </View>
 
+          <TouchableOpacity onPress={()=>navigation.navigate('Donner')}>
          <View style={styles.dons}>
           <Text>+</Text>
          </View>
+          </TouchableOpacity>
 
        <View style={styles.text2}>
        <Text>MES CATCHS</Text>
        </View>
 
+          {/* <TouchableOpacity>
          <View style={styles.catchs}>
           <Text>+</Text>
          </View>
+          </TouchableOpacity> */}
 
 
      </View>
@@ -98,16 +103,17 @@ const styles = StyleSheet.create({
     justifyContent:"center"
 
   },
-  arrowLeft:{
-    alignItems: "flex-start",
-    marginLeft: 15,
-    marginTop: 5
-  },
+  // arrowLeft:{
+  //   alignItems: "flex-start",
+  //   marginLeft: 15,
+  //   marginTop: 5
+  // },
    headerText: {
     fontSize: 20,
     fontWeight: '800',
     justifyContent:'center',
-
+    paddingRight:5,
+    paddingTop: 20
   },
   user: {
     alignItems: "center",
@@ -180,5 +186,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
   },
+  logout: {
+    borderWidth: 1,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 30,
+    backgroundColor: '#A896CF',
+    height: 30,
+  }
 
 });
