@@ -14,6 +14,7 @@ import {
   import { signIn } from "../reducers/user";
   import React from "react";
   import { localFetch } from "../localFetch";
+  import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
   
   
   export default function SiScreen({ navigation }) {
@@ -51,8 +52,10 @@ import {
       };
   
     return (
-      <View style={styles.container}>
+      <KeyboardAwareScrollView style={styles.container}
+      contentContainerStyle={styles.contentContainer}>
         <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
+        <View style={styles.separator} />
 
         <View style={styles.top}>
         <Image style={styles.logo} source={require("../assets/Logo.png")}/>
@@ -95,7 +98,7 @@ import {
             /> */}
           </View>
         </View>
-      </View>
+      </KeyboardAwareScrollView>
     );
   }
   
@@ -103,9 +106,17 @@ import {
     
     container: {
       flex: 1,
+      backgroundColor: 'white'
+    },
+    contentContainer: {
       alignItems: "center",
       justifyContent: "center",
     },
+    separator: {
+      height: 170, 
+      backgroundColor: 'transparent',
+    },
+    
     background: {
       height: "100%",
       width: "100%",

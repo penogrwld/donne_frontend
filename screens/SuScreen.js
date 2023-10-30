@@ -5,6 +5,8 @@ import {
     StyleSheet,
     TouchableOpacity,
     Image,
+    KeyboardAvoidingView,
+    ScrollView
       } from "react-native";
   //import { CheckBox } from "react-native-elements";
   import { useState } from "react";
@@ -14,11 +16,13 @@ import {
   import FontAwesome from 'react-native-vector-icons/FontAwesome';
   import React from "react";
   import { localFetch } from "../localFetch";
+  import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
   
   
   const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-  const PHONE_REGEX = /^(0[6-7]\d(\s?\d){8})$/
+  const PHONE_REGEX = /^(0[6-7]\d{8})$/
   
   export default function SuScreen({ navigation }) {
 
@@ -31,10 +35,10 @@ import {
     const [signUpFirstName, setSignUpFirstname] = useState('');
     const [signUpLastName, setSignUpLastname] = useState('');
     const [signUpUsername, setSignUpUsername] = useState('');
-    const [signUpPhone, setSignUpPhone] = useState();
+    const [signUpPhone, setSignUpPhone] = useState('');
     const [signUpEmail, setSignUpEmail] = useState('');
     const [signUpPassword, setSignUpPassword] = useState('');
-  
+
     const handleSelect = () => {
       setSelection(!isSelected)
     }
@@ -54,14 +58,17 @@ import {
                       setSignUpUsername('');
                       setSignUpEmail('');
                       setSignUpPassword('');
+                      setSignUpPhone(null)
                       navigation.navigate('TabNavigator',{ screen: 'Profil'})
                   }
               });
       }};
   
     return (
-      <View style={styles.container}>
+      <KeyboardAwareScrollView style={styles.container}
+      contentContainerStyle={styles.contentContainer}>
         <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
+        <View style={styles.separator} />
           <View style={styles.header}>
              <FontAwesome name="arrow-left" onPress={() => navigation.navigate('Si')} size={32} color="#000" />
           </View>
@@ -114,16 +121,23 @@ import {
             <Text style={styles.text}>INSCRIPTION</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </KeyboardAwareScrollView>
     );
   }
   
   const styles = StyleSheet.create({
     container: {
       flex: 1,
+      backgroundColor: 'white'
+
+    },
+    contentContainer: {
       alignItems: "center",
       justifyContent: "center",
-    
+    },
+    separator: {
+      height: 100, 
+      backgroundColor: 'transparent',
     },
     background: {
       height: "100%",
@@ -137,13 +151,14 @@ import {
       margin: 0,
       padding: 20,
       position:'absolute',
-      paddingBottom:720
+      paddingBottom:600
     },
 
     containerInput: {
       width: "80%",
       height:"60%",
-      paddingTop: 70,
+      paddingTop: 20,
+      marginTop: 60
     },
 
     input: {
@@ -225,8 +240,7 @@ import {
     },
     logo: {
       width: 140,
-      height: 80,
-      
+      height: 80,      
     },
     
   });

@@ -29,7 +29,7 @@ export default function DonneurCard(props) {
       if(!user.token){
         return;
       }
-      fetch(`http://${localFetch}:3000/users/unlike/${props.token}`, {
+      fetch(`http://${localFetch}:3000/users/dislike/${props.token}`, {
         method: 'PUT',
         headers: {'Content-Type':'application/json'},
         body: JSON.stringify({ object: props.id }),

@@ -23,7 +23,7 @@ import {
     const dispatch = useDispatch()
     const handleDelete = () => {
 
-      fetch(`http://${localFetch}:3000/users/unlike/${user.token}`, {
+      fetch(`http://${localFetch}:3000/users/dislike/${user.token}`, {
         method: "PUT",
         headers: {"Content-Type": "application/json"},
         body:JSON.stringify({ object: props.id })
