@@ -34,11 +34,12 @@ export default function LikedScreen({navigation}) {
   }, [user.numberLikes]);
   
   const allObject = objData.map((obj, key) => {
+    console.log(obj.user)
     return <DenicheurCard key={key} 
     id = {obj._id}
     image={obj.image[0]} 
     title={obj.title} 
-    avatar={obj.user.avatar}
+    // avatar={obj.user.avatar}
     description={obj.description}
     condition={obj.condition}/> 
   })
