@@ -46,8 +46,7 @@ export default function SnapScreen({navigation}) {
           method: 'POST',
           body: formData,
          }).then((response) => response.json())
-          .then((data) => {
-            console.log(data.url)
+         .then((data) => {
            data.result && dispatch(addPhoto(data.url));
          })
       }
