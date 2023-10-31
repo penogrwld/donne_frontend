@@ -88,6 +88,7 @@ const handleObjectClick = (object) => {
   console.log(object.id)
   setModalVisible(true);
    };
+   
 
 const handleRemoveObject = () => {
     if (selectedObject) {
