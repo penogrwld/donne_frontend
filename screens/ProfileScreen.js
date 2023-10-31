@@ -30,7 +30,7 @@ export default function ProfileScreen() {
          </View>
   
           <View style={styles.title}>
-           <Text style={styles.text}>SES DONS</Text>
+             <Text style={styles.text}>SES DONS</Text>
           </View>
   
        </View>

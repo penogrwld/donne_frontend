@@ -32,7 +32,7 @@ export default function DonneurCard(props) {
     if (!user.token) {
       return;
     }
-    fetch(`http://${localFetch}:3000/users/dislike/${props.token}`, {
+    fetch(`http://${localFetch}/users/dislike/${props.token}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ object: props.id }),
@@ -56,31 +56,37 @@ export default function DonneurCard(props) {
   return (
     <View>
       {!accepted ? (
-        <View style={styles.div}>
+        <View style={styles.card}>
+
           <Image style={styles.imgItem} source={{ uri: props.image }} />
+          
+          
           <Image
-            style={styles.imgUser}
-            onPress={() => navigation.navigate("Profile")}
-            source={{ uri: props.avatar }}
+                style={styles.imgUser}
+                onPress={() => navigation.navigate("Profile")}
+                source={{ uri: props.avatar }}
           />
-          <Text>{props.username}</Text>
+          
+
+
           <View style={styles.textes}>
-            <Text style={styles.titleText}>{props.title}</Text>
-            <Text>Acceptez-vous de donner cet objet ?</Text>
-            <View style={styles.buttonsOne}>
-              <TouchableOpacity
-                style={styles.buttonNo}
-                onPress={() => handleRefuse()}
-              >
-                <Text>NON</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.buttonYes}
-                onPress={() => handleAccept()}
-              >
-                <Text>OUI</Text>
-              </TouchableOpacity>
-            </View>
+              <Text style={styles.titleText}>{props.title}</Text>
+              <Text>Acceptez-vous de donner cet objet à {props.username} ?</Text>
+
+              <View style={styles.buttonsOne}>
+                      <TouchableOpacity
+                        style={styles.buttonNo}
+                        onPress={() => handleRefuse()}
+                      >
+                        <Text>NON</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={styles.buttonYes}
+                        onPress={() => handleAccept()}
+                      >
+                        <Text>OUI</Text>
+                      </TouchableOpacity>
+              </View>
           </View>
         </View>
       ) : (
@@ -88,7 +94,7 @@ export default function DonneurCard(props) {
           {/* {!valid ? ( */}
             <View style={styles.phone}>
               <Text>
-                Contactez l'utilisateur avec le numéro suivant:
+                Contactez {props.username}  au numéro suivant:
               </Text>
               <Text>0{props.phone}</Text>
             </View>
@@ -124,6 +130,22 @@ export default function DonneurCard(props) {
 
 const styles = StyleSheet.create({
   // Style pour chaque composant
+  card: {
+    flexDirection: 'row',
+    height: 200,
+    marginTop: 1,
+    marginLeft: 1,
+    marginRight: 1,
+    flexWrap: 'wrap',
+    borderWidth: 1,
+    paddingTop: 20,
+    backgroundColor: 'transparent',
+    shadowColor: 'gray', // Ajout de l'ombre
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    borderRadius: 10,
+  },
   div: {
     // justifyContent: "space-around",
     // alignItems: "center",
@@ -136,20 +158,26 @@ const styles = StyleSheet.create({
     // borderWidth: 1,
   },
   imgItem: {
-    width: 70,
-    height: 70,
+    margin: 10,
+    width: 60,
+    height: 60,
     borderRadius: 10,
     // alignItems: "flex-start"
   },
   imgUser: {
+    margin: 10,
     width: 60,
     height: 60,
     borderRadius: 50,
     marginTop: 10,
-    justifyContent: "center",
   },
   textes: {
-    marginLeft: 10,
+
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width:190,
+    marginLeft: 20,
   },
   titleText: {
     fontWeight: "700",
@@ -158,9 +186,11 @@ const styles = StyleSheet.create({
 
   // Style des boutons
   buttonsOne: {
+    flex:1,
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     // borderWidth: 1,
+    width: 160,
     marginTop: 30,
   },
   buttonsTwo: {
@@ -200,16 +230,18 @@ const styles = StyleSheet.create({
     height: 50,
   },
   acceptContainer: {
-    margin: 10,
-    // shadowColor: "#000000",
-    // shadowOpacity: 0.8,
-    // shadowRadius: 2,
-    // shadowOffset: {
-    //   height: 1,
-    //   width: 1
-    // }
-    // borderBottomWidth: 1,
-    // borderTopColor: 'black'
+    height: 200,
+    marginTop: 1,
+    marginLeft: 1,
+    marginRight: 1,
+    borderWidth: 1,
+    paddingTop: 20,
+    backgroundColor: 'transparent',
+    shadowColor: 'gray', // Ajout de l'ombre
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    borderRadius: 10,
   },
   phone: {
     marginTop: 10,
@@ -218,5 +250,7 @@ const styles = StyleSheet.create({
   },
   accepted: {
     alignItems: "center",
+    justifyContent:'space-between',
   },
+
 });

@@ -52,17 +52,17 @@ export default function LikedScreen({navigation}) {
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
 
       <View style={styles.header}>
-        <FontAwesome name='arrow-left' size={32} color={'black'} onPress={() => navigation.navigate('Trouver')}/>
-      {swap ? (<Text style={styles.headerText} >Côté Denicheur</Text>) : (<Text style={styles.headerText}>Côté Dénicheur</Text>) }  
-        <FontAwesome name='exchange' size={32} color={'black'} onPress={() => navigation.navigate('Donneur')}/>
+        <FontAwesome name='arrow-left' style={styles.iconTop} size={32} color={'black'} onPress={() => navigation.navigate('Trouver')}/>
+           <Text style={styles.headerText} >MES LIKES </Text>  
+        <FontAwesome name='exchange' style={styles.iconTop2} size={31} color={'black'} onPress={() => navigation.navigate('Donneur')}/>
       </View>
-    <ScrollView>
 
-      {allObject}
+    <ScrollView>
+        {allObject}
     </ScrollView>
 
         <View style={styles.reste}>
-          <Text style={styles.resteText}>Il te reste {nbrLikes} likes !</Text>
+          <Text style={styles.resteText}>Tu peux encore liker {nbrLikes} objets !</Text>
         </View>
 
     </View>
@@ -80,20 +80,21 @@ const styles = StyleSheet.create({
   },
   header: {
     borderBottomWidth: 1,
-    marginTop:40,
+    marginTop: 50,
     marginLeft:0,
     padding: 10,
     flexDirection:"row",
     alignItems:"center",
-    justifyContent:"space-between",
-    
-    
+    justifyContent:"space-between", 
     },
-
+    headerText: {
+      fontSize: 20,
+      fontWeight: "800",
+    },
     arrowLeft: {
      alignItems: "flex-start",
-     paddingLeft: 20,
-     marginTop: 5
+     paddingLeft: 10,
+     paddingTop: 50,
     },
 
   headerText: {
@@ -167,7 +168,7 @@ const styles = StyleSheet.create({
   },
 
   reste: {
-
+    height: 120,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -176,7 +177,15 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 20,
     fontStyle: 'italic',
-    margin: 100,
+    
+  },
+  iconTop: {
+    paddingLeft: 10,
+    paddingBottom: 2,
+  },
+  iconTop2: {
+    paddingRight: 10,
+    paddingBottom: 2,
   }
 
 });
