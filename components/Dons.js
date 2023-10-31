@@ -30,6 +30,7 @@ image: {
     borderRadius: 50, 
     height: 100,
     width: 100,
+    marginRight: 30,
 },
 
  })

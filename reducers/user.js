@@ -13,6 +13,7 @@ const initialState = {
     isConnected: false,
     numberLikes: 0,
     numberWhoLiked: 0,
+    numberGifts: 0
   },
 };
 
@@ -60,8 +61,11 @@ export const userSlice = createSlice({
     removeWhoLiked: (state, action) => {
       state.value.numberWhoLiked -= 1
     },
+    addGift: (state, action) => {
+      state.value.numberGifts += 1
+    },
   },
 });
 
-export const { signUp, signIn, logout, removeWhoLiked, addProfilePic, removeProfilePic, addLike, removeLike } = userSlice.actions;
+export const { signUp, signIn, logout, addGift, removeWhoLiked, addProfilePic, removeProfilePic, addLike, removeLike } = userSlice.actions;
 export default userSlice.reducer;
