@@ -8,6 +8,7 @@ import { logout } from "../reducers/user";
 import { useEffect, useState } from "react";
 
 import Dons from "../components/Dons";
+import Catchs from "../components/Catchs";
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { ScrollView } from "react-native-gesture-handler";
@@ -22,27 +23,23 @@ export default function UserScreen({navigation}) {
 
 
   const [don, setDon] = useState([])
-  // const [catch, setCatch] = useState([])
 
   useEffect(() => {
     fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/users/${user.token}/object`)
     .then((response) => response.json())
     .then(data => {
       setDon(data)
-
     });
-
-    // fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/objects/${user.token}`)
-    // .then((response) => response.json()) 
-    // .then(data => {
-    //   console.log(data)
-    // })
-
 
   }, [user.token]);
 
 const allObject = don.map((item, i) => {
   return <Dons key= {i} image= {item.image} />
+});
+
+const allCatchs = don.map((data, j) => {
+  console.log(item)
+  return <Catchs key = {j} image= {data.catchs} />
 });
 
 
@@ -115,6 +112,11 @@ const allObject = don.map((item, i) => {
        <View style={styles.text2}>
        <Text>MES CATCHS</Text>
        </View>
+
+       <View style={styles.catchs}>
+       {allCatchs}
+       </View>
+
 
           {/* <TouchableOpacity>
          <View style={styles.catchs}>
@@ -238,9 +240,6 @@ paddingTop: 40,
   },
 
   catchs: {
-    borderWidth: 1,
-    backgroundColor: 'white',
-    borderRadius: 100,
     padding: 10,
     flexDirection: "row",
     justifyContent: "center",

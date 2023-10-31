@@ -7,7 +7,7 @@ import {
     TouchableOpacity,
     ScrollView,
   } from "react-native";
-  import React, { useState, useEffect } from "react";
+
 
   export default function Dons(props){
 
