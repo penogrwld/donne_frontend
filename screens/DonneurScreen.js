@@ -21,7 +21,7 @@ export default function DonneurScreen({ navigation }) {
   const [objectData, setObjectData] = useState([]);
 
   useEffect(() => {
-    fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/users/${user.token}/object`)
+    fetch(`https://${localFetch}/users/${user.token}/object`)
       .then((response) => response.json())
       .then((data) => {
         // setObjectData(data[0].likedBy);

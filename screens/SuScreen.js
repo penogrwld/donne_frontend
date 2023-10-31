@@ -44,7 +44,7 @@ import {
     }
   
     const handleRegister = () => {
-          if(isSelected){fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/users/signup`, {
+          if(isSelected){fetch(`https://${localFetch}/users/signup`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({firstname: signUpFirstName, avatar: null, lastname: signUpLastName, username: signUpUsername, phone: signUpPhone, email: signUpEmail, password: signUpPassword }),

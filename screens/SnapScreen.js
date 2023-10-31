@@ -42,7 +42,7 @@ export default function SnapScreen({navigation}) {
           type: 'image/jpeg',
          })
          
-         fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/objects/upload`, {
+         fetch(`https://${localFetch}/objects/upload`, {
           method: 'POST',
           body: formData,
          }).then((response) => response.json())

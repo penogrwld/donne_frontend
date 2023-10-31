@@ -1,1 +1,1 @@
-export const localFetch = '10.3.0.40'
+export const localFetch = 'donne-backend-pljfklhkf-penogrwld.vercel.app'

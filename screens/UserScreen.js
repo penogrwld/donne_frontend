@@ -25,7 +25,7 @@ export default function UserScreen({navigation}) {
   // const [catch, setCatch] = useState([])
 
   useEffect(() => {
-    fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/users/${user.token}/object`)
+    fetch(`https://${localFetch}/users/${user.token}/object`)
     .then((response) => response.json())
     .then(data => {
       setDon(data)
@@ -47,7 +47,7 @@ const allObject = don.map((item, i) => {
 
 
   const handleRemove = () => {
-    fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/users/remove/${user.token}`, {
+    fetch(`https://${localFetch}/users/remove/${user.token}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
     })
