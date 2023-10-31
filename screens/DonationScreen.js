@@ -14,6 +14,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useState } from 'react';
 import { removePhoto, removeAll } from "../reducers/image";
 import { localFetch } from "../localFetch";
+import { addGift } from "../reducers/user";
 
 
 export default function DonationScreen({ navigation }) {
@@ -89,6 +90,7 @@ export default function DonationScreen({ navigation }) {
       if(data.result){
         navigation.navigate('Thanks')
         dispatch(removeAll())
+        dispatch(addGift())
         setCity('')
         setCondition('')
         setDescription('')

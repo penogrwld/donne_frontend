@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
@@ -38,7 +38,7 @@ export default function UserScreen({navigation}) {
     // })
 
 
-  }, [user.token]);
+  }, [user.numberGifts]);
 
 const allObject = don.map((item, i) => {
   return <Dons key= {i} image= {item.image} />
@@ -96,9 +96,13 @@ const allObject = don.map((item, i) => {
 
 
 
-        <View style={styles.objects}>
+        <ScrollView style={styles.objects}
+        contentContainerStyle={styles.objectsContainer}
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        >
          {allObject}
-        </View>
+        </ScrollView>
 
 
   
@@ -197,11 +201,17 @@ const styles = StyleSheet.create({
   objects: {
     paddingTop: 10,
     paddingBottom: 30,
-    flexDirection: "row",
-    justifyContent: "space-evenly",
+    // flexDirection: "row",
+    // justifyContent: "space-evenly",
     shadowOffset: { width: 4, height: 4 },
     shadowColor: "grey",
     shadowOpacity: 1.0,
+
+  },
+  objectsContainer: {
+    justifyContent: "space-evenly",
+    flexDirection: "row",
+
   },
   
   text2: {
