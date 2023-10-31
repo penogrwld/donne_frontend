@@ -47,7 +47,7 @@ export default function HomeScreen({navigation}) {
   };
   
   const handleLike = () => { 
-    fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/users/like/${user.token}`, {
+    fetch(`https://${localFetch}/users/like/${user.token}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({object: don[currentItemIndex]})

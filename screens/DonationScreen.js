@@ -29,6 +29,8 @@ export default function DonationScreen({ navigation }) {
   const [condition, setCondition] = useState('')
   const [city, setCity] = useState('');
   const [postalCode, setPostalCode] = useState('')
+  const [latitude, setLatitude] = useState('')
+  const [longitude, setLongitude] = useState('')
   const [isLocation, setIsLocation] = useState(false)
 
   const user = useSelector((state)=> state.user.value)
@@ -36,7 +38,6 @@ export default function DonationScreen({ navigation }) {
 
   const photosObject = image.object
  
-
   const handleSelectOne = () => {
     setSelectionOne(!isSelectedOne)
     setSelectionTwo(false)
@@ -61,23 +62,27 @@ export default function DonationScreen({ navigation }) {
       const myCity = data.features[1]
       const location = {
         city: myCity.properties.city,
-        postalCode: myCity.properties.postcode
+        postalCode: myCity.properties.postcode,
+        latitude: myCity.geometry.coordinates[1],
+        longitude: myCity.geometry.coordinates[0]
       };
       if(data.features){
         setIsLocation(true)
       setCity(location.city)
       setPostalCode(location.postalCode)
+      setLatitude(location.latitude)
+      setLongitude(location.longitude)
       }
     })
   }
 
   const handleSubmit = () => {
     
-    fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/objects/add` , {
+    fetch(`https://${localFetch}/objects/add` , {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ image: photosObject, title: title, description: description, condition: condition,
-      localisation: {city: city, postalCode: postalCode}, user: user, token: user.token, likedBy: null, caughtBy: null}),
+      localisation: {city: city, postalCode: postalCode, latitude: latitude, longitude: longitude}, user: user, token: user.token, likedBy: null, caughtBy: null}),
     })
     .then((response) => response.json())
     .then(data => {
@@ -95,7 +100,6 @@ export default function DonationScreen({ navigation }) {
       }
     })
   }
-console.log(image.object)
   return (
     <View style={styles.container}>
       <Modal animationType="slide"
