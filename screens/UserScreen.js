@@ -36,10 +36,10 @@ const allObject = don.map((item, i) => {
   return <Dons key= {i} image= {item.image} />
 });
 
-const allCatchs = don.map((data, j) => {
-  console.log(item)
-  return <Catchs key = {j} image= {data.catchs} />
-});
+// const allCatchs = don.map((data, j) => {
+//   console.log(item)
+//   return <Catchs key = {j} image= {data.catchs} />
+// });
 
 
   const handleRemove = () => {
@@ -112,9 +112,9 @@ const allCatchs = don.map((data, j) => {
        <Text>MES CATCHS</Text>
        </View>
 
-       <View style={styles.catchs}>
+       {/* <View style={styles.catchs}>
        {allCatchs}
-       </View>
+       </View> */}
 
 
           {/* <TouchableOpacity>
