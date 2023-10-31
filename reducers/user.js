@@ -11,6 +11,8 @@ const initialState = {
     lastname: null,
     username: null, 
     isConnected: false,
+    latitude: null,
+    longitude: null,
     numberLikes: 0,
     numberWhoLiked: 0,
     numberGifts: 0
@@ -64,8 +66,14 @@ export const userSlice = createSlice({
     addGift: (state, action) => {
       state.value.numberGifts += 1
     },
+    addLatitude: (state, action) => {
+      state.value.latitude = action.payload
+    },
+    addLongitude: (state, action) => {
+      state.value.longitude = action.payload
+    },
   },
 });
 
-export const { signUp, signIn, logout, addGift, removeWhoLiked, addProfilePic, removeProfilePic, addLike, removeLike } = userSlice.actions;
+export const { signUp, signIn, logout, addGift, addLongitude, addLatitude, removeWhoLiked, addProfilePic, removeProfilePic, addLike, removeLike } = userSlice.actions;
 export default userSlice.reducer;

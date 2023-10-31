@@ -102,6 +102,7 @@ export default function DonationScreen({ navigation }) {
       }
     })
   }
+  console.log(user)
   return (
     <View style={styles.container}>
       <Modal animationType="slide"
