@@ -23,7 +23,32 @@ export default function UserScreen({navigation}) {
 
   const [don, setDon] = useState([])
   const [catchs, setCatchs] = useState([])
-// console.log(catchs)
+
+
+  const [currentPosition, setCurrentPosition] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+        
+      if (status === 'granted') {
+        Location.watchPositionAsync({ distanceInterval: 10 },
+          (location) => {
+            setCurrentPosition(location.coords);
+            setIsLoading(false)
+          });
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    if (!isLoading && currentPosition) {
+      dispatch(addLatitude(currentPosition.latitude));
+      dispatch(addLongitude(currentPosition.longitude));
+    }
+  }, [isLoading, currentPosition]);
 
   useEffect(() => {
     fetch(`https://${localFetch}/users/${user.token}/object`)
@@ -46,7 +71,7 @@ const allObject = don.map((item, i) => {
 
 const allCatchs = catchs.map((obj, j) => {
   console.log(obj)
-  return <Catchs key = {j} image= {obj.catchs} />
+  return <Catchs key = {j} catch= {obj} />
 });
 
 
@@ -89,7 +114,8 @@ const allCatchs = catchs.map((obj, j) => {
           dispatch(logout())
           navigation.navigate('Si')
           }}>
-          <Text style={styles.textlogout}>LOGOUT</Text>
+          <FontAwesome name='power-off' size={17} color='white' style={styles.deleteIcon} />
+          <Text style={styles.textlogout}> DECONNEXION</Text>
          </TouchableOpacity>
          </View>
        </View>
@@ -122,19 +148,17 @@ const allCatchs = catchs.map((obj, j) => {
 
        <View style={styles.text2}>
        <Text>MES CATCHS</Text>
-       </View>
+    
 
-       <View style={styles.catchs}>
-       {allCatchs}
-       </View>
+       <ScrollView style={styles.objects}
+        contentContainerStyle={styles.objectsContainer}
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        >
+         {allCatchs}
+        </ScrollView>
 
-
-          {/* <TouchableOpacity>
-         <View style={styles.catchs}>
-          <Text>+</Text>
-         </View>
-          </TouchableOpacity> */}
-
+        </View>
 
      </View>
   );
@@ -164,15 +188,13 @@ const styles = StyleSheet.create({
    headerText: {
     fontSize: 20,
     fontWeight: '800',
-    paddingRight:5,
+    paddingRight: 5,
     paddingTop: 20,
   },
   user: {
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "space-evenly",
-    marginRight: '20%',
-    
   }, 
   photos: {
     alignItems: 'center',
@@ -203,6 +225,12 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     padding: 10,
   },
+
+
+  infos: {
+    paddingTop: 55,
+    paddingRight: 50,
+    },
   
   text1: {
     padding: 10,
@@ -211,8 +239,6 @@ const styles = StyleSheet.create({
   objects: {
     paddingTop: 10,
     paddingBottom: 30,
-    // flexDirection: "row",
-    // justifyContent: "space-evenly",
     shadowOffset: { width: 4, height: 4 },
     shadowColor: "grey",
     shadowOpacity: 1.0,
@@ -225,7 +251,7 @@ const styles = StyleSheet.create({
   },
   
   text2: {
-    marginBottom: 200,
+    marginBottom: 300,
     borderTopWidth: 1,
     borderColor: 'black',
     padding: 20,
@@ -261,19 +287,21 @@ const styles = StyleSheet.create({
   },
   
   catchs: {
-    padding: 10,
+    justifyContent: "space-evenly",
     flexDirection: "row",
-    justifyContent: "center",
     
   },
   logout: {
-    borderRadius: 20,
+    flex: 1,
+    flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 30,
+    alignContent: 'center',
+    alignItems:  'center',
+    borderRadius: 20,
+    marginTop: 25,
     backgroundColor: '#A896CF',
-    height: 30,
-    width: 90,
+    height: 10,
+    width: 120,
     shadowOffset: { width: 4, height: 4 },
     shadowColor: "grey",
     shadowOpacity: 1.0,
@@ -281,7 +309,8 @@ const styles = StyleSheet.create({
   },
   textlogout: {
     color: 'white',
-    
-  }
+    fontSize: 10,
+  },
+
   
 });

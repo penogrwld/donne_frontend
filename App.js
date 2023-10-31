@@ -30,6 +30,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import user from "./reducers/user";
 import image from "./reducers/image";
 
+import { localFetch } from "./localFetch";
+
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -45,7 +47,7 @@ const TabNavigator = () => {
   const [objectData, setObjectData] = useState(0);
   
   useEffect(() => {
-    fetch(`http://10.3.0.21:3000/users/${user.token}/object`)
+    fetch(`http://${localFetch}/users/${user.token}/object`)
       .then((response) => response.json())
       .then((data) => {
         setObjectData(data[0].likedBy.length);

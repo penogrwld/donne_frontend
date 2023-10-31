@@ -22,10 +22,7 @@ import {
 
  const styles = StyleSheet.create({
 
-dons: {
 
-
-},
 image: {
     borderRadius: 50, 
     height: 100,

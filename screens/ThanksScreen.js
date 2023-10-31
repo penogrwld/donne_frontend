@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 1.0,
   },
     textButton: {
-    color: "000000",
+    color: "white",
     
   },
   

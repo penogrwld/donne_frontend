@@ -13,7 +13,7 @@ import {
 
         return (
 <View style={styles.dons}>
- <Image style={styles.image} source={{ uri: props.image }}/>
+ <Image style={styles.image} source={{ uri: props.catch }}/>
 </View>
     )
          };
@@ -29,6 +29,7 @@ image: {
     borderRadius: 50, 
     height: 100,
     width: 100,
+    marginRight: 30,
 },
 
  })

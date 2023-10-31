@@ -21,17 +21,21 @@ export default function HomeScreen({navigation}) {
   const [disliked, setDisliked] = useState(false)
   const [currentItemIndex, setCurrentItemIndex] = useState(0)
 
+
   // let currentItemIndex = Math.floor(Math.random()*don.length)
 
+  
   useEffect(() => {
-    fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/objects/${user.token}`)
-    .then((response) => response.json())
-    .then(data => {
-      setDon(data.result) 
-      setCurrentItemIndex(Math.floor(Math.random() * data.result.length))
-    })
+  
+      fetch(`https://${localFetch}/objects/${user.token}/${user.latitude}/${user.longitude}`)
+        .then((response) => response.json())
+        .then(data => {
+          setDon(data.result);
+          setCurrentItemIndex(Math.floor(Math.random() * data.result.length));
+        });
+    
   }, [disliked]);
-
+  
 
   let card = <></>
   if(don.length > 0 && currentItemIndex < don.length) { // Pour vérifier qu'il y a bien des objets à donner
@@ -53,7 +57,7 @@ export default function HomeScreen({navigation}) {
       body: JSON.stringify({object: don[currentItemIndex]})
     })
     .then((response)=>response.json())
-    .then(data => fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/objects/${user.token}`)
+    .then(data => fetch(`hthttps://${localFetch}/objects/${user.token}`)
     .then((response) => response.json())
     .then(data => {
       setDon(data.result) 

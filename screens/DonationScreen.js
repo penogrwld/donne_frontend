@@ -102,6 +102,7 @@ export default function DonationScreen({ navigation }) {
       }
     })
   }
+  console.log(user)
   return (
     <View style={styles.container}>
       <Modal animationType="slide"
@@ -209,17 +210,17 @@ export default function DonationScreen({ navigation }) {
         <View name="StateContainer" style={styles.stateContainer}>
         <View style={styles.checkOne}>
         {isSelectedOne ? ( 
-            <FontAwesome name='check-square' size={25} color={'#74D48F'} onPress={()=> handleSelectOne()}/> 
+            <FontAwesome name='check-square' style={styles.checkBtn}  size={25} color={'#74D48F'} onPress={()=> handleSelectOne()}/> 
           ) : (
-            <FontAwesome name='square-o' size={25} color={'black'} onPress={()=> handleSelectOne()} />
+            <FontAwesome name='square-o' size={25} style={styles.checkBtn} color={'black'} onPress={()=> handleSelectOne()} />
             )}
             <Text>Ready to use</Text>
             </View>
             <View style={styles.checkTwo}>
             {isSelectedTwo ? ( 
-            <FontAwesome name='check-square' size={25} color={'#74D48F'} onPress={()=> handleSelectTwo()}/> 
+            <FontAwesome name='check-square' size={25} style={styles.checkBtn} color={'#74D48F'} onPress={()=> handleSelectTwo()}/> 
           ) : (
-            <FontAwesome name='square-o' size={25} color={'black'} onPress={()=> handleSelectTwo()} />
+            <FontAwesome name='square-o' size={25} style={styles.checkBtn} color={'black'} onPress={()=> handleSelectTwo()} />
             )}
             <Text>À retaper</Text>
         </View>
@@ -286,6 +287,9 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     flexDirection: 'row',
     height: '25%',
+    shadowOffset: { width: 2, height: 2 },
+    shadowColor: "grey",
+    shadowOpacity: 1.0,
     },
   photoText: {
     fontSize: 13,
@@ -310,6 +314,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     width: 70,
     height: 70,
+    
   },
   deleteIcon: {
     justifyContent: 'center',
@@ -336,6 +341,9 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: 'white',
     width: '80%',
+    shadowOffset: { width: 2, height: 2 },
+    shadowColor: "grey",
+    shadowOpacity: 1.0,
   },
   descriptionText: {
     fontSize: 13,
@@ -350,7 +358,10 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: 'white',
     width: '80%',
-    height: '40%'
+    height: '40%',
+    shadowOffset: { width: 2, height: 2 },
+    shadowColor: "grey",
+    shadowOpacity: 1.0,
   },
   addDescription: {
     justifyContent: 'center',
@@ -363,7 +374,8 @@ const styles = StyleSheet.create({
   },
   stateContainer:{
   flexDirection:"row",
-  justifyContent:"space-arround"
+  justifyContent:"space-arround",
+  
   
   },
   titleState: {
@@ -378,8 +390,7 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'space-evenly',
       width: '40%',
-      marginBottom: -10
-      
+      marginBottom: -10,
   },
   checkTwo: {
     marginTop: 20,
