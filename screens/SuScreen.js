@@ -56,6 +56,7 @@ import {
                       setSignUpLastname('');
                       setSignUpFirstname('');
                       setSignUpUsername('');
+                      setSignUpPhone('');
                       setSignUpEmail('');
                       setSignUpPassword('');
                       setSignUpPhone(null)
