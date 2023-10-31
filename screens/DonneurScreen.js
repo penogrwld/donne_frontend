@@ -44,7 +44,7 @@ export default function DonneurScreen({ navigation }) {
 
     return data.likedBy.map((item, key) => {
       return (
-        <LikesCard
+        <LikesCard style={styles.likeCard}
           key={key}
           title={data.title}
           // uniqid={data.uniqid}
@@ -65,14 +65,16 @@ export default function DonneurScreen({ navigation }) {
       <View style={styles.header}>
         <FontAwesome
           name="arrow-left"
-          size={20}
+          style={styles.iconTop}
+          size={32}
           color={"black"}
-          onPress={() => navigation.navigate("Trouver")}
+          onPress={() => navigation.navigate("Likes")}
         />
-        <Text style={styles.headerText}>Côté Donneur</Text>
+        <Text style={styles.headerText}>MES DONS</Text>
         <FontAwesome
           name="exchange"
-          size={20}
+          style={styles.iconTop2}
+          size={31}
           color={"black"}
           onPress={() => navigation.navigate("Likes")}
         />
@@ -98,21 +100,25 @@ const styles = StyleSheet.create({
   // Style pour l'en-tête
   header: {
     borderBottomWidth: 1,
-    marginTop: 30,
-    padding: 25,
-    justifyContent: "space-around",
-    flexDirection: "row",
-    alignItems: "center",
+    marginTop: 50,
+    marginLeft:0,
+    padding: 10,
+    flexDirection:"row",
+    alignItems:"center",
+    justifyContent:"space-between",
   },
   headerText: {
     fontSize: 20,
     fontWeight: "800",
   },
+  
+  arrowLeft: {
+    paddingLeft: 10,
+    paddingTop: 50,
+   },
 
   // Style pour chaque composant
   div: {
-    // justifyContent: "space-around",
-    // alignItems: "center",
     flexDirection: "column",
     padding: 15,
     borderBottomWidth: 1,
@@ -194,4 +200,13 @@ const styles = StyleSheet.create({
     // borderWidth: 1,
     // flexDirection: 'column',
   },
+  iconTop: {
+    paddingLeft: 10,
+    paddingBottom: 2,
+  },
+  iconTop2: {
+    paddingRight: 10,
+    paddingBottom: 2,
+  },
+
 });

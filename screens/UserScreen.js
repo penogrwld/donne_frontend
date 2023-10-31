@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, Modal } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
@@ -19,11 +19,12 @@ export default function UserScreen({navigation}) {
   const image = useSelector((state)=> state.image.value)
   const dispatch = useDispatch()
 
+  const [modalVisible, setModalVisible] = useState(false)
+  const [selectedObject, setSelectedObject] = useState(null);
 
 
   const [don, setDon] = useState([])
   const [catchs, setCatchs] = useState([])
-
 
   const [currentPosition, setCurrentPosition] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -65,14 +66,82 @@ export default function UserScreen({navigation}) {
 
   }, [user.numberGifts]);
 
-const allObject = don.map((item, i) => {
-  return <Dons key= {i} image= {item.image} />
-});
+
+
+// YOAN AJOUT MODAL
+// const allObject = don.map((item, i) => {
+//   return <Dons key= {i} image= {item.image} />
+// });
+
+
+const allObject = don.map((item, i) => (
+  <View style={styles.photocontainer} key={i} >
+    <TouchableOpacity onPress={() => handleObjectClick(item)}>
+      <FontAwesome name='times-circle-o' size={20} color='#000000' style={styles.deleteIcon} />
+      <Dons image={item.image} />
+    </TouchableOpacity>
+  </View>
+));
+
+const handleObjectClick = (object) => {
+  setSelectedObject(object);
+  console.log(object.id)
+  setModalVisible(true);
+   };
+
+const handleRemoveObject = () => {
+    if (selectedObject) {
+      // Appelez handleRemoveObject en passant l'ID de l'objet.
+      console.log(selectedObject)
+      const objectId = selectedObject.id;
+      handleRemoveObjectById(objectId);
+    }
+  };   
+
+  // Handle removing the selected object
+const handleRemoveObjectById = (objectId) => {
+    if (objectId) {
+      // Make an API call or dispatch an action to remove the object
+      // https://${localFetch}/users/like/${user.token}
+      fetch(`http://192.168.149.127:3000/objects/${objectId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((response) => {
+        if (response.ok) {
+          console.log('ok')
+        // Après avoir supprimé l'objet avec succès, effectuez un nouveau fetch
+        // pour mettre à jour la liste des objets
+        fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/users/${user.token}/object`)
+        .then((response) => response.json())
+        .then(data => {
+          setDon(data);
+        });
+        }
+        else {
+          // Gérez les erreurs, par exemple, objet non trouvé, erreur serveur, etc.
+          console.error('Erreur de suppression de lobjet')
+        }  
+      })
+      .catch((error) => {
+        // Gérez les erreurs de la requête fetch ici
+        console.error('Erreur de requête fetch :', error);
+      });  
 
 const allCatchs = catchs.map((obj, j) => {
   console.log(obj)
   return <Catchs key = {j} catch= {obj} />
 });
+
+      // Close the modal and clear the selected object
+      setModalVisible(false);
+      setSelectedObject(null);
+    }
+  };   
+
+// YOAN FIN DE CODE
 
 
   const handleRemove = () => {
@@ -87,6 +156,32 @@ const allCatchs = catchs.map((obj, j) => {
 
   return (
     <View style={styles.container}>
+
+       {/* ajout de modal supprimer un objet de ses dons */}
+
+       <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text>Confirmez la suppression de l'objet :</Text>
+            {/* <Text>{selectedObject ? selectedObject.title : ""}</Text> */}
+
+            <View style={styles.ouiounon}>
+                  <TouchableOpacity style={styles.yes} onPress={handleRemoveObject}>
+                    <Text style={styles.textButton}>OUI</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.not} onPress={() => setModalVisible(false)}>
+                    <Text style={styles.textButton}>Annuler</Text>
+                  </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
+
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
       <View style={styles.header}>
         {/* <FontAwesome name='arrow-left' size={32} color={'black'} onPress={() => navigation.navigate('Choices')} style={styles.arrowLeft}/> */}
@@ -102,7 +197,7 @@ const allCatchs = catchs.map((obj, j) => {
           <View style={styles.deleteContainer}>
                 <Image style={styles.image} source={{ uri: user.avatar }} />
                 <TouchableOpacity onPress={() => handleRemove()}>
-                <FontAwesome name='times-circle-o' size={20} color='#000000' style={styles.deleteIcon} />
+                <FontAwesome name='times-circle-o' size={20} color='black' style={styles.deleteicon} />
                 </TouchableOpacity>
                 </View>)}
          </View>
@@ -142,7 +237,6 @@ const allCatchs = catchs.map((obj, j) => {
           <Text style={styles.textButton}>DONNER</Text>
          </View>
           </TouchableOpacity>
-
 
           </View>
 
@@ -291,6 +385,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     
   },
+  
   logout: {
     flex: 1,
     flexDirection: 'row',
@@ -309,8 +404,67 @@ const styles = StyleSheet.create({
   },
   textlogout: {
     color: 'white',
+    
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    width: 300,
+    height: 150,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+  },
+  deleteicon: {
+
+  
+  },
+  photocontainer: {
+    justifyContent: 'flex-end',
+  },
+  yes: {
+    width : 100,
+    height : 50,
+    borderRadius: 10,
+    justifyContent: "center",
+    backgroundColor: '#74D48F',
+    shadowOffset: { width: 4, height: 4 },
+    shadowColor: "grey",
+    shadowOpacity: 1.0,
+    alignItems: "center",
+    margin: 10, // Marge entre les boutons
+
+  },
+  not: {
+    width : 100,
+    height : 50,
+    borderRadius: 10,
+    justifyContent: "center",
+    backgroundColor: '#A896CF',
+    shadowOffset: { width: 4, height: 4 },
+    shadowColor: "grey",
+    shadowOpacity: 1.0,
+    alignItems: "center",
+    margin: 10, // Marge entre les boutons
+
+  },
+  ouiounon: {
+    flexDirection: 'row',
+    justifyContent: "space-beetween"
+  },
     fontSize: 10,
   },
 
   
-});
+);
