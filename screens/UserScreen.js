@@ -11,7 +11,6 @@ import Dons from "../components/Dons";
 import Catchs from "../components/Catchs";
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { ScrollView } from "react-native-gesture-handler";
 
 export default function UserScreen({navigation}) {
 
@@ -44,7 +43,7 @@ const allCatchs = don.map((data, j) => {
 
 
   const handleRemove = () => {
-    fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/users/remove/${user.token}`, {
+    fetch(`https://${localFetch}/users/remove/${user.token}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
     })
@@ -132,7 +131,9 @@ const allCatchs = don.map((data, j) => {
 const styles = StyleSheet.create({
 
   container: {
-paddingTop: 40,
+    flex: 1,
+    paddingTop: 40,
+    backgroundColor: 'white'
   },
 
   background: {
@@ -159,7 +160,7 @@ paddingTop: 40,
     flexDirection: "row",
     justifyContent: "space-evenly",
     marginRight: '20%',
-  
+    
   }, 
   photos: {
     alignItems: 'center',
@@ -183,18 +184,18 @@ paddingTop: 40,
     marginRight: 10,
     marginLeft: 10,
   },
-
+  
   top: {
     marginBottom: 40,
     marginTop: 80,
     borderTopWidth: 1,
     padding: 10,
   },
-
+  
   text1: {
     padding: 10,
   },
-
+  
   objects: {
     paddingTop: 10,
     paddingBottom: 30,
@@ -204,14 +205,14 @@ paddingTop: 40,
     shadowColor: "grey",
     shadowOpacity: 1.0,
   },
-
+  
   text2: {
     marginBottom: 200,
     borderTopWidth: 1,
     borderColor: 'black',
     padding: 20,
   },
-
+  
   image: {
     borderWidth: 1,
     backgroundColor: 'white',
@@ -234,16 +235,18 @@ paddingTop: 40,
     shadowOpacity: 1.0,
     
   },
-
+  
   textButton: {
     color: 'white',
+    fontSize: 13,
+    
   },
-
+  
   catchs: {
     padding: 10,
     flexDirection: "row",
     justifyContent: "center",
-
+    
   },
   logout: {
     borderRadius: 20,
@@ -256,11 +259,11 @@ paddingTop: 40,
     shadowOffset: { width: 4, height: 4 },
     shadowColor: "grey",
     shadowOpacity: 1.0,
-
+    
   },
   textlogout: {
-  color: 'white',
-  
+    color: 'white',
+    
   }
-
+  
 });
