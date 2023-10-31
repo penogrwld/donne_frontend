@@ -25,6 +25,31 @@ export default function UserScreen({navigation}) {
   const [don, setDon] = useState([])
   // const [catch, setCatch] = useState([])
 
+  const [currentPosition, setCurrentPosition] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+        
+      if (status === 'granted') {
+        Location.watchPositionAsync({ distanceInterval: 10 },
+          (location) => {
+            setCurrentPosition(location.coords);
+            setIsLoading(false)
+          });
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    if (!isLoading && currentPosition) {
+      dispatch(addLatitude(currentPosition.latitude));
+      dispatch(addLongitude(currentPosition.longitude));
+    }
+  }, [isLoading, currentPosition]);
+
   useEffect(() => {
     fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/users/${user.token}/object`)
     .then((response) => response.json())
