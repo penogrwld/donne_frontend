@@ -1,15 +1,14 @@
-import { View, Text, SafeAreaView, StyleSheet,} from "react-native";
-import { useEffect, useState } from "react";
-import { LinearGradient } from "expo-linear-gradient";
-
-import { localFetch } from "../localFetch";
-import { useDispatch, useSelector } from "react-redux";
-
-import ItemCard from "../components/ItemCard";
-
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useDispatch, useSelector } from 'react-redux';
+import SwipeCards from 'react-native-swipe-cards';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { addLike } from "../reducers/user";
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
+import { localFetch } from '../localFetch';
+import ItemCard from '../components/ItemCard';
+import { addLike } from '../reducers/user';
 
 
 
@@ -41,6 +40,7 @@ export default function HomeScreen({navigation}) {
   let card = <></>
   if(don.length > 0 && currentItemIndex < don.length) { // Pour vérifier qu'il y a bien des objets à donner
     card =  [don[currentItemIndex]].map( data => {
+
           return <ItemCard key={data.image[0]} item = {data}/> 
       })
       }
@@ -58,15 +58,15 @@ export default function HomeScreen({navigation}) {
       body: JSON.stringify({object: don[currentItemIndex]})
     })
     .then((response)=>response.json())
-    .then(data => fetch(`${localFetch}/objects/${user.token}`)
-    .then((response) => response.json())
     .then(data => {
+      setDisliked(!disliked)
       setDon(data.result) 
       dispatch(addLike())
-    }))
+    }
+    )
    
-  };
-console.log(user)
+  }
+  
   return (
     <View style={styles.container}>
 

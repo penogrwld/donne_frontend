@@ -32,6 +32,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import user from "./reducers/user";
 import image from "./reducers/image";
 
+import { localFetch } from "./localFetch";
+
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
