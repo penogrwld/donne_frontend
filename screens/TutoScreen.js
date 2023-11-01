@@ -6,9 +6,10 @@
     return (
       <View style={styles.container}>
         <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
-        <Text style={styles.textHeader}>COMMENT ÇA MARCHE ?</Text>
+        <Text style={styles.textHeader}>BIENVENUE SUR DONNE !</Text>
           <View>
-              <Text >Texte expliquant comment fonctionne l'application</Text>
+              <Text>Vous vous demandez peut être à quoi sert cette application ?</Text>
+              <Text>Moi aussi.</Text>
           </View>   
       </View>
     );
