@@ -17,7 +17,7 @@ export default function DonneurCard(props) {
   const image = useSelector((state) => state.image.value);
   const [accepted, setAccepted] = useState(false);
   const [valid, setValid] = useState(false);
-  const [dislike, setDislike] = useState(false);
+  // const [dislike, setDislike] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -26,13 +26,10 @@ export default function DonneurCard(props) {
   };
 
   const handleValid = () => {
-    setValid(!valid);
-  };
-  const handleRefuse = () => {
     if (!user.token) {
       return;
     }
-    fetch(`http://${localFetch}/users/dislike/${props.token}`, {
+    fetch(`${localFetch}/users/catch/${props.token}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ object: props.id }),
@@ -42,11 +39,37 @@ export default function DonneurCard(props) {
         // // Traitez la réponse ici
         if (data.result) {
           // L'opération a réussi, mettez à jour l'interface si nécessaire
-          setDislike(true);
+          // setDislike(true);
+          console.log('Félicitation pour votre donation');
+        } else {
+          // L'opération a échoué, affichez l'erreur si nécessaire
+          // setDislike(false);
+          console.error(`Erreur mec`);
+        }
+        dispatch(removeWhoLiked());
+      })
+  };
+
+
+  const handleRefuse = () => {
+    if (!user.token) {
+      return;
+    }
+    fetch(`${localFetch}/users/dislike/${props.token}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ object: props.id }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // // Traitez la réponse ici
+        if (data.result) {
+          // L'opération a réussi, mettez à jour l'interface si nécessaire
+          // setDislike(true);
           console.log('objet a été retiré de la liste des "aimés"');
         } else {
           // L'opération a échoué, affichez l'erreur si nécessaire
-          setDislike(false);
+          // setDislike(false);
           console.error(`Erreur mec`);
         }
         dispatch(removeWhoLiked());
