@@ -79,7 +79,7 @@ export default function DonationScreen({ navigation }) {
 
   const handleSubmit = () => {
     
-    fetch(`https://${localFetch}/objects/add` , {
+    fetch(`${localFetch}/objects/add` , {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ image: photosObject, title: title, description: description, condition: condition,

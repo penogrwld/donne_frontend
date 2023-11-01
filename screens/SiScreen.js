@@ -27,7 +27,7 @@ import {
   
   
     const handleConnexion = () => {
-          fetch(`https://${localFetch}/users/signin`, {
+          fetch(`${localFetch}/users/signin`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ username: signInUsername, password: signInPassword }),

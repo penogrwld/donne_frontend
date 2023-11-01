@@ -23,7 +23,8 @@ import {
     const dispatch = useDispatch()
 
     const handleDelete = () => {
-      fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/users/dislike/${user.token}`, {
+
+      fetch(`${localFetch}/users/dislike/${user.token}`, {
         method: "PUT",
         headers: {"Content-Type": "application/json"},
         body:JSON.stringify({ object: props.id })

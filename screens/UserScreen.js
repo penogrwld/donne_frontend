@@ -52,7 +52,7 @@ export default function UserScreen({navigation}) {
   }, [isLoading, currentPosition]);
 
   useEffect(() => {
-    fetch(`http://${localFetch}/users/${user.token}/object`)
+    fetch(`${localFetch}/users/${user.token}/object`)
     .then((response) => response.json())
     .then(data => {
       setDon(data)
@@ -80,7 +80,7 @@ const allObject = don.map((item, i) => (
     <TouchableOpacity onPress={() => handleObjectClick(item)}>
       <FontAwesome name='times-circle-o' size={20} color='#000000' style={styles.deleteIcon} />
     </TouchableOpacity>
-    <Dons image={item.image} />
+      <Dons image={item.image} />
   </View>
 ));
 
@@ -141,7 +141,7 @@ const handleRemoveObjectById = (objectId) => {
 
 
   const handleRemove = () => {
-    fetch(`https://${localFetch}/users/remove/${user.token}`, {
+    fetch(`${localFetch}/users/remove/${user.token}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
     })
