@@ -6,11 +6,15 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import React from "react";
 import { localFetch } from "../localFetch";
 import DenicheurCard from "../components/DenicheurCard";
+import { useIsFocused } from '@react-navigation/native';
+
 
 export default function LikedScreen({navigation}) {
  
   const [swap, setSwap] = useState(true)
   const [accepted, setAccepted] = useState(false)
+  let focus = useIsFocused()
+
 
  
 
@@ -31,7 +35,7 @@ export default function LikedScreen({navigation}) {
         setNbrLikes(5-data.finalObj.likedObjects.length);
         setObjData(data.finalObj.likedObjects)
       });
-  }, [user.numberLikes]);
+  }, [focus]);
   
   const allObject = objData.map((obj, key) => {
     console.log(obj.user)

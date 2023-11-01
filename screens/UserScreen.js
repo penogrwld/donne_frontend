@@ -11,6 +11,8 @@ import Dons from "../components/Dons";
 import Catchs from "../components/Catchs";
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { useIsFocused } from '@react-navigation/native';
+
 
 export default function UserScreen({navigation}) {
 
@@ -18,6 +20,8 @@ export default function UserScreen({navigation}) {
   const user = useSelector((state) => state.user.value)
   const image = useSelector((state)=> state.image.value)
   const dispatch = useDispatch()
+  let focus = useIsFocused()
+
 
   const [modalVisible, setModalVisible] = useState(false)
   const [selectedObject, setSelectedObject] = useState(null);
@@ -65,7 +69,7 @@ export default function UserScreen({navigation}) {
       setCatchs(data.finalObj.catchs)
     })
 
-  }, [user.numberGifts]);
+  }, [focus]);
 
 
 const allCatchs = catchs.map((obj, j) => {
@@ -74,15 +78,17 @@ const allCatchs = catchs.map((obj, j) => {
 });
 
 // YOAN AJOUT MODAL
-
-const allObject = don.map((item, i) => (
-  <View style={styles.photocontainer} key={i} >
-    <TouchableOpacity onPress={() => handleObjectClick(item)}>
-      <FontAwesome name='times-circle-o' size={20} color='#000000' style={styles.deleteIcon} />
-    </TouchableOpacity>
-      <Dons image={item.image} />
-  </View>
-));
+let allObject = <></>
+if(allObject.length>0){
+  allObject = don.map((item, i) => (
+   <View style={styles.photocontainer} key={i} >
+     <TouchableOpacity onPress={() => handleObjectClick(item)}>
+       <FontAwesome name='times-circle-o' size={20} color='#000000' style={styles.deleteIcon} />
+     </TouchableOpacity>
+       <Dons image={item.image} />
+   </View>
+ ));
+}
 
 
 const handleObjectClick = (object) => {
@@ -201,13 +207,17 @@ const handleRemoveObjectById = (objectId) => {
          <View style={styles.infos}>
          <Text>{user.firstname} {user.lastname}</Text>
          <Text>{user.email}</Text>
+
          <TouchableOpacity style={styles.logout} onPress={()=> {
           dispatch(logout())
           navigation.navigate('Si')
           }}>
-          <Text style={styles.textlogout}>DÉCONNEXION</Text>
+          <FontAwesome name='power-off' size={20} color='white' style={styles.deleteicon} />
+          <Text style={styles.textlogout}> DÉCONNEXION</Text>
          </TouchableOpacity>
+
          </View>
+         
        </View>
 
 
@@ -277,7 +287,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     padding: 10,
     alignItems: "center",
-    justifyContent:"center"
+
   },
 
    headerText: {
@@ -290,9 +300,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "space-evenly",
-    marginRight: '20%',
-    
+    marginRight: '5%',
   }, 
+  infos:  {
+    marginTop: '15%',
+  },
+
   photos: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -301,11 +314,12 @@ const styles = StyleSheet.create({
     marginTop: 30,
     height: 110,
     width: 110,
+    shadowOffset: { width: 4, height: 4 },
+    shadowColor: "grey",
+    shadowOpacity: 1.0,
   },
   addPhoto: {
     backgroundColor: 'white',
-    height: 110,
-    width: 110,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 30,
@@ -314,6 +328,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginRight: 10,
     marginLeft: 10,
+    height: 110,
+    width: 110,
+    
   },
   
   top: {
@@ -328,7 +345,7 @@ const styles = StyleSheet.create({
   },
   
   objects: {
-    paddingTop: 10,
+    paddingTop: 20,
     paddingBottom: 30,
     shadowOffset: { width: 4, height: 4 },
     shadowColor: "grey",
@@ -351,8 +368,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     backgroundColor: 'white',
     borderRadius: 100,
-    padding: 50,
+    padding: 70,
     marginTop: 50,
+    
     
   },
   
@@ -373,7 +391,6 @@ const styles = StyleSheet.create({
   textButton: {
     color: 'white',
     fontSize: 13,
-    
   },
   
   catchs: {
@@ -384,9 +401,10 @@ const styles = StyleSheet.create({
   },
   logout: {
     borderRadius: 20,
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 30,
+    marginTop: 50,
     backgroundColor: '#A896CF',
     height: 30,
     width: 130,
@@ -397,7 +415,7 @@ const styles = StyleSheet.create({
   },
   textlogout: {
     color: 'white',
-    
+    fontSize: 12,
   },
   centeredView: {
     flex: 1,
