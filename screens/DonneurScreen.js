@@ -43,7 +43,8 @@ export default function DonneurScreen({ navigation }) {
         });
         setObjectData(allObject);
       });
-  }, [focus]);
+  }, [user.numberWhoLiked, focus]);
+
   const objet = objectData.map((data, i) => {
 
     return data.likedBy.map((item, key) => {

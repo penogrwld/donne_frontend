@@ -35,7 +35,7 @@ export default function LikedScreen({navigation}) {
         setNbrLikes(5-data.finalObj.likedObjects.length);
         setObjData(data.finalObj.likedObjects)
       });
-  }, [focus]);
+  }, [user.numberLikes, focus]);
   
   const allObject = objData.map((obj, key) => {
     console.log(obj.user)

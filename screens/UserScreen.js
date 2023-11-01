@@ -110,7 +110,7 @@ const handleRemoveObjectById = (objectId) => {
     if (objectId) {
       // Make an API call or dispatch an action to remove the object
       // https://${localFetch}/users/like/${user.token}
-      fetch(`http://${localFetch}/objects/${objectId}`, {
+      fetch(`${localFetch}/objects/${objectId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -121,7 +121,7 @@ const handleRemoveObjectById = (objectId) => {
           // console.log('ok')
         // Après avoir supprimé l'objet avec succès, effectuez un nouveau fetch
         // pour mettre à jour la liste des objets
-        fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/users/${user.token}/object`)
+        fetch(`${localFetch}/users/${user.token}/object`)
         .then((response) => response.json())
         .then(data => {
           setDon(data);
