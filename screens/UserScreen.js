@@ -59,7 +59,7 @@ export default function UserScreen({navigation}) {
 
     });
 
-    fetch(`http://${localFetch}/users/${user.token}`)
+    fetch(`${localFetch}/users/${user.token}`)
     .then((response) => response.json()) 
     .then(data => {
       setCatchs(data.finalObj.catchs)
@@ -74,15 +74,17 @@ const allCatchs = catchs.map((obj, j) => {
 });
 
 // YOAN AJOUT MODAL
-
-const allObject = don.map((item, i) => (
-  <View style={styles.photocontainer} key={i} >
-    <TouchableOpacity onPress={() => handleObjectClick(item)}>
-      <FontAwesome name='times-circle-o' size={20} color='#000000' style={styles.deleteIcon} />
-    </TouchableOpacity>
-      <Dons image={item.image} />
-  </View>
-));
+let allObject = <></>
+if(allObject.length>0){
+  allObject = don.map((item, i) => (
+   <View style={styles.photocontainer} key={i} >
+     <TouchableOpacity onPress={() => handleObjectClick(item)}>
+       <FontAwesome name='times-circle-o' size={20} color='#000000' style={styles.deleteIcon} />
+     </TouchableOpacity>
+       <Dons image={item.image} />
+   </View>
+ ));
+}
 
 
 const handleObjectClick = (object) => {
@@ -205,6 +207,7 @@ const handleRemoveObjectById = (objectId) => {
           dispatch(logout())
           navigation.navigate('Si')
           }}>
+          <FontAwesome name='power-off' size={20} color='white' style={styles.deleteicon} />
           <Text style={styles.textlogout}>DÉCONNEXION</Text>
          </TouchableOpacity>
          </View>
