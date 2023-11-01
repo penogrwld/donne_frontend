@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
@@ -23,8 +23,33 @@ export default function UserScreen({navigation}) {
   const [don, setDon] = useState([])
   // const [catch, setCatch] = useState([])
 
+  const [currentPosition, setCurrentPosition] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+
   useEffect(() => {
-    fetch(`https://${localFetch}/users/${user.token}/object`)
+    (async () => {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+        
+      if (status === 'granted') {
+        Location.watchPositionAsync({ distanceInterval: 10 },
+          (location) => {
+            setCurrentPosition(location.coords);
+            setIsLoading(false)
+          });
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    if (!isLoading && currentPosition) {
+      dispatch(addLatitude(currentPosition.latitude));
+      dispatch(addLongitude(currentPosition.longitude));
+    }
+  }, [isLoading, currentPosition]);
+
+  useEffect(() => {
+    fetch(`${localFetch}/users/${user.token}/object`)
     .then((response) => response.json())
     .then(data => {
       setDon(data)
@@ -38,7 +63,7 @@ export default function UserScreen({navigation}) {
     // })
 
 
-  }, [user.token]);
+  }, [user.numberGifts]);
 
 const allObject = don.map((item, i) => {
   return <Dons key= {i} image= {item.image} />
@@ -46,7 +71,7 @@ const allObject = don.map((item, i) => {
 
 
   const handleRemove = () => {
-    fetch(`https://${localFetch}/users/remove/${user.token}`, {
+    fetch(`${localFetch}/users/remove/${user.token}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
     })
@@ -96,9 +121,13 @@ const allObject = don.map((item, i) => {
 
 
 
-        <View style={styles.objects}>
+        <ScrollView style={styles.objects}
+        contentContainerStyle={styles.objectsContainer}
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        >
          {allObject}
-        </View>
+        </ScrollView>
 
 
   
@@ -197,11 +226,17 @@ const styles = StyleSheet.create({
   objects: {
     paddingTop: 10,
     paddingBottom: 30,
-    flexDirection: "row",
-    justifyContent: "space-evenly",
+    // flexDirection: "row",
+    // justifyContent: "space-evenly",
     shadowOffset: { width: 4, height: 4 },
     shadowColor: "grey",
     shadowOpacity: 1.0,
+
+  },
+  objectsContainer: {
+    justifyContent: "space-evenly",
+    flexDirection: "row",
+
   },
   
   text2: {

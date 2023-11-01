@@ -38,19 +38,24 @@ import {
     const [signUpPhone, setSignUpPhone] = useState('');
     const [signUpEmail, setSignUpEmail] = useState('');
     const [signUpPassword, setSignUpPassword] = useState('');
+    const [errorMail, setErrorMail] = useState(false);
+    const [errorUsername, setErrorUsername] = useState(false);
+    const [errorField, setErrorField] = useState(false);
+
+
 
     const handleSelect = () => {
       setSelection(!isSelected)
     }
   
     const handleRegister = () => {
-          if(isSelected){fetch(`https://${localFetch}/users/signup`, {
+          if(isSelected && EMAIL_REGEX.test(signUpEmail)){fetch(`${localFetch}/users/signup`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({firstname: signUpFirstName, avatar: null, lastname: signUpLastName, username: signUpUsername, phone: signUpPhone, email: signUpEmail, password: signUpPassword }),
           }).then(response => response.json())
               .then(data => {
-                  if (data.result && EMAIL_REGEX.test(signUpEmail) && PHONE_REGEX.test(signUpPhone)) {
+                  if (data.result && PHONE_REGEX.test(signUpPhone)) {
                       dispatch(signUp({firstname: signUpFirstName, avatar: null, lastname: signUpLastName, username: signUpUsername, phone: signUpPhone, email: signUpEmail, token: data.token }));
             // vide les champs après inscription
                       setSignUpLastname('');
@@ -60,10 +65,19 @@ import {
                       setSignUpEmail('');
                       setSignUpPassword('');
                       setSignUpPhone(null)
+                      setErrorMail(false)
+                      setErrorField(false)
                       navigation.navigate('TabNavigator',{ screen: 'Profil'})
+                  } else if (!data.result) {
+                    setErrorUsername(true)
+                  } else {
+                    setErrorField(true)
                   }
               });
-      }};
+      } else {
+        setErrorMail(true)
+      }
+    };
   
     return (
       <KeyboardAwareScrollView style={styles.container}
@@ -81,6 +95,9 @@ import {
 
 
           <View style={styles.containerInput}>
+            { errorMail && <Text style={styles.errorMsg}>Le mail est invalide</Text>}
+            { errorUsername && <Text style={styles.errorMsg}>Cette utilisateur existe déjà</Text>}
+            { errorField && <Text style={styles.errorMsg}>Un champ n'a pas était rempli</Text>}
              <TextInput style={styles.input} placeholder="Nom" onChangeText={(value) => setSignUpLastname(value)} value={signUpLastName}></TextInput>
              <TextInput style={styles.input} placeholder="Prénom" onChangeText={(value) => setSignUpFirstname(value)} value={signUpFirstName}></TextInput>
              <TextInput style={styles.input} placeholder="Pseudo" onChangeText={(value) => setSignUpUsername(value)} value={signUpUsername}></TextInput>
@@ -135,6 +152,12 @@ import {
     contentContainer: {
       alignItems: "center",
       justifyContent: "center",
+    },
+    errorMsg: {
+      backgroundColor: '#A896CF',
+      color: 'white',
+      padding: 10,
+      marginBottom: 10
     },
     separator: {
       height: 100, 

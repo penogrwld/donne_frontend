@@ -7,6 +7,8 @@ import SuScreen from "./screens/SuScreen";
 import ChoicesScreen from "./screens/ChoicesScreen";
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react'
+import { localFetch } from "./localFetch";
+
 
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
@@ -45,7 +47,7 @@ const TabNavigator = () => {
   const [objectData, setObjectData] = useState(0);
   
   useEffect(() => {
-    fetch(`http://10.3.0.21:3000/users/${user.token}/object`)
+    fetch(`${localFetch}/users/${user.token}/object`)
       .then((response) => response.json())
       .then((data) => {
         setObjectData(data[0].likedBy.length);

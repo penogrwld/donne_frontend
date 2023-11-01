@@ -44,7 +44,7 @@ export default function SnapScreen({navigation}) {
         type: 'image/jpeg',
       })
   
-      fetch(`https://${localFetch}/objects/upload`, {
+      fetch(`${localFetch}/objects/upload`, {
         method: 'POST',
         body: formData,
       })
@@ -53,7 +53,7 @@ export default function SnapScreen({navigation}) {
           if (data.result) {
             dispatch(addProfilePic(data.url))
   
-            fetch(`https://${localFetch}/users/avatar/${user.token}`, {
+            fetch(`${localFetch}/users/avatar/${user.token}`, {
               method: 'PUT',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ avatar: data.url })

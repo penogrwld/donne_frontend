@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import { addLike } from "../reducers/user";
 
 
+
 export default function HomeScreen({navigation}) {
   
   const user = useSelector((state)=> state.user.value)
@@ -21,17 +22,21 @@ export default function HomeScreen({navigation}) {
   const [disliked, setDisliked] = useState(false)
   const [currentItemIndex, setCurrentItemIndex] = useState(0)
 
+
   // let currentItemIndex = Math.floor(Math.random()*don.length)
 
+  
   useEffect(() => {
-    fetch(`https://${localFetch}/objects/${user.token}`)
-    .then((response) => response.json())
-    .then(data => {
-      setDon(data.result) 
-      setCurrentItemIndex(Math.floor(Math.random() * data.result.length))
-    })
+  
+      fetch(`${localFetch}/objects/${user.token}/${user.latitude}/${user.longitude}`)
+        .then((response) => response.json())
+        .then(data => {
+          setDon(data.result);
+          setCurrentItemIndex(Math.floor(Math.random() * data.result.length));
+        });
+    
   }, [disliked]);
-
+  
 
   let card = <></>
   if(don.length > 0 && currentItemIndex < don.length) { // Pour vérifier qu'il y a bien des objets à donner
@@ -47,13 +52,13 @@ export default function HomeScreen({navigation}) {
   };
   
   const handleLike = () => { 
-    fetch(`https://${localFetch}/users/like/${user.token}`, {
+    fetch(`${localFetch}/users/like/${user.token}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({object: don[currentItemIndex]})
     })
     .then((response)=>response.json())
-    .then(data => fetch(`https://${localFetch}/objects/${user.token}`)
+    .then(data => fetch(`${localFetch}/objects/${user.token}`)
     .then((response) => response.json())
     .then(data => {
       setDon(data.result) 
@@ -61,7 +66,7 @@ export default function HomeScreen({navigation}) {
     }))
    
   };
-
+console.log(user)
   return (
     <View style={styles.container}>
 
