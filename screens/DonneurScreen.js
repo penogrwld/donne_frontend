@@ -14,11 +14,15 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import React from "react";
 import LikesCard from "../components/LikesCard";
 import { localFetch } from "../localFetch";
+import { useIsFocused } from '@react-navigation/native';
+
 
 export default function DonneurScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);
 
   const [objectData, setObjectData] = useState([]);
+  let focus = useIsFocused()
+
 
   useEffect(() => {
     fetch(`${localFetch}/users/${user.token}/object`)
@@ -39,7 +43,7 @@ export default function DonneurScreen({ navigation }) {
         });
         setObjectData(allObject);
       });
-  }, [user.numberWhoLiked]);
+  }, [focus]);
   const objet = objectData.map((data, i) => {
 
     return data.likedBy.map((item, key) => {

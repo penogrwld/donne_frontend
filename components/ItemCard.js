@@ -102,25 +102,23 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   dot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: 'black',
     margin: 4,
   },
   activeDot: {
-    height: 8,
+    width: 20,
+    height: 20,
     borderRadius: 50,
     backgroundColor: 'black',
-
+    marginRight: 15,
+    marginLeft: 15,
   },
   inactiveDot: {
     width: 15,
     height: 15,
     borderRadius: 50,
     backgroundColor: 'darkgray',
-    marginRight: 20,
-    marginLeft: 20,
+    marginRight: 15,
+    marginLeft: 15,
   },
   textcontainer: {
     alignItems: 'center',
