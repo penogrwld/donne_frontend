@@ -79,8 +79,8 @@ const allObject = don.map((item, i) => (
   <View style={styles.photocontainer} key={i} >
     <TouchableOpacity onPress={() => handleObjectClick(item)}>
       <FontAwesome name='times-circle-o' size={20} color='#000000' style={styles.deleteIcon} />
-      <Dons image={item.image} />
     </TouchableOpacity>
+      <Dons image={item.image} />
   </View>
 ));
 
