@@ -57,7 +57,7 @@ export default function HomeScreen({navigation}) {
       body: JSON.stringify({object: don[currentItemIndex]})
     })
     .then((response)=>response.json())
-    .then(data => fetch(`hthttps://${localFetch}/objects/${user.token}`)
+    .then(data => fetch(`https://${localFetch}/objects/${user.token}`)
     .then((response) => response.json())
     .then(data => {
       setDon(data.result) 

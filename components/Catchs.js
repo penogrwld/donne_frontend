@@ -1,19 +1,15 @@
 import {
     View,
-    Text,
     StyleSheet,
-    SafeAreaView,
     Image,
-    TouchableOpacity,
-    ScrollView,
   } from "react-native";
-  import React, { useState, useEffect } from "react";
+  import React from "react";
 
   export default function Catchs(props){
 
         return (
-<View style={styles.dons}>
- <Image style={styles.image} source={{ uri: props.catch }}/>
+<View style={styles.catchs}>
+ <Image style={styles.image} source={{ uri: props.catchs }}/>
 </View>
     )
          };
@@ -21,10 +17,6 @@ import {
 
  const styles = StyleSheet.create({
 
-dons: {
-
-
-},
 image: {
     borderRadius: 50, 
     height: 100,
