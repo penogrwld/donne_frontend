@@ -59,7 +59,7 @@ export default function UserScreen({navigation}) {
 
     });
 
-    fetch(`http://${localFetch}/users/${user.token}`)
+    fetch(`${localFetch}/users/${user.token}`)
     .then((response) => response.json()) 
     .then(data => {
       setCatchs(data.finalObj.catchs)
@@ -115,7 +115,7 @@ const handleRemoveObjectById = (objectId) => {
           // console.log('ok')
         // Après avoir supprimé l'objet avec succès, effectuez un nouveau fetch
         // pour mettre à jour la liste des objets
-        fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/users/${user.token}/object`)
+        fetch(`${localFetch}/users/${user.token}/object`)
         .then((response) => response.json())
         .then(data => {
           setDon(data);

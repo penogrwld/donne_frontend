@@ -15,6 +15,8 @@ import { useState } from 'react';
 import { removePhoto, removeAll } from "../reducers/image";
 import { localFetch } from "../localFetch";
 import { addGift } from "../reducers/user";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 
 
 export default function DonationScreen({ navigation }) {

@@ -1,1 +1,1 @@
-export const localFetch = 'http://10.3.0.21:3000'
+export const localFetch = 'http://10.3.0.40:3000'
