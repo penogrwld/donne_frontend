@@ -21,6 +21,7 @@ import {
 
     const user = useSelector((state) => state.user.value);
     const dispatch = useDispatch()
+
     const handleDelete = () => {
 
       fetch(`http://10.3.0.40:3000/users/dislike/${user.token}`, {
@@ -41,9 +42,6 @@ import {
 
     <View style={styles.title}>
     <Text style={styles.text}>{props.title}</Text>
-    <FontAwesome onPress={() => handleDelete()}
-    style={styles.trash} name='trash-o' size={25} color='black'
-     />
     </View>
 
 
@@ -51,29 +49,37 @@ import {
       <Image style={styles.imgItem} source={{ uri: props.image }} />
 
       <View style={styles.right}>
-      <Text style={[styles.description, { maxWidth: 270 }]} >"{props.description}"</Text>
-      <Text style={styles.condition}>{props.condition}</Text>
+            <Text style={[styles.description, { maxWidth: 270 }]} >"{props.description}"</Text>
+            <Text style={styles.condition}>{props.condition}</Text>
       </View>
+
+      <FontAwesome onPress={() => handleDelete()} 
+      style={styles.trash} name='trash-o' size={25} color='black'
+      />
     </View>
+
     <View style={styles.bottom}>
       {props.avatar ? (
         <Image
-          style={styles.imgDonneur}
-          onPress={() => navigation.navigate("Profile")}
-          source={{ uri: props.avatar }}
+        style={styles.imgDonneur}
+        onPress={() => navigation.navigate("Profile")}
+        source={{ uri: props.avatar }}
         />
-      ) : (
-        <Image
+        ) : (
+          <Image
           style={styles.imgDonneur}
           onPress={() => navigation.navigate("Profile")}
           source={require("../assets/smile.png")}
         />
       )}
-   <Text style={styles.user}>{props.user}</Text> 
+   <Text style={styles.user}>{props.user}</Text>
+
 
     
     </View>
-
+    <View style={styles.message}>
+        <Text style={[styles.description, { maxWidth: 350 }]}  > Si votre demande est acceptée le donneur vous contactera par téléphone</Text>
+    </View>
 </View>
 
     );
@@ -84,6 +90,9 @@ import {
   const styles = StyleSheet.create({
 
     card: {
+      marginTop: 1,
+      marginLeft: 1,
+      marginRight: 1,
       flexWrap: 'wrap',
       borderWidth: 1,
       paddingTop: 20,
@@ -107,6 +116,7 @@ import {
       paddingBottom: 10,
       marginBottom: 10,
       fontWeight: 'bold',
+      marginRight: 100,
     },
 
     trash: {
@@ -125,10 +135,12 @@ import {
 
     condition: {
       padding: 10,
+   
     },
     right: {
       margin: 10,
       alignItems: 'center',
+    
     },
 
     imgItem: {
@@ -155,6 +167,16 @@ import {
     condition: {
       fontStyle: 'italic',
     },
+
+    description: {
+      textAlign: 'center'
+     
+    },
+    message: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      textAlign: 'center'
+    }
 
   });
 
