@@ -42,7 +42,7 @@ export default function SnapScreen({navigation}) {
           type: 'image/jpeg',
          })
          
-         fetch(`https://${localFetch}/objects/upload`, {
+         fetch(`${localFetch}/objects/upload`, {
           method: 'POST',
           body: formData,
          }).then((response) => response.json())

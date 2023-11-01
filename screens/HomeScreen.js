@@ -28,7 +28,7 @@ export default function HomeScreen({navigation}) {
   
   useEffect(() => {
   
-      fetch(`http://10.3.0.40:3000/objects/${user.token}/${user.latitude}/${user.longitude}`)
+      fetch(`${localFetch}/objects/${user.token}/${user.latitude}/${user.longitude}`)
         .then((response) => response.json())
         .then(data => {
           setDon(data.result);
@@ -41,6 +41,7 @@ export default function HomeScreen({navigation}) {
   let card = <></>
   if(don.length > 0 && currentItemIndex < don.length) { // Pour vérifier qu'il y a bien des objets à donner
     card =  [don[currentItemIndex]].map( data => {
+
           return <ItemCard key={data.image[0]} item = {data}/> 
       })
       }
@@ -52,21 +53,21 @@ export default function HomeScreen({navigation}) {
   };
   
   const handleLike = () => { 
-    fetch(`https://${localFetch}/users/like/${user.token}`, {
+    fetch(`${localFetch}/users/like/${user.token}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({object: don[currentItemIndex]})
     })
     .then((response)=>response.json())
-    .then(data => fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/objects/${user.token}`)
-    .then((response) => response.json())
     .then(data => {
+      setDisliked(!disliked)
       setDon(data.result) 
       dispatch(addLike())
-    }))
+    }
+    )
    
-  };
-console.log(user)
+  }
+  
   return (
     <View style={styles.container}>
 
