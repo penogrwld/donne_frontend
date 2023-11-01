@@ -24,7 +24,7 @@ import {
 
     const handleDelete = () => {
 
-      fetch(`http://10.3.0.40:3000/users/dislike/${user.token}`, {
+      fetch(`${localFetch}/users/dislike/${user.token}`, {
         method: "PUT",
         headers: {"Content-Type": "application/json"},
         body:JSON.stringify({ object: props.id })
