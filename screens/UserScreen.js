@@ -8,6 +8,7 @@ import { logout } from "../reducers/user";
 import { useEffect, useState } from "react";
 
 import Dons from "../components/Dons";
+import Catchs from "../components/Catchs";
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
@@ -23,7 +24,7 @@ export default function UserScreen({navigation}) {
 
 
   const [don, setDon] = useState([])
-  // const [catch, setCatch] = useState([])
+  const [catchs, setCatchs] = useState([])
 
   const [currentPosition, setCurrentPosition] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -58,22 +59,21 @@ export default function UserScreen({navigation}) {
 
     });
 
-    // fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/objects/${user.token}`)
-    // .then((response) => response.json()) 
-    // .then(data => {
-    //   console.log(data)
-    // })
-
+    fetch(`http://${localFetch}/users/${user.token}`)
+    .then((response) => response.json()) 
+    .then(data => {
+      setCatchs(data.finalObj.catchs)
+    })
 
   }, [user.numberGifts]);
 
 
+const allCatchs = catchs.map((obj, j) => {
+  console.log(obj)
+  return <Catchs key= {j} catchs= {obj} />
+});
 
 // YOAN AJOUT MODAL
-// const allObject = don.map((item, i) => {
-//   return <Dons key= {i} image= {item.image} />
-// });
-
 
 const allObject = don.map((item, i) => (
   <View style={styles.photocontainer} key={i} >
@@ -84,16 +84,16 @@ const allObject = don.map((item, i) => (
   </View>
 ));
 
+
 const handleObjectClick = (object) => {
   setSelectedObject(object);
-  console.log(object.id)
   setModalVisible(true);
    };
 
 const handleRemoveObject = () => {
     if (selectedObject) {
-      // Appelez handleRemoveObject en passant l'ID de l'objet.
-      console.log(selectedObject)
+      // // Appelez handleRemoveObject en passant l'ID de l'objet.
+      // console.log(selectedObject)
       const objectId = selectedObject.id;
       handleRemoveObjectById(objectId);
     }
@@ -112,7 +112,7 @@ const handleRemoveObjectById = (objectId) => {
       })
       .then((response) => {
         if (response.ok) {
-          console.log('ok')
+          // console.log('ok')
         // Après avoir supprimé l'objet avec succès, effectuez un nouveau fetch
         // pour mettre à jour la liste des objets
         fetch(`https://donne-backend-pljfklhkf-penogrwld.vercel.app/users/${user.token}/object`)
@@ -205,7 +205,7 @@ const handleRemoveObjectById = (objectId) => {
           dispatch(logout())
           navigation.navigate('Si')
           }}>
-          <Text style={styles.textlogout}>LOGOUT</Text>
+          <Text style={styles.textlogout}>DÉCONNEXION</Text>
          </TouchableOpacity>
          </View>
        </View>
@@ -226,7 +226,7 @@ const handleRemoveObjectById = (objectId) => {
         </ScrollView>
 
 
-  
+
           <TouchableOpacity style={styles.dons} onPress={()=>navigation.navigate('Donner')}>
          <View>
           <Text style={styles.textButton}>DONNER</Text>
@@ -235,8 +235,17 @@ const handleRemoveObjectById = (objectId) => {
 
           </View>
 
+
        <View style={styles.text2}>
        <Text>MES CATCHS</Text>
+    
+       <ScrollView style={styles.objects}
+        contentContainerStyle={styles.objectsContainer}
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        >
+       {allCatchs}
+       </ScrollView>
        </View>
 
           {/* <TouchableOpacity>
@@ -321,8 +330,6 @@ const styles = StyleSheet.create({
   objects: {
     paddingTop: 10,
     paddingBottom: 30,
-    // flexDirection: "row",
-    // justifyContent: "space-evenly",
     shadowOffset: { width: 4, height: 4 },
     shadowColor: "grey",
     shadowOpacity: 1.0,
@@ -331,7 +338,6 @@ const styles = StyleSheet.create({
   objectsContainer: {
     justifyContent: "space-evenly",
     flexDirection: "row",
-
   },
   
   text2: {
@@ -371,9 +377,6 @@ const styles = StyleSheet.create({
   },
   
   catchs: {
-    borderWidth: 1,
-    backgroundColor: 'white',
-    borderRadius: 100,
     padding: 10,
     flexDirection: "row",
     justifyContent: "center",
@@ -386,7 +389,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
     backgroundColor: '#A896CF',
     height: 30,
-    width: 90,
+    width: 130,
     shadowOffset: { width: 4, height: 4 },
     shadowColor: "grey",
     shadowOpacity: 1.0,

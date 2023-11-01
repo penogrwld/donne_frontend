@@ -1,15 +1,14 @@
-import { View, Text, SafeAreaView, StyleSheet,} from "react-native";
-import { useEffect, useState } from "react";
-import { LinearGradient } from "expo-linear-gradient";
-
-import { localFetch } from "../localFetch";
-import { useDispatch, useSelector } from "react-redux";
-
-import ItemCard from "../components/ItemCard";
-
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useDispatch, useSelector } from 'react-redux';
+import SwipeCards from 'react-native-swipe-cards';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { addLike } from "../reducers/user";
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
+import { localFetch } from '../localFetch';
+import ItemCard from '../components/ItemCard';
+import { addLike } from '../reducers/user';
 
 
 

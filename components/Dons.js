@@ -1,13 +1,9 @@
 import {
     View,
-    Text,
     StyleSheet,
-    SafeAreaView,
     Image,
-    TouchableOpacity,
-    ScrollView,
   } from "react-native";
-  import React, { useState, useEffect } from "react";
+
 
   export default function Dons(props){
 
@@ -22,10 +18,7 @@ import {
 
  const styles = StyleSheet.create({
 
-dons: {
 
-
-},
 image: {
     borderRadius: 50, 
     height: 100,
