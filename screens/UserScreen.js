@@ -104,7 +104,7 @@ const handleRemoveObjectById = (objectId) => {
     if (objectId) {
       // Make an API call or dispatch an action to remove the object
       // https://${localFetch}/users/like/${user.token}
-      fetch(`http://192.168.149.127:3000/objects/${objectId}`, {
+      fetch(`${localFetch}/objects/${objectId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
