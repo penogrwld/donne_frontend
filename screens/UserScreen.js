@@ -6,16 +6,12 @@ import { removeProfilePic } from "../reducers/user";
 import { localFetch } from "../localFetch";
 import { logout } from "../reducers/user";
 import { useEffect, useState } from "react";
-
 import Dons from "../components/Dons";
 import Catchs from "../components/Catchs";
-
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useIsFocused } from '@react-navigation/native';
 
-
 export default function UserScreen({navigation}) {
-
 
   const user = useSelector((state) => state.user.value)
   const image = useSelector((state)=> state.image.value)
@@ -173,7 +169,6 @@ const handleRemoveObjectById = (objectId) => {
 
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
       <View style={styles.header}>
-        {/* <FontAwesome name='arrow-left' size={32} color={'black'} onPress={() => navigation.navigate('Choices')} style={styles.arrowLeft}/> */}
         <Text style={styles.headerText}>MON COMPTE</Text>
       </View>
 
@@ -196,6 +191,7 @@ const handleRemoveObjectById = (objectId) => {
          <View style={styles.infos}>
          <Text>{user.firstname} {user.lastname}</Text>
          <Text>{user.email}</Text>
+         <Text>@{user.username}</Text>
 
          <TouchableOpacity style={styles.logout} onPress={()=> {
            dispatch(logout())
@@ -318,7 +314,7 @@ const styles = StyleSheet.create({
   
   top: {
     marginBottom: 40,
-    marginTop: 80,
+    marginTop: 60,
     borderTopWidth: 1,
     padding: 10,
   },
@@ -348,13 +344,11 @@ const styles = StyleSheet.create({
   },
   
   image: {
-    borderWidth: 1,
     backgroundColor: 'white',
     borderRadius: 100,
     padding: 70,
     marginTop: 50,
-    
-    
+  
   },
   
   dons: {
@@ -376,12 +370,6 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
   
-  catchs: {
-    padding: 10,
-    flexDirection: "row",
-    justifyContent: "center",
-    
-  },
   logout: {
     borderRadius: 20,
     flexDirection: 'row',
