@@ -69,7 +69,7 @@ console.log("REPONSEDU BACK",data)
     <View style={styles.container}>
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
       <View style={styles.header}></View>
-      <Text style={styles.headertext}>Swipe vite pour découvrir les dons de ta région !</Text>
+      <Text style={styles.headertext}>Swipe vite pour découvrir les objets autour de toi !</Text>
   
       {swiper}
 
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   likeornot: {
     flexDirection: 'row',
     width: 400,
-    height: 160,
+    height: 140,
     justifyContent: 'space-around',
   },
   namepage: {
@@ -105,19 +105,21 @@ const styles = StyleSheet.create({
     width: '100%',
     margin: 30,
     padding: 20,
-    justifyContent: "flex-start",
-    flexDirection: 'row',
+    justifyContent: "center",
+    flexDirection: 'center',
     alignItems: 'center',
   },
   headertext: {
-    fontSize: 16,
+    fontSize: 21,
     paddingBottom: 5,
     marginBottom: 10,
-    fontStyle: 'italic'
+    fontStyle: 'italic',
+    justifyContent: 'center',
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
   swipetext: {
-    fontSize: 15,
-    
+    fontSize: 10,
   },
   heart: {
     marginTop: 20,

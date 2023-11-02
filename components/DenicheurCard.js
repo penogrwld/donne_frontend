@@ -35,6 +35,8 @@ import {
         })
        }
       
+       console.log(props)
+
     return (
 
 
@@ -43,7 +45,6 @@ import {
     <View style={styles.title}>
     <Text style={styles.text}>{props.title}</Text>
     </View>
-
 
     <View style={styles.middle} >
       <Image style={styles.imgItem} source={{ uri: props.image }} />
@@ -62,23 +63,21 @@ import {
       {props.avatar ? (
         <Image
         style={styles.imgDonneur}
-        onPress={() => navigation.navigate("Profile")}
         source={{ uri: props.avatar }}
         />
         ) : (
           <Image
           style={styles.imgDonneur}
-          onPress={() => navigation.navigate("Profile")}
           source={require("../assets/smile.png")}
         />
+        
       )}
-   <Text style={styles.user}>{props.user}</Text>
+      
+      <Text style={styles.user}> @{props.name}</Text>
 
-
-    
     </View>
     <View style={styles.message}>
-        <Text style={[styles.description, { maxWidth: 350 }]}  > Si votre demande est acceptée le donneur vous contactera par téléphone</Text>
+        <Text style={[styles.attention, { maxWidth: 350 }]}  > Attends le retour du donneur par téléphone ☎️ {'\n'}(s'il accepte ta demande)</Text>
     </View>
 </View>
 
@@ -90,47 +89,42 @@ import {
   const styles = StyleSheet.create({
 
     card: {
-      marginTop: 1,
-      marginLeft: 1,
-      marginRight: 1,
+      margin: 10,
       flexWrap: 'wrap',
-      borderWidth: 1,
       paddingTop: 20,
-      backgroundColor: 'transparent',
+      backgroundColor: 'rgba(255 255 255 / 0.9)',
       shadowColor: 'gray', // Ajout de l'ombre
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.3,
       shadowRadius: 2,
-      borderRadius: 10,
+      borderRadius: 15,
     },
 
     title: {
       flexDirection: 'row',
       justifyContent: "center",
       alignItems: 'center',
-      paddingLeft: 150,
     },
 
     text: {
       fontSize: 18,
-      paddingBottom: 10,
-      marginBottom: 10,
+      paddingBottom: 4,
+      marginBottom: 4,
       fontWeight: 'bold',
-      marginRight: 100,
+      color: "#74D48F",
+      fontSize: 22,
+      textDecorationLine: 'underline'
     },
 
     trash: {
-    // paddingLeft: 120,
     paddingBottom: 20,
     },
 
 
     middle: {
-      // borderWidth: 1,
       flexDirection: 'row',
       justifyContent: 'space-around',
       alignItems: 'center'
-   
     },
 
     condition: {
@@ -154,14 +148,18 @@ import {
       width: 60,
       height: 60,
       borderRadius: 50,
-      margin: 30,
-
+      marginLeft: 30,
+      marginBottom: 20,
+      marginTop: 20,
     },
 
     bottom: {
-
       flexDirection: 'row',
-  
+      alignItems: 'center'
+    },
+
+    user: {
+      fontWeight: 'bold',
     },
 
     condition: {
@@ -169,8 +167,15 @@ import {
     },
 
     description: {
-      textAlign: 'center'
-     
+      fontSize: 14,
+      textAlign: 'center',
+      marginBottom: 15,
+
+    },
+    attention: {
+      fontSize: 12,
+      textAlign: 'center',
+      marginBottom: 15,
     },
     message: {
       flexDirection: 'row',

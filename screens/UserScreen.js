@@ -30,6 +30,7 @@ export default function UserScreen({navigation}) {
   const [don, setDon] = useState([])
   const [catchs, setCatchs] = useState([])
 
+
   const [currentPosition, setCurrentPosition] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -73,13 +74,12 @@ export default function UserScreen({navigation}) {
 
 
 const allCatchs = catchs.map((obj, j) => {
-  console.log(obj)
   return <Catchs key= {j} catchs= {obj} />
 });
 
 // YOAN AJOUT MODAL
 let allObject = <></>
-if(allObject.length>0){
+if(don.length>0){
   allObject = don.map((item, i) => (
    <View style={styles.photocontainer} key={i} >
      <TouchableOpacity onPress={() => handleObjectClick(item)}>

@@ -85,7 +85,7 @@ import {
         <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
         <View style={styles.separator} />
           <View style={styles.header}>
-             <FontAwesome name="arrow-left" onPress={() => navigation.navigate('Si')} size={32} color="#000" />
+             <FontAwesome name="angle-left" onPress={() => navigation.navigate('Si')} size={40} color="#000" />
           </View>
                        
         <View style={styles.top}>

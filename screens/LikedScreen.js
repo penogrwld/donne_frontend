@@ -43,7 +43,8 @@ export default function LikedScreen({navigation}) {
     id = {obj._id}
     image={obj.image[0]} 
     title={obj.title} 
-    // avatar={obj.user.avatar}
+    avatar={obj.user.avatar}
+    name={obj.user.username}
     description={obj.description}
     condition={obj.condition}/> 
   })
@@ -56,7 +57,7 @@ export default function LikedScreen({navigation}) {
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
 
       <View style={styles.header}>
-        <FontAwesome name='arrow-left' style={styles.iconTop} size={32} color={'black'} onPress={() => navigation.navigate('Trouver')}/>
+        <FontAwesome name='angle-left' style={styles.iconTop} size={40} color={'black'} onPress={() => navigation.navigate('Trouver')}/>
            <Text style={styles.headerText} >MES LIKES </Text>  
         <FontAwesome name='exchange' style={styles.iconTop2} size={31} color={'black'} onPress={() => navigation.navigate('Donneur')}/>
       </View>
@@ -172,7 +173,7 @@ const styles = StyleSheet.create({
   },
 
   reste: {
-    height: 120,
+    height: 100,
     alignItems: "center",
     justifyContent: "center",
   },
