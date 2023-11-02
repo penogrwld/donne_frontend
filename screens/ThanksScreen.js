@@ -1,18 +1,19 @@
 import { View, Text , StyleSheet, TouchableOpacity  } from 'react-native'
 import { LinearGradient } from "expo-linear-gradient";
 import React from 'react'
+import ConfettiCannon from 'react-native-confetti-cannon';
 
-// import LottieView from 'lottie-react-native';
-import LottieView from "lottie-react-native";
 
 export default function ThanksScreen({navigation}) {
+
+
   return (
     <View style={styles.container}>
-      {/* <LottieView>
-        source={require('../assets/animation_lo78wxb0.json')}
-      </LottieView> */}
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
-      <Text style={styles.header}>MERCI POUR VOTRE DON !</Text>
+      <Text style={styles.header}>🎉 MERCI POUR VOTRE DON ! 🎉</Text>
+            
+            <ConfettiCannon count={200} origin={{ x: -10, y: 0 }} />
+
         <View style={styles.containerButton}>
           <TouchableOpacity  onPress={() => navigation.navigate('Profil')} style={styles.button}>
             <Text style={styles.textButton}>Voir mes dons</Text>
@@ -34,7 +35,9 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   header:{
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    fontSize: '20',
+    color: "#A896CF",
   },
   containerButton: {
     width: "80%",

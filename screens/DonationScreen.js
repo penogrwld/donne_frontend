@@ -15,7 +15,6 @@ import { useState } from 'react';
 import { removePhoto, removeAll } from "../reducers/image";
 import { localFetch } from "../localFetch";
 import { addGift } from "../reducers/user";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 
 
@@ -143,7 +142,6 @@ export default function DonationScreen({ navigation }) {
 
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
       <View style={styles.header}>
-        {/* <FontAwesome name='arrow-left' size={32} color={'black'} onPress={() => navigation.navigate('Choices')} style={styles.arrowLeft}/> */}
         <Text style={styles.headerText}>FAIRE UN DON</Text>
       </View>
         <Text style={styles.photoText}>AJOUTER DES PHOTOS :</Text>

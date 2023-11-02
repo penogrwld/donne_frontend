@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: 'row',
     height: 200,
-    margin: 15,
+    margin: 20,
     flexWrap: 'wrap',
     paddingTop: 20,
     backgroundColor: 'rgba(255 255 255 / 0.9)',
