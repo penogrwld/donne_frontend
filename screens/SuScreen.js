@@ -5,10 +5,7 @@ import {
     StyleSheet,
     TouchableOpacity,
     Image,
-    KeyboardAvoidingView,
-    ScrollView
       } from "react-native";
-  //import { CheckBox } from "react-native-elements";
   import { useState } from "react";
   import { useDispatch } from "react-redux";
   import { signUp } from "../reducers/user";
@@ -197,19 +194,8 @@ import {
       flexDirection: "row",
       alignItems: "center",
       marginTop: -10
-      // marginLeft: -20
-      // justifyContent: "center",
-      // position: 'absolute',
-      // flexWrap: "wrap",
-      // textAlign: 'left',
-      // right: 10,
-      // left: -20,
-      // bottom: 50
     },
 
-    // checkbox: {
-    //   marginRight: 20,
-    // },
     textValid: {
       color: 'black',
       marginTop: 15,

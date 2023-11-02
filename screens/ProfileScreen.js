@@ -2,7 +2,6 @@ import { View, Text, StyleSheet, TouchableOppacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useSelector } from 'react-redux';
 import React from "react";
-import { localFetch } from "../localFetch";
 
 export default function ProfileScreen() {
  

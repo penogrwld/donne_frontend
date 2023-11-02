@@ -3,7 +3,6 @@ import {
     Text,
     StyleSheet,
     TextInput,
-    SafeAreaView,
     TouchableOpacity,
     Image,
   } from "react-native";
@@ -82,20 +81,6 @@ import {
               >Inscription
               </Text>
             </Text>
-            {/* <Text style={styles.connectWith}>Se connecter avec: </Text> */}
-            {/* // Permet de s'incrire ou se connecter avec un réseau social */}
-            {/* <SocialIcon
-              style={styles.social}
-              title="Sign In With Facebook"
-              button
-              type="facebook"
-            />
-            <SocialIcon
-              style={styles.social}
-              title="Sign In With Google"
-              button
-              type="google"
-            /> */}
           </View>
         </View>
       </KeyboardAwareScrollView>
@@ -144,7 +129,6 @@ import {
     buttons: {
       backgroundColor: "#74D48F",
       padding: 20,
-      // margin: 10,
       alignItems: "center",
       borderRadius: 10,
       shadowOffset: { width: 5, height: 5 },

@@ -11,21 +11,11 @@ import { useIsFocused } from '@react-navigation/native';
 
 export default function LikedScreen({navigation}) {
  
-  const [swap, setSwap] = useState(true)
-  const [accepted, setAccepted] = useState(false)
   let focus = useIsFocused()
-
-
- 
 
   const [nbrLikes, setNbrLikes] = useState(5);
   const [objData, setObjData] = useState([])
-  const [refresh, setRefresh] = useState(false)
 
-  const handleAccept = () => {
-    setAccepted(!accepted)
-  }
-  
   const user = useSelector((state) => state.user.value);
 
   useEffect(() => {
@@ -49,9 +39,6 @@ export default function LikedScreen({navigation}) {
     condition={obj.condition}/> 
   })
   
-
-
-
   return (
     <View style={styles.container}>
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
@@ -107,14 +94,12 @@ const styles = StyleSheet.create({
     fontWeight: '800'
   },
 
-  // Style pour chaque composant
-
   imgItem: {
     width: 70,
     height: 70,
     borderRadius: 10,
-    // alignItems: "flex-start"
   },
+
   imgUser: {
     width: 60,
     height: 60,
@@ -140,22 +125,17 @@ const styles = StyleSheet.create({
   },
   buttonNo: {
     backgroundColor: "#A896CF",
-    // padding: 20,
-    // margin: 10,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
     shadowOffset: { width: 5, height: 5 },
     shadowColor: "grey",
     shadowOpacity: 1.0,
-    // marginTop: 10,
     width: 70,
     height: 50
   },
   buttonYes: {
     backgroundColor: "#74D48F",
-    // padding: 20,
-    // margin: 10,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
@@ -168,8 +148,6 @@ const styles = StyleSheet.create({
   },
   accepted: {
     marginTop: 10
-    // borderWidth: 1,
-    // flexDirection: 'column',
   },
 
   reste: {

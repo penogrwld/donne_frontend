@@ -75,7 +75,7 @@ export default function UserScreen({navigation}) {
 const allCatchs = catchs.map((obj, j) => {
   return <Catchs key= {j} catchs= {obj} />
 });
-// YOAN AJOUT MODAL
+
 let allObject = <></>
 if(don.length>0){
   allObject = don.map((item, i) => (
@@ -96,18 +96,15 @@ const handleObjectClick = (object) => {
 
 const handleRemoveObject = () => {
     if (selectedObject) {
-      // // Appelez handleRemoveObject en passant l'ID de l'objet.
-      // console.log(selectedObject)
       const objectId = selectedObject.id;
       handleRemoveObjectById(objectId);
     }
   };   
 
-  // Handle removing the selected object
+
 const handleRemoveObjectById = (objectId) => {
     if (objectId) {
-      // Make an API call or dispatch an action to remove the object
-      // https://${localFetch}/users/like/${user.token}
+
       fetch(`${localFetch}/objects/${objectId}`, {
         method: 'DELETE',
         headers: {
@@ -116,9 +113,7 @@ const handleRemoveObjectById = (objectId) => {
       })
       .then((response) => {
         if (response.ok) {
-          // console.log('ok')
-        // Après avoir supprimé l'objet avec succès, effectuez un nouveau fetch
-        // pour mettre à jour la liste des objets
+
         fetch(`${localFetch}/users/${user.token}/object`)
         .then((response) => response.json())
         .then(data => {
@@ -126,22 +121,17 @@ const handleRemoveObjectById = (objectId) => {
         });
         }
         else {
-          // Gérez les erreurs, par exemple, objet non trouvé, erreur serveur, etc.
           console.error('Erreur de suppression de lobjet')
         }  
       })
       .catch((error) => {
-        // Gérez les erreurs de la requête fetch ici
         console.error('Erreur de requête fetch :', error);
       });  
 
-      // Close the modal and clear the selected object
       setModalVisible(false);
       setSelectedObject(null);
     }
   };   
-
-// YOAN FIN DE CODE
 
 
   const handleRemove = () => {
@@ -168,7 +158,6 @@ const handleRemoveObjectById = (objectId) => {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text>Confirmez la suppression de l'objet :</Text>
-            {/* <Text>{selectedObject ? selectedObject.title : ""}</Text> */}
 
             <View style={styles.ouiounon}>
                   <TouchableOpacity style={styles.yes} onPress={handleRemoveObject}>
@@ -258,13 +247,6 @@ const handleRemoveObjectById = (objectId) => {
        </ScrollView>
        </View>
        </ScrollView>
-
-          {/* <TouchableOpacity>
-         <View style={styles.catchs}>
-         <Text>+</Text>
-         </View>
-        </TouchableOpacity> */}
-
 
      </View>
   );
@@ -438,10 +420,7 @@ const styles = StyleSheet.create({
       height: 2,
     },
   },
-  deleteicon: {
 
-  
-  },
   photocontainer: {
     justifyContent: 'flex-end',
   },
@@ -455,7 +434,7 @@ const styles = StyleSheet.create({
     shadowColor: "grey",
     shadowOpacity: 1.0,
     alignItems: "center",
-    margin: 10, // Marge entre les boutons
+    margin: 10, 
 
   },
   not: {
@@ -468,7 +447,7 @@ const styles = StyleSheet.create({
     shadowColor: "grey",
     shadowOpacity: 1.0,
     alignItems: "center",
-    margin: 10, // Marge entre les boutons
+    margin: 10, 
 
   },
   ouiounon: {

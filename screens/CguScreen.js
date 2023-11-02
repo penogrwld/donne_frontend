@@ -108,12 +108,14 @@ const styles = StyleSheet.create({
     margin : 10,
     fontSize: 20,
     textDecorationLine: "underline", 
+    textAlign: 'center',
   },
 
   text:{
     color:"black",
     fontSize: 15,
     margin : 10,
+    textAlign: 'justify',
   },
   
 });
