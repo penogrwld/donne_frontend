@@ -5,10 +5,7 @@ import {
     StyleSheet,
     TouchableOpacity,
     Image,
-    KeyboardAvoidingView,
-    ScrollView
       } from "react-native";
-  //import { CheckBox } from "react-native-elements";
   import { useState } from "react";
   import { useDispatch } from "react-redux";
   import { signUp } from "../reducers/user";
@@ -85,7 +82,7 @@ import {
         <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
         <View style={styles.separator} />
           <View style={styles.header}>
-             <FontAwesome name="arrow-left" onPress={() => navigation.navigate('Si')} size={32} color="#000" />
+             <FontAwesome name="angle-left" onPress={() => navigation.navigate('Si')} size={40} color="#000" />
           </View>
                        
         <View style={styles.top}>
@@ -198,19 +195,8 @@ import {
       flexDirection: "row",
       alignItems: "center",
       marginTop: -10
-      // marginLeft: -20
-      // justifyContent: "center",
-      // position: 'absolute',
-      // flexWrap: "wrap",
-      // textAlign: 'left',
-      // right: 10,
-      // left: -20,
-      // bottom: 50
     },
 
-    // checkbox: {
-    //   marginRight: 20,
-    // },
     textValid: {
       color: 'black',
       marginTop: 15,

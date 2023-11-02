@@ -2,27 +2,36 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
   Image,
   TouchableOpacity,
-  ScrollView,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { localFetch } from "../localFetch";
 import { removeWhoLiked } from "../reducers/user";
+import { Linking } from 'react-native';
 
 export default function DonneurCard(props) {
   const user = useSelector((state) => state.user.value);
-  const image = useSelector((state) => state.image.value);
   const [accepted, setAccepted] = useState(false);
-  const [valid, setValid] = useState(false);
-  // const [dislike, setDislike] = useState(false);
 
   const dispatch = useDispatch();
 
   const handleAccept = () => {
     setAccepted(!accepted);
+  };
+
+
+  const handlePhoneCall = () => {
+    const phoneNumber = `tel:0${props.phone}`;
+  
+    Linking.openURL(phoneNumber)
+      .then(() => {
+        // L'appel a été lancé avec succès
+      })
+      .catch((error) => {
+        console.error(`Erreur lors du lancement de l'appel : ${error}`);
+      });
   };
 
   const handleValid = () => {
@@ -36,14 +45,9 @@ export default function DonneurCard(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        // // Traitez la réponse ici
         if (data.result) {
-          // L'opération a réussi, mettez à jour l'interface si nécessaire
-          // setDislike(true);
           console.log('Félicitation pour votre donation');
         } else {
-          // L'opération a échoué, affichez l'erreur si nécessaire
-          // setDislike(false);
           console.error(`Erreur mec`);
         }
         dispatch(removeWhoLiked());
@@ -62,14 +66,9 @@ export default function DonneurCard(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        // // Traitez la réponse ici
         if (data.result) {
-          // L'opération a réussi, mettez à jour l'interface si nécessaire
-          // setDislike(true);
           console.log('objet a été retiré de la liste des "aimés"');
         } else {
-          // L'opération a échoué, affichez l'erreur si nécessaire
-          // setDislike(false);
           console.error(`Erreur mec`);
         }
         dispatch(removeWhoLiked());
@@ -81,33 +80,32 @@ export default function DonneurCard(props) {
       {!accepted ? (
         <View style={styles.card}>
 
+<View style={styles.left}>
           <Image style={styles.imgItem} source={{ uri: props.image }} />
-          
           
           <Image
                 style={styles.imgUser}
-                onPress={() => navigation.navigate("Profile")}
                 source={{ uri: props.avatar }}
           />
-          
+  </View>        
 
 
           <View style={styles.textes}>
               <Text style={styles.titleText}>{props.title}</Text>
-              <Text>Acceptez-vous de donner cet objet à {props.username} ?</Text>
+              <Text style={styles.textaccept}>Acceptez-vous de donner cet objet à {props.username} ?</Text>
 
               <View style={styles.buttonsOne}>
                       <TouchableOpacity
                         style={styles.buttonNo}
                         onPress={() => handleRefuse()}
                       >
-                        <Text>NON</Text>
+                        <Text style={styles.text}>NON</Text>
                       </TouchableOpacity>
                       <TouchableOpacity
                         style={styles.buttonYes}
                         onPress={() => handleAccept()}
                       >
-                        <Text>OUI</Text>
+                        <Text style={styles.text}>OUI</Text>
                       </TouchableOpacity>
               </View>
           </View>
@@ -117,9 +115,11 @@ export default function DonneurCard(props) {
           {/* {!valid ? ( */}
             <View style={styles.phone}>
               <Text>
-                Contactez {props.username}  au numéro suivant:
+                Contactez {props.username} au numéro suivant:
               </Text>
-              <Text>0{props.phone}</Text>
+              <TouchableOpacity onPress={handlePhoneCall}>
+                 <Text style={styles.phoneNumber}>0{props.phone}</Text>
+              </TouchableOpacity>
             </View>
             <View style={styles.accepted}>
               <Text>La donation a-t-elle été effectuée ?</Text>
@@ -128,23 +128,16 @@ export default function DonneurCard(props) {
                   style={styles.buttonNo}
                   onPress={() => handleAccept()}
                 >
-                  <Text>NON</Text>
+                  <Text style={styles.text}>NON</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={styles.buttonYes}
                   onPress={() => handleValid()}
                 >
-                  <Text>OUI</Text>
+                  <Text style={styles.text}>OUI</Text>
                 </TouchableOpacity>
               </View>
             </View>
-          {/* ) : (
-            <View>
-              <Text>
-                Contactez l'utilisateur avec le numéro suivant: 0{props.phone}
-              </Text>
-            </View>
-          )} */}
         </View>
       )}
     </View>
@@ -152,17 +145,14 @@ export default function DonneurCard(props) {
 }
 
 const styles = StyleSheet.create({
-  // Style pour chaque composant
+
   card: {
     flexDirection: 'row',
     height: 200,
-    marginTop: 1,
-    marginLeft: 1,
-    marginRight: 1,
+    margin: 20,
     flexWrap: 'wrap',
-    borderWidth: 1,
     paddingTop: 20,
-    backgroundColor: 'transparent',
+    backgroundColor: 'rgba(255 255 255 / 0.9)',
     shadowColor: 'gray', // Ajout de l'ombre
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
@@ -170,22 +160,18 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   div: {
-    // justifyContent: "space-around",
-    // alignItems: "center",
     flexDirection: "column",
     padding: 15,
     borderTopWidth: 1,
     borderTopColor: "#BBBBBB",
     borderBottomWidth: 1,
     borderBottomColor: "#BBBBBB",
-    // borderWidth: 1,
   },
   imgItem: {
     margin: 10,
     width: 60,
     height: 60,
     borderRadius: 10,
-    // alignItems: "flex-start"
   },
   imgUser: {
     margin: 10,
@@ -195,24 +181,35 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   textes: {
-
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    width:190,
+    width: 250,
     marginLeft: 20,
+    
   },
   titleText: {
     fontWeight: "700",
     marginBottom: 10,
+    textAlign: 'center',
+  },
+
+  textaccept: {
+    marginLeft: 10,
+    textAlign: 'center',
+
   },
 
   // Style des boutons
+  text: {
+  color: 'white',
+  fontWeight: 'bold'
+},
+
   buttonsOne: {
     flex:1,
     flexDirection: "row",
     justifyContent: "space-between",
-    // borderWidth: 1,
     width: 160,
     marginTop: 30,
   },
@@ -222,44 +219,34 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     width: "100%",
     marginTop: 20,
-    // borderWidth: 1,
   },
   buttonNo: {
     backgroundColor: "#A896CF",
-    // padding: 20,
-    // margin: 10,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
-    shadowOffset: { width: 5, height: 5 },
+    shadowOffset: { width: 2, height: 2 },
     shadowColor: "grey",
     shadowOpacity: 1.0,
-    // marginTop: 10,
     width: 70,
     height: 50,
   },
   buttonYes: {
     backgroundColor: "#74D48F",
-    // padding: 20,
-    // margin: 10,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
-    shadowOffset: { width: 5, height: 5 },
+    shadowOffset: { width: 2, height: 2 },
     shadowColor: "grey",
     shadowOpacity: 1.0,
-    // marginTop: 10,
     width: 70,
     height: 50,
   },
   acceptContainer: {
     height: 200,
-    marginTop: 1,
-    marginLeft: 1,
-    marginRight: 1,
-    borderWidth: 1,
+    margin: 10,
     paddingTop: 20,
-    backgroundColor: 'transparent',
+    backgroundColor: 'rgba(255 255 255 / 0.9)',
     shadowColor: 'gray', // Ajout de l'ombre
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
@@ -274,6 +261,11 @@ const styles = StyleSheet.create({
   accepted: {
     alignItems: "center",
     justifyContent:'space-between',
+  },
+  phoneNumber: {
+    color: 'blue',
+    textDecorationLine: 'underline',
+
   },
 
 });

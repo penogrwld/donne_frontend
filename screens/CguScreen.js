@@ -8,7 +8,7 @@ export default function CguScreen({navigation}) {
     <View style={styles.container}>
         <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
           <View style={styles.header}>
-             <FontAwesome name="arrow-left" onPress={() => navigation.navigate('Su')} size={32} color="#000" />
+             <FontAwesome name="angle-left" onPress={() => navigation.navigate('Su')} size={40} color="#000" />
           </View>
           <View name="Container vide"style={styles.containerVide}/>     
 
@@ -108,12 +108,14 @@ const styles = StyleSheet.create({
     margin : 10,
     fontSize: 20,
     textDecorationLine: "underline", 
+    textAlign: 'center',
   },
 
   text:{
     color:"black",
     fontSize: 15,
     margin : 10,
+    textAlign: 'justify',
   },
   
 });

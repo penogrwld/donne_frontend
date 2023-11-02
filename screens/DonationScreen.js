@@ -15,13 +15,8 @@ import { useState } from 'react';
 import { removePhoto, removeAll } from "../reducers/image";
 import { localFetch } from "../localFetch";
 import { addGift } from "../reducers/user";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-
-
 
 export default function DonationScreen({ navigation }) {
-
-  
 
   const dispatch = useDispatch()
   const [isSelectedOne, setSelectionOne] = useState(false);
@@ -104,10 +99,6 @@ export default function DonationScreen({ navigation }) {
     })
   }
 
-  const handleReset = () => {
-    setLatitude('')
-    setLongitude('')
-  }
   return (
     <View style={styles.container}>
       <Modal animationType="slide"
@@ -143,7 +134,6 @@ export default function DonationScreen({ navigation }) {
 
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
       <View style={styles.header}>
-        {/* <FontAwesome name='arrow-left' size={32} color={'black'} onPress={() => navigation.navigate('Choices')} style={styles.arrowLeft}/> */}
         <Text style={styles.headerText}>FAIRE UN DON</Text>
       </View>
         <Text style={styles.photoText}>AJOUTER DES PHOTOS :</Text>
@@ -430,7 +420,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 2, height: 2 },
     shadowColor: "grey",
     shadowOpacity: 1.0,
-    // borderWidth:.5,
     borderRadius:20
   },
   addLocalisationText: {
@@ -490,11 +479,10 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     alignItems:'flex-start',
     justifyContent:'flex-start',
-    marginLeft:-20,
-    marginTop:-20,
-    height:30,
-    marginBottom:10
-
+    marginLeft: -20,
+    marginTop: -20,
+    height: 30,
+    marginBottom: 10,
 
   },
   modalCloseBtn:{
@@ -529,7 +517,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: '10%',
     marginLeft: '75%',
-    margin:20 ,
+    margin: 20,
     borderRadius: 10,
     width: 60,
     height: 50,
@@ -540,7 +528,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 1.0,
     position:'relative',
     size:15,
-    // borderWidth:2,
     borderColor:'grey'
   },
   goText: {
@@ -566,7 +553,5 @@ const styles = StyleSheet.create({
   modifLoc: {
 flexDirection: 'row',
 }
-
-
 });
 

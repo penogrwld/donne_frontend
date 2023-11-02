@@ -2,9 +2,6 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
-  Image,
-  TouchableOpacity,
   ScrollView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -69,9 +66,9 @@ export default function DonneurScreen({ navigation }) {
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
       <View style={styles.header}>
         <FontAwesome
-          name="arrow-left"
+          name="angle-left"
           style={styles.iconTop}
-          size={32}
+          size={40}
           color={"black"}
           onPress={() => navigation.navigate("Likes")}
         />
