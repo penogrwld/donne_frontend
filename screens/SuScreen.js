@@ -98,6 +98,7 @@ import {
             { errorMail && <Text style={styles.errorMsg}>Le mail est invalide</Text>}
             { errorUsername && <Text style={styles.errorMsg}>Cette utilisateur existe déjà</Text>}
             { errorField && <Text style={styles.errorMsg}>Un champ n'a pas était rempli</Text>}
+             <TextInput style={styles.input} placeholder="Prénom" onChangeText={(value) => setSignUpFirstname(value)} value={signUpFirstName}></TextInput>
              <TextInput style={styles.input} placeholder="Nom" onChangeText={(value) => setSignUpLastname(value)} value={signUpLastName}></TextInput>
              <TextInput style={styles.input} placeholder="Pseudo" onChangeText={(value) => setSignUpUsername(value)} value={signUpUsername}></TextInput>
              <TextInput style={styles.input} placeholder="Mobile" onChangeText={(value) => setSignUpPhone(value)} value={signUpPhone}></TextInput>
