@@ -100,11 +100,14 @@ export default function DonationScreen({ navigation }) {
         setSelectionTwo(false)
         setIsLocation(false)
         setTitle('')
-
       }
     })
   }
-  console.log(user)
+
+  const handleReset = () => {
+    setLatitude('')
+    setLongitude('')
+  }
   return (
     <View style={styles.container}>
       <Modal animationType="slide"
@@ -134,8 +137,7 @@ export default function DonationScreen({ navigation }) {
                 setModalVisible(!modalVisible)}}>
               <Text style={styles.textStyle}>Add</Text>
             </TouchableOpacity>
-          </View>
-          
+          </View>          
         </View>
         </Modal>
 
@@ -234,8 +236,13 @@ export default function DonationScreen({ navigation }) {
             <Text style={styles.addLocalisationText}>Ajouter une adresse</Text>
           </TouchableOpacity>) : (
             <View style={styles.localisation}>
-            <Text style={styles.localisationText}>{city}</Text>
-            <Text style={styles.localisationText}>{postalCode}</Text>
+              <View style={styles.modifLoc}>
+            <Text style={styles.localisationText}>
+              {city}
+              </Text>
+                <FontAwesome size={18} name='pencil' onPress={()=> setModalVisible(true)} />
+                </View>
+            <Text style={styles.localisationText2}>{postalCode}</Text>
             </View>
           )}
         </View>
@@ -541,12 +548,25 @@ const styles = StyleSheet.create({
     fontSize: 15
   },
   localisation: {
-    marginTop: 10,
-    marginLeft: 30,
+    marginTop: 20,
+    marginLeft: 20,
   },
   localisationText: {
-    fontSize: 13
-  }
+    fontSize: 14,
+    marginRight: 40,
+    marginLeft: 15,
+    marginTop: 10
+  
+  },
+  localisationText2: {
+    fontSize: 14,
+    marginRight: 40,
+    marginLeft: 15,
+  },
+  modifLoc: {
+flexDirection: 'row',
+}
+
 
 });
 
