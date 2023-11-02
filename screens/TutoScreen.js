@@ -11,7 +11,7 @@
               <Text style={styles.text}>L'application mobile qui révolutionne la façon dont nous faisons des dons !</Text>
               <Text style={styles.text}>Imagine un monde où tu peux swiper à travers les objets à donner proche de chez toi, tout en restant confortablement installé dans ton canap'.</Text>
               <Text style={styles.textreve}>DONNE rend ce rêve réalité ! 🤩</Text>
-              <Text style={styles.text}>Swipe à droite pour catcher ton objet favoris ! {'\n'}Si ta demande est acceptée, récupère l’objet directement auprès du Donneur. ✅ </Text>
+              <Text style={styles.text}>Swipe à droite pour catcher ton objet favori ! {'\n'}Si ta demande est acceptée, récupère l’objet directement auprès du Donneur. ✅ </Text>
               <Text style={styles.text}>Swipe à gauche si l'objet ne te plaît pas.🙃</Text>
               <Text style={styles.textreve}>⚠️ Attention, tu ne peux liker que 5 objets {'\n'} maximum en même temps.</Text>
               <Text style={styles.text}>Tu l'auras compris : si tu es donneur, tu ne seras donc pas submergé de demandes. {'\n'}Gagnant-gagnant ! 🌟</Text>

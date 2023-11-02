@@ -42,22 +42,7 @@ const store = configureStore({
 const TabNavigator = () => {
 
 
-  const user = useSelector((state) => state.user.value);
-
-  const [objectData, setObjectData] = useState(0);
-  
-  useEffect(() => {
-    fetch(`${localFetch}/users/${user.token}/object`)
-      .then((response) => response.json())
-      .then((data) => {
-        setObjectData(data[0].likedBy.length);
-      });
-  }, [user.token]);
-
-  
-
   return (
-
 
     <Tab.Navigator screenOptions={({ route }) => ({
       tabBarIcon: ({ color, size }) => {
@@ -84,7 +69,7 @@ const TabNavigator = () => {
       <Tab.Screen name="Profil" component={UserScreen} />
       <Tab.Screen name="Trouver" component={HomeScreen} />
       <Tab.Screen name="Donner" component={DonationScreen} />
-      <Tab.Screen name="Likes" component={LikedScreen} options={{ tabBarBadge: objectData, tabBarBadgeStyle: { backgroundColor: '#74D48F' }  }}  />
+      <Tab.Screen name="Likes" component={LikedScreen}  />
       <Tab.Screen name="Tuto" component={TutoScreen} />
     </Tab.Navigator>
   );
