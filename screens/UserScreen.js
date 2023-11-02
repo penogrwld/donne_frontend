@@ -61,7 +61,6 @@ export default function UserScreen({navigation}) {
     .then((response) => response.json())
     .then(data => {
       setDon(data)
-
     });
 
     fetch(`${localFetch}/users/${user.token}`)
@@ -76,7 +75,6 @@ export default function UserScreen({navigation}) {
 const allCatchs = catchs.map((obj, j) => {
   return <Catchs key= {j} catchs= {obj} />
 });
-
 // YOAN AJOUT MODAL
 let allObject = <></>
 if(don.length>0){
@@ -190,6 +188,8 @@ const handleRemoveObjectById = (objectId) => {
         <Text style={styles.headerText}>MON COMPTE</Text>
       </View>
 
+    <ScrollView showsVerticalScrollIndicator={false}>
+
 
        <View style={styles.user}>
          <View style={styles.photos}>
@@ -209,8 +209,8 @@ const handleRemoveObjectById = (objectId) => {
          <Text>{user.email}</Text>
 
          <TouchableOpacity style={styles.logout} onPress={()=> {
-          dispatch(logout())
-          navigation.navigate('Si')
+           dispatch(logout())
+           navigation.navigate('Si')
           }}>
           <FontAwesome name='power-off' size={20} color='white' style={styles.deleteicon} />
           <Text style={styles.textlogout}> DÉCONNEXION</Text>
@@ -257,12 +257,13 @@ const handleRemoveObjectById = (objectId) => {
        {allCatchs}
        </ScrollView>
        </View>
+       </ScrollView>
 
           {/* <TouchableOpacity>
          <View style={styles.catchs}>
-          <Text>+</Text>
+         <Text>+</Text>
          </View>
-          </TouchableOpacity> */}
+        </TouchableOpacity> */}
 
 
      </View>
