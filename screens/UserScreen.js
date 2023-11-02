@@ -138,7 +138,16 @@ const handleRemoveObjectById = (objectId) => {
     .then(dispatch(removeProfilePic()))
   }
 
-
+  const handleDelete = () => {
+    fetch(`${localFetch}/users/delete/${user.token}`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+    })
+    .then(dispatch(logout()))
+ navigation.navigate('Si')
+    
+  }
+  
 
   return (
     <View style={styles.container}>
@@ -199,6 +208,10 @@ const handleRemoveObjectById = (objectId) => {
           }}>
           <FontAwesome name='power-off' size={20} color='white' style={styles.deleteicon} />
           <Text style={styles.textlogout}> DÉCONNEXION</Text>
+         </TouchableOpacity>
+         <TouchableOpacity style={styles.delete} onPress={handleDelete}>
+          <FontAwesome name='ban' size={20} color='white' style={styles.deleteicon2} />
+          <Text style={styles.textDelete}> SUPPRIMER MON COMPTE</Text>
          </TouchableOpacity>
 
          </View>
@@ -384,9 +397,30 @@ const styles = StyleSheet.create({
     shadowOpacity: 1.0,
     
   },
+  delete:{
+
+    borderRadius: 20,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 15,
+    backgroundColor: 'palevioletred',
+    height: 30,
+    width: 195,
+    shadowOffset: { width: 4, height: 4 },
+    shadowColor: "grey",
+    shadowOpacity: 1.0,
+  },
   textlogout: {
     color: 'white',
     fontSize: 12,
+  },
+  textDelete:{
+    color: 'white',
+    fontSize: 12,
+    
+   
+
   },
   centeredView: {
     flex: 1,
@@ -409,6 +443,7 @@ const styles = StyleSheet.create({
     },
   },
 
+  
   photocontainer: {
     justifyContent: 'flex-end',
   },
