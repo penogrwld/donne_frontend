@@ -60,7 +60,7 @@ console.log("REPONSEDU BACK",data)
   stack={false}
   stackOffsetX={0}
   renderCard={(cardData) => <ItemCard key={cardData.image[0]} item={cardData} />}
-  renderNoMoreCards={() => <Text>No more cards</Text>}
+  renderNoMoreCards={() => <Text>Il n'y a plus de dons, reviens plus tard !</Text>}
   handleYup={handleLike}
   handleNope={handleDislike}
   />
@@ -69,13 +69,13 @@ console.log("REPONSEDU BACK",data)
     <View style={styles.container}>
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
       <View style={styles.header}></View>
-      <Text style={styles.headertext}>Quoi de neuf autour de moi ?</Text>
+      <Text style={styles.headertext}>Swipe vite pour découvrir les dons de ta région !</Text>
   
       {swiper}
 
       <View style={styles.likeornot}>
-        <Icon name="reply"style={styles.cross} size={110} color="#A896CF" />
-        <Icon name="share" style={styles.heart} size={110} color="#74D48F" />
+        <Icon name="reply"style={styles.cross} size={90} color="#A896CF" />
+        <Icon name="share" style={styles.heart} size={90} color="#74D48F" />
       </View>
     </View>
   );
@@ -110,16 +110,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headertext: {
-    fontSize: 18,
-    paddingBottom: 10,
+    fontSize: 16,
+    paddingBottom: 5,
     marginBottom: 10,
+    fontStyle: 'italic'
+  },
+  swipetext: {
+    fontSize: 15,
+    
   },
   heart: {
+    marginTop: 20,
     shadowOffset: { width: 5, height: 5 },
     shadowColor: "grey",
     shadowOpacity: 0.5,
   },
   cross: {
+    marginTop: 20,
     shadowOffset: { width: 5, height: 5 },
     shadowColor: "grey",
     shadowOpacity: 0.5,
