@@ -27,7 +27,7 @@ export default function HomeScreen({ navigation }) {
         setDon(data.result);
         //setCurrentItemIndex(Math.floor(Math.random() * data.result.length));
       });
-  }, [disliked, liked, focus]);
+  }, [disliked, liked, focus]);     // PAUL ????
 
 
 
