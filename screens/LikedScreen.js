@@ -41,6 +41,8 @@ export default function LikedScreen({navigation}) {
   
   return (
     <View style={styles.container}>
+
+
       <LinearGradient colors={["#D7C4AB", "white"]} style={styles.background} />
 
       <View style={styles.header}>

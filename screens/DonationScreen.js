@@ -200,7 +200,7 @@ export default function DonationScreen({ navigation }) {
           </View>
         </View>
       <View style={styles.addState}>
-        <Text style={styles.titleState}>ETAT :</Text>
+        <Text style={styles.titleState}>ÉTAT :</Text>
         <View name="StateContainer" style={styles.stateContainer}>
         <View style={styles.checkOne}>
         {isSelectedOne ? ( 

@@ -50,7 +50,7 @@ import {
       <Image style={styles.imgItem} source={{ uri: props.image }} />
 
       <View style={styles.right}>
-            <Text style={[styles.description, { maxWidth: 270 }]} >"{props.description}"</Text>
+            <Text style={[styles.description, { maxWidth: 200 }]} >"{props.description}"</Text>
             <Text style={styles.condition}>{props.condition}</Text>
       </View>
 
