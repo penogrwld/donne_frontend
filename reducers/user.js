@@ -19,6 +19,9 @@ const initialState = {
   },
 };
 
+// Ce reducer sert à récupérer les informations du user connecté. 
+// Notamment le token dont on a besoin presque partout. 
+
 export const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -59,10 +62,10 @@ export const userSlice = createSlice({
     },
     removeLike: (state, action) => {
       state.value.numberLikes -= 1
-    },
+    }, // Pas utile
     removeWhoLiked: (state, action) => {
       state.value.numberWhoLiked -= 1
-    },
+    }, // Pas utile
     addGift: (state, action) => {
       state.value.numberGifts += 1
     },
