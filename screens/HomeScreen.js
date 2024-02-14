@@ -47,7 +47,7 @@ export default function HomeScreen({ navigation }) {
       .then((response) => response.json())
       .then((data) => {
 
-console.log("REPONSEDU BACK",data)
+console.log("REPONSE DU BACK",data)
         setLiked(!liked);
         //setDon(data.result);
         dispatch(addLike());

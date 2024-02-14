@@ -3,9 +3,11 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   value: {
     object:[],
-    user: null
   }
 };
+
+// Ce reducer permet de récupérer les photos qui ont été prise dans SnapScreen et UserSnapScreen
+// pour les utiliser dans DonationScreen (photos des dons) & UserScreen (photo de profil)
 
 export const imageSlice = createSlice({
   name: 'image',
@@ -20,9 +22,6 @@ export const imageSlice = createSlice({
       removeAll: (state, action) => {
         state.value.object = []
       },
-      removeProfilePic: (state, action) => {
-        state.value.user = null
-      }
   },
 });
 
